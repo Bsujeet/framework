@@ -1,0 +1,37 @@
+{
+    "_id":"mongodb_object_id",
+    "type":"VM",
+    "operation":"CREATE|START|STOP|DELETE",
+    "name":"User Friendly Name",
+    "description":"Description about this request",
+    "requestedBy":"userid",
+    "createdOn":"date",
+    "modifiedOn":"date",
+    "status":"stored|inprogress|succeeded|failed",
+    "statusMessage":"Latest message for the status",
+    "jobid":"Associated workflow job id",
+    "parameters":[
+        {
+            "name":"cpu_core",
+            "value":"2",
+            "type" :"number|string|object|csv"
+        },
+        {
+            "name":"hdd",
+            "value":"2",
+            "type" :"number|string|object|csv"
+        },
+        {
+            "name":"memory",
+            "value":"2",
+            "type" :"number|string|object|csv"
+        },
+        {
+            "name":"os",
+            "value":"2",
+            "type" :"number|string|object|csv"
+        }
+    ]      
+    
+
+}
