@@ -4,7 +4,10 @@ const express = require('express');
 const api = require('./api');
 
 const router = express.Router();
-
+router.get('/', function (req, res) {
+  // res.json({ 'test': 'for default' });
+  res.render('index.html');
+})
 // endpoints
 // Login
 router.post('/api/v1/login', api.login.post);
@@ -30,4 +33,8 @@ router.get('/api/v1/job', api.request.getJob);
 // Resource
 // router.get('/api/v1/requests', api.resources.get)
 
+
+
 module.exports = router;
+
+
