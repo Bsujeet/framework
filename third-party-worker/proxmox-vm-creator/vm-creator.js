@@ -63,7 +63,11 @@ function makePostRequest (options) {
                 const _response = JSON.parse(body);
                 resolve(_response.data);
             } else {
-                reject(response.statusMessage);
+                if (error.code === 'EHOSTUNREACH' || error) {
+                    reject('Unable to reach at Proxmox server.');
+                }else{
+                    reject(response.statusMessage);
+                }
             }
         });
     });
@@ -76,7 +80,11 @@ function makeGetRequest (options) {
                 const _response = JSON.parse(body);
                 resolve(_response.data);
             } else {
-                reject(response.statusMessage);
+                if (error.code === 'EHOSTUNREACH' || error) {
+                    reject('Unable to reach at Proxmox server.');
+                } else {
+                    reject(response.statusMessage);
+                }
             }
         });
     });
