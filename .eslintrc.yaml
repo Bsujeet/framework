@@ -40,11 +40,11 @@
       - 2
       - functions: false
     space-before-function-paren:
-      - 2
+      - 0
       - always
     max-len:
       - 2
-      - 120
+      - 160
       - 2
     semi:
       - 2

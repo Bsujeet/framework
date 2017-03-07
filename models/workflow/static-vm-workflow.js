@@ -197,14 +197,14 @@ module.exports = {
             icon: '',
             input_params: [
                 {
-                    name: "vmId",
-                    value: "",
-                    type: "STRING"
+                    name: 'vmId',
+                    value: '',
+                    type: 'STRING'
                 },
                 {
-                    name: "vmNode",
-                    value: "",
-                    type: "STRING"
+                    name: 'vmNode',
+                    value: '',
+                    type: 'STRING'
                 }
             ],
             output_params: [],

@@ -14,7 +14,7 @@ EventBus.Emitter.on(EventBus.Events.JOB_COMPLETE, (data) => {
     onRequestComplete(data.requestId);
 });
 
-function createNewRequest (reqBody, callback) {
+function createNewRequest(reqBody, callback) {
     switch (reqBody.type) {
         case 'VM':
             VMRequestHandler.createRequest(reqBody, (err, data) => {
@@ -30,7 +30,7 @@ function createNewRequest (reqBody, callback) {
     }
 }
 
-function getRequest (requestId, callback) {
+function getRequest(requestId, callback) {
     if (requestId) {
         Request.findById(requestId, {}, (err, requests) => {
             if (err) {
@@ -50,7 +50,7 @@ function getRequest (requestId, callback) {
     }
 }
 
-function onRequestComplete (requestId) {
+function onRequestComplete(requestId) {
     getRequest(requestId, (err, request) => {
         if (err) {
             logger.error('Error occured while getting request from DB. Error:', err);
