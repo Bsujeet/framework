@@ -14,7 +14,7 @@ function tokenValidationFactory(options) {
                 User.verifyToken(token, (err, user) => {
                     if (err) {
                         return res.status(401)
-                            .send({ success: false, message: 'Invalid token! Please login again.' })
+                            .send({ status: false, message: 'Invalid token! Please login again.' })
                             .end();
                     }
                     req.userId = user.userId;
@@ -22,7 +22,7 @@ function tokenValidationFactory(options) {
                 });
             } else {
                 return res.status(401)
-                    .send({ success: false, message: 'No token provided.' })
+                    .send({ status: false, message: 'No token provided.' })
                     .end();
             }
         }
