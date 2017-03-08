@@ -4,10 +4,10 @@ const express = require('express');
 const api = require('./api');
 
 const router = express.Router();
-router.get('/', function (req, res) {
+router.get('/', (req, res) => {
   // res.json({ 'test': 'for default' });
-  res.render('index.html');
-})
+    res.render('index.html');
+});
 // endpoints
 // Login
 router.post('/api/v1/login', api.login.post);
