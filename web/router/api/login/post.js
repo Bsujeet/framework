@@ -15,14 +15,14 @@ const reqSchema = joi.object({
 function authenticate (req, resp) {
     const { error, value: reqBody } = joi.validate(req.body, reqSchema);
     if (error) {
-        resp.status(400).send({ status: false, msg: 'Parameter error' });
+        resp.status(200).send({ status: false, msg: 'Parameter error' });
         resp.end();
         return;
     }
 
     User.authenticate(reqBody.userId, reqBody.password, (err, token) => {
         if (err) {
-            resp.status(400).send({ status: false, msg: 'Invalid UserID/Password' });
+            resp.status(200).send({ status: false, msg: 'Invalid UserID/Password' });
             resp.end();
             return;
         }
