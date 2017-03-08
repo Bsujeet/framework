@@ -1,18 +1,18 @@
 webpackJsonp([0,4],{
 
-/***/ 1016:
-/***/ function(module, exports, __webpack_require__) {
+/***/ 1018:
+/***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(437);
+module.exports = __webpack_require__(438);
 
 
-/***/ },
+/***/ }),
 
 /***/ 174:
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -23,7 +23,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(1);
-var router_1 = __webpack_require__(49);
+var router_1 = __webpack_require__(48);
 //import { DataTransferService } from './service/data-transfer.service';
 var common_service_1 = __webpack_require__(93);
 var AppComponent = (function () {
@@ -70,8 +70,8 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            template: __webpack_require__(743),
-            styles: [__webpack_require__(737)],
+            template: __webpack_require__(744),
+            styles: [__webpack_require__(738)],
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof router_1.Router !== 'undefined' && router_1.Router) === 'function' && _a) || Object, (typeof (_b = typeof common_service_1.CommonService !== 'undefined' && common_service_1.CommonService) === 'function' && _b) || Object])
     ], AppComponent);
@@ -79,15 +79,15 @@ var AppComponent = (function () {
     var _a, _b;
 }());
 exports.AppComponent = AppComponent;
-//# sourceMappingURL=D:/Bitbucket/Project/DMF/trunk/src/src/src/app/app.component.js.map
+//# sourceMappingURL=D:/Datacenter/src/src/src/app/app.component.js.map
 
-/***/ },
+/***/ }),
 
 /***/ 368:
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -98,7 +98,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(1);
-var http_1 = __webpack_require__(235);
+var http_1 = __webpack_require__(236);
 var AuthService = (function () {
     function AuthService(http) {
         this.http = http;
@@ -124,12 +124,12 @@ var AuthService = (function () {
     var _a;
 }());
 exports.AuthService = AuthService;
-//# sourceMappingURL=D:/Bitbucket/Project/DMF/trunk/src/src/src/app/service/auth.service.js.map
+//# sourceMappingURL=D:/Datacenter/src/src/src/app/service/auth.service.js.map
 
-/***/ },
+/***/ }),
 
-/***/ 436:
-/***/ function(module, exports) {
+/***/ 437:
+/***/ (function(module, exports) {
 
 function webpackEmptyContext(req) {
 	throw new Error("Cannot find module '" + req + "'.");
@@ -137,34 +137,34 @@ function webpackEmptyContext(req) {
 webpackEmptyContext.keys = function() { return []; };
 webpackEmptyContext.resolve = webpackEmptyContext;
 module.exports = webpackEmptyContext;
-webpackEmptyContext.id = 436;
+webpackEmptyContext.id = 437;
 
 
-/***/ },
+/***/ }),
 
-/***/ 437:
-/***/ function(module, exports, __webpack_require__) {
+/***/ 438:
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
-__webpack_require__(574);
-var platform_browser_dynamic_1 = __webpack_require__(529);
+
+__webpack_require__(575);
+var platform_browser_dynamic_1 = __webpack_require__(530);
 var core_1 = __webpack_require__(1);
-var environment_1 = __webpack_require__(573);
-var _1 = __webpack_require__(571);
+var environment_1 = __webpack_require__(574);
+var _1 = __webpack_require__(572);
 if (environment_1.environment.production) {
     core_1.enableProdMode();
 }
 platform_browser_dynamic_1.platformBrowserDynamic().bootstrapModule(_1.AppModule);
-//# sourceMappingURL=D:/Bitbucket/Project/DMF/trunk/src/src/src/main.js.map
+//# sourceMappingURL=D:/Datacenter/src/src/src/main.js.map
 
-/***/ },
+/***/ }),
 
-/***/ 559:
-/***/ function(module, exports, __webpack_require__) {
+/***/ 560:
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -176,16 +176,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var platform_browser_1 = __webpack_require__(120);
 var core_1 = __webpack_require__(1);
-var forms_1 = __webpack_require__(76);
-var http_1 = __webpack_require__(235);
-var clarity_angular_1 = __webpack_require__(575);
+var forms_1 = __webpack_require__(75);
+var http_1 = __webpack_require__(236);
+var clarity_angular_1 = __webpack_require__(576);
 var app_component_1 = __webpack_require__(174);
-var app_routing_1 = __webpack_require__(560);
-var forms_2 = __webpack_require__(76);
+var app_routing_1 = __webpack_require__(561);
+var forms_2 = __webpack_require__(75);
 var auth_service_1 = __webpack_require__(368);
 var common_service_1 = __webpack_require__(93);
 //import {DataTransferService} from './service/data-transfer.service'; 
-var ng2_pagination_1 = __webpack_require__(731);
+var ng2_pagination_1 = __webpack_require__(732);
 var AppModule = (function () {
     function AppModule() {
     }
@@ -210,25 +210,25 @@ var AppModule = (function () {
     return AppModule;
 }());
 exports.AppModule = AppModule;
-//# sourceMappingURL=D:/Bitbucket/Project/DMF/trunk/src/src/src/app/app.module.js.map
+//# sourceMappingURL=D:/Datacenter/src/src/src/app/app.module.js.map
 
-/***/ },
+/***/ }),
 
-/***/ 560:
-/***/ function(module, exports, __webpack_require__) {
+/***/ 561:
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
-var router_1 = __webpack_require__(49);
-var about_component_1 = __webpack_require__(564);
-var home_component_1 = __webpack_require__(566);
-var createVM_component_1 = __webpack_require__(562);
-var login_component_1 = __webpack_require__(567);
-var forgotpw_component_1 = __webpack_require__(565);
-var Notfound_component_1 = __webpack_require__(569);
-var signup_component_1 = __webpack_require__(568);
-var underConstruction_component_1 = __webpack_require__(570);
-var monitor_component_1 = __webpack_require__(563);
+
+var router_1 = __webpack_require__(48);
+var about_component_1 = __webpack_require__(565);
+var home_component_1 = __webpack_require__(567);
+var createVM_component_1 = __webpack_require__(563);
+var login_component_1 = __webpack_require__(568);
+var forgotpw_component_1 = __webpack_require__(566);
+var Notfound_component_1 = __webpack_require__(570);
+var signup_component_1 = __webpack_require__(569);
+var underConstruction_component_1 = __webpack_require__(571);
+var monitor_component_1 = __webpack_require__(564);
 exports.ROUTES = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: 'home', component: home_component_1.HomeComponent },
@@ -242,15 +242,15 @@ exports.ROUTES = [
 ];
 exports.ROUTING = router_1.RouterModule.forRoot(exports.ROUTES);
 exports.routComponents = [about_component_1.AboutComponent, home_component_1.HomeComponent, createVM_component_1.CreateVMComponent, login_component_1.LoginComponent, forgotpw_component_1.ForgotPasswordComponent, Notfound_component_1.PageNotFound, signup_component_1.SignupComponent, underConstruction_component_1.UnderConstruction, monitor_component_1.MonitorComponent];
-//# sourceMappingURL=D:/Bitbucket/Project/DMF/trunk/src/src/src/app/app.routing.js.map
+//# sourceMappingURL=D:/Datacenter/src/src/src/app/app.routing.js.map
 
-/***/ },
+/***/ }),
 
-/***/ 561:
-/***/ function(module, exports, __webpack_require__) {
+/***/ 562:
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -261,7 +261,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(1);
-var router_1 = __webpack_require__(49);
+var router_1 = __webpack_require__(48);
 var AuthManager = (function () {
     function AuthManager(router) {
         this.router = router;
@@ -281,15 +281,15 @@ var AuthManager = (function () {
     var _a;
 }());
 exports.AuthManager = AuthManager;
-//# sourceMappingURL=D:/Bitbucket/Project/DMF/trunk/src/src/src/app/authmanager.js.map
+//# sourceMappingURL=D:/Datacenter/src/src/src/app/authmanager.js.map
 
-/***/ },
+/***/ }),
 
-/***/ 562:
-/***/ function(module, exports, __webpack_require__) {
+/***/ 563:
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -300,8 +300,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(1);
-var forms_1 = __webpack_require__(76);
-var router_1 = __webpack_require__(49);
+var forms_1 = __webpack_require__(75);
+var router_1 = __webpack_require__(48);
 //import { DataTransferService } from '../../../service/data-transfer.service';
 var common_service_1 = __webpack_require__(93);
 var app_component_1 = __webpack_require__(174);
@@ -421,7 +421,7 @@ var CreateVMComponent = (function () {
     CreateVMComponent = __decorate([
         core_1.Component({
             // styleUrls: ['../app/styles.css'],
-            template: __webpack_require__(744)
+            template: __webpack_require__(745)
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof forms_1.FormBuilder !== 'undefined' && forms_1.FormBuilder) === 'function' && _a) || Object, (typeof (_b = typeof router_1.Router !== 'undefined' && router_1.Router) === 'function' && _b) || Object, (typeof (_c = typeof common_service_1.CommonService !== 'undefined' && common_service_1.CommonService) === 'function' && _c) || Object, (typeof (_d = typeof app_component_1.AppComponent !== 'undefined' && app_component_1.AppComponent) === 'function' && _d) || Object])
     ], CreateVMComponent);
@@ -429,15 +429,15 @@ var CreateVMComponent = (function () {
     var _a, _b, _c, _d;
 }());
 exports.CreateVMComponent = CreateVMComponent;
-//# sourceMappingURL=D:/Bitbucket/Project/DMF/trunk/src/src/src/app/component/VM/create/createVM.component.js.map
+//# sourceMappingURL=D:/Datacenter/src/src/src/app/component/VM/create/createVM.component.js.map
 
-/***/ },
+/***/ }),
 
-/***/ 563:
-/***/ function(module, exports, __webpack_require__) {
+/***/ 564:
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -460,23 +460,23 @@ var MonitorComponent = (function () {
     };
     MonitorComponent = __decorate([
         core_1.Component({
-            template: __webpack_require__(745),
-            styles: [__webpack_require__(738)]
+            template: __webpack_require__(746),
+            styles: [__webpack_require__(739)]
         }), 
         __metadata('design:paramtypes', [])
     ], MonitorComponent);
     return MonitorComponent;
 }());
 exports.MonitorComponent = MonitorComponent;
-//# sourceMappingURL=D:/Bitbucket/Project/DMF/trunk/src/src/src/app/component/VM/monitor/monitor.component.js.map
+//# sourceMappingURL=D:/Datacenter/src/src/src/app/component/VM/monitor/monitor.component.js.map
 
-/***/ },
+/***/ }),
 
-/***/ 564:
-/***/ function(module, exports, __webpack_require__) {
+/***/ 565:
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -497,23 +497,23 @@ var AboutComponent = (function () {
     }
     AboutComponent = __decorate([
         core_1.Component({
-            styles: [__webpack_require__(739)],
-            template: __webpack_require__(746)
+            styles: [__webpack_require__(740)],
+            template: __webpack_require__(747)
         }), 
         __metadata('design:paramtypes', [])
     ], AboutComponent);
     return AboutComponent;
 }());
 exports.AboutComponent = AboutComponent;
-//# sourceMappingURL=D:/Bitbucket/Project/DMF/trunk/src/src/src/app/component/about/about.component.js.map
+//# sourceMappingURL=D:/Datacenter/src/src/src/app/component/about/about.component.js.map
 
-/***/ },
+/***/ }),
 
-/***/ 565:
-/***/ function(module, exports, __webpack_require__) {
+/***/ 566:
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -524,8 +524,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(1);
-var forms_1 = __webpack_require__(76);
-var router_1 = __webpack_require__(49);
+var forms_1 = __webpack_require__(75);
+var router_1 = __webpack_require__(48);
 var ForgotPasswordComponent = (function () {
     function ForgotPasswordComponent(formBuilder, router) {
         this.formBuilder = formBuilder;
@@ -545,7 +545,7 @@ var ForgotPasswordComponent = (function () {
     ForgotPasswordComponent = __decorate([
         core_1.Component({
             // styleUrls: ['./login.component.scss'],
-            template: __webpack_require__(747)
+            template: __webpack_require__(748)
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof forms_1.FormBuilder !== 'undefined' && forms_1.FormBuilder) === 'function' && _a) || Object, (typeof (_b = typeof router_1.Router !== 'undefined' && router_1.Router) === 'function' && _b) || Object])
     ], ForgotPasswordComponent);
@@ -553,15 +553,15 @@ var ForgotPasswordComponent = (function () {
     var _a, _b;
 }());
 exports.ForgotPasswordComponent = ForgotPasswordComponent;
-//# sourceMappingURL=D:/Bitbucket/Project/DMF/trunk/src/src/src/app/component/forgotpw/forgotpw.component.js.map
+//# sourceMappingURL=D:/Datacenter/src/src/src/app/component/forgotpw/forgotpw.component.js.map
 
-/***/ },
+/***/ }),
 
-/***/ 566:
-/***/ function(module, exports, __webpack_require__) {
+/***/ 567:
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -578,7 +578,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  */
 var core_1 = __webpack_require__(1);
 //import { DataTransferService } from '../../service/data-transfer.service';
-var router_1 = __webpack_require__(49);
+var router_1 = __webpack_require__(48);
 var common_service_1 = __webpack_require__(93);
 var app_component_1 = __webpack_require__(174);
 var HomeComponent = (function () {
@@ -624,8 +624,8 @@ var HomeComponent = (function () {
     };
     HomeComponent = __decorate([
         core_1.Component({
-            styles: [__webpack_require__(740)],
-            template: __webpack_require__(748)
+            styles: [__webpack_require__(741)],
+            template: __webpack_require__(749)
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof router_1.Router !== 'undefined' && router_1.Router) === 'function' && _a) || Object, (typeof (_b = typeof common_service_1.CommonService !== 'undefined' && common_service_1.CommonService) === 'function' && _b) || Object, (typeof (_c = typeof app_component_1.AppComponent !== 'undefined' && app_component_1.AppComponent) === 'function' && _c) || Object])
     ], HomeComponent);
@@ -633,15 +633,15 @@ var HomeComponent = (function () {
     var _a, _b, _c;
 }());
 exports.HomeComponent = HomeComponent;
-//# sourceMappingURL=D:/Bitbucket/Project/DMF/trunk/src/src/src/app/component/home/home.component.js.map
+//# sourceMappingURL=D:/Datacenter/src/src/src/app/component/home/home.component.js.map
 
-/***/ },
+/***/ }),
 
-/***/ 567:
-/***/ function(module, exports, __webpack_require__) {
+/***/ 568:
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -652,11 +652,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(1);
-var forms_1 = __webpack_require__(76);
-var router_1 = __webpack_require__(49);
+var forms_1 = __webpack_require__(75);
+var router_1 = __webpack_require__(48);
 var common_service_1 = __webpack_require__(93);
 //import { DataTransferService } from '../../service/data-transfer.service';
-__webpack_require__(269);
+__webpack_require__(270);
 var LoginComponent = (function () {
     function LoginComponent(_fb, CS, 
         /*private DT: DataTransferService,*/
@@ -687,14 +687,14 @@ var LoginComponent = (function () {
             this.router.navigateByUrl('/home');
         }
         else if (!data.status) {
-            this.result = data.result;
+            this.result = data.msg;
             this.InVisible = true;
         }
     };
     LoginComponent = __decorate([
         core_1.Component({
-            styles: [__webpack_require__(741)],
-            template: __webpack_require__(749)
+            styles: [__webpack_require__(742)],
+            template: __webpack_require__(750)
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof forms_1.FormBuilder !== 'undefined' && forms_1.FormBuilder) === 'function' && _a) || Object, (typeof (_b = typeof common_service_1.CommonService !== 'undefined' && common_service_1.CommonService) === 'function' && _b) || Object, (typeof (_c = typeof router_1.Router !== 'undefined' && router_1.Router) === 'function' && _c) || Object])
     ], LoginComponent);
@@ -702,15 +702,15 @@ var LoginComponent = (function () {
     var _a, _b, _c;
 }());
 exports.LoginComponent = LoginComponent;
-//# sourceMappingURL=D:/Bitbucket/Project/DMF/trunk/src/src/src/app/component/login/login.component.js.map
+//# sourceMappingURL=D:/Datacenter/src/src/src/app/component/login/login.component.js.map
 
-/***/ },
+/***/ }),
 
-/***/ 568:
-/***/ function(module, exports, __webpack_require__) {
+/***/ 569:
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -721,11 +721,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(1);
-var forms_1 = __webpack_require__(76);
-var router_1 = __webpack_require__(49);
-var signup_model_1 = __webpack_require__(572);
+var forms_1 = __webpack_require__(75);
+var router_1 = __webpack_require__(48);
+var signup_model_1 = __webpack_require__(573);
 var common_service_1 = __webpack_require__(93);
-__webpack_require__(269);
+__webpack_require__(270);
 var SignupComponent = (function () {
     function SignupComponent(_fb, router, CS) {
         this._fb = _fb;
@@ -750,7 +750,7 @@ var SignupComponent = (function () {
     SignupComponent = __decorate([
         core_1.Component({
             // styleUrls: ['./login.component.scss'],
-            template: __webpack_require__(750)
+            template: __webpack_require__(751)
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof forms_1.FormBuilder !== 'undefined' && forms_1.FormBuilder) === 'function' && _a) || Object, (typeof (_b = typeof router_1.Router !== 'undefined' && router_1.Router) === 'function' && _b) || Object, (typeof (_c = typeof common_service_1.CommonService !== 'undefined' && common_service_1.CommonService) === 'function' && _c) || Object])
     ], SignupComponent);
@@ -758,15 +758,15 @@ var SignupComponent = (function () {
     var _a, _b, _c;
 }());
 exports.SignupComponent = SignupComponent;
-//# sourceMappingURL=D:/Bitbucket/Project/DMF/trunk/src/src/src/app/component/signup/signup.component.js.map
+//# sourceMappingURL=D:/Datacenter/src/src/src/app/component/signup/signup.component.js.map
 
-/***/ },
+/***/ }),
 
-/***/ 569:
-/***/ function(module, exports, __webpack_require__) {
+/***/ 570:
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -789,15 +789,15 @@ var PageNotFound = (function () {
     return PageNotFound;
 }());
 exports.PageNotFound = PageNotFound;
-//# sourceMappingURL=D:/Bitbucket/Project/DMF/trunk/src/src/src/app/component/underConstruction/Notfound.component.js.map
+//# sourceMappingURL=D:/Datacenter/src/src/src/app/component/underConstruction/Notfound.component.js.map
 
-/***/ },
+/***/ }),
 
-/***/ 570:
-/***/ function(module, exports, __webpack_require__) {
+/***/ 571:
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -820,31 +820,31 @@ var UnderConstruction = (function () {
     return UnderConstruction;
 }());
 exports.UnderConstruction = UnderConstruction;
-//# sourceMappingURL=D:/Bitbucket/Project/DMF/trunk/src/src/src/app/component/underConstruction/underConstruction.component.js.map
+//# sourceMappingURL=D:/Datacenter/src/src/src/app/component/underConstruction/underConstruction.component.js.map
 
-/***/ },
+/***/ }),
 
-/***/ 571:
-/***/ function(module, exports, __webpack_require__) {
+/***/ 572:
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 __export(__webpack_require__(174));
-__export(__webpack_require__(559));
-__export(__webpack_require__(561));
+__export(__webpack_require__(560));
+__export(__webpack_require__(562));
 __export(__webpack_require__(368));
-//# sourceMappingURL=D:/Bitbucket/Project/DMF/trunk/src/src/src/app/index.js.map
+//# sourceMappingURL=D:/Datacenter/src/src/src/app/index.js.map
 
-/***/ },
+/***/ }),
 
-/***/ 572:
-/***/ function(module, exports) {
+/***/ 573:
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var signupModel = (function () {
     function signupModel(username, email, password) {
         this.username = username;
@@ -854,149 +854,149 @@ var signupModel = (function () {
     return signupModel;
 }());
 exports.signupModel = signupModel;
-//# sourceMappingURL=D:/Bitbucket/Project/DMF/trunk/src/src/src/app/model/signup.model.js.map
+//# sourceMappingURL=D:/Datacenter/src/src/src/app/model/signup.model.js.map
 
-/***/ },
+/***/ }),
 
-/***/ 573:
-/***/ function(module, exports) {
+/***/ 574:
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 // The file contents for the current environment will overwrite these during build.
 // The build system defaults to the dev environment which uses `environment.ts`, but if you do
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `angular-cli.json`.
-"use strict";
+
 exports.environment = {
     production: false
 };
-//# sourceMappingURL=D:/Bitbucket/Project/DMF/trunk/src/src/src/environments/environment.js.map
+//# sourceMappingURL=D:/Datacenter/src/src/src/environments/environment.js.map
 
-/***/ },
+/***/ }),
 
-/***/ 574:
-/***/ function(module, exports, __webpack_require__) {
+/***/ 575:
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 // This file includes polyfills needed by Angular 2 and is loaded before
 // the app. You can add your own extra polyfills to this file.
-__webpack_require__(589);
-__webpack_require__(582);
-__webpack_require__(578);
-__webpack_require__(584);
+__webpack_require__(590);
 __webpack_require__(583);
+__webpack_require__(579);
+__webpack_require__(585);
+__webpack_require__(584);
+__webpack_require__(582);
 __webpack_require__(581);
+__webpack_require__(589);
+__webpack_require__(578);
+__webpack_require__(577);
+__webpack_require__(587);
 __webpack_require__(580);
 __webpack_require__(588);
-__webpack_require__(577);
-__webpack_require__(576);
 __webpack_require__(586);
-__webpack_require__(579);
-__webpack_require__(587);
-__webpack_require__(585);
-__webpack_require__(590);
-__webpack_require__(1015);
-//# sourceMappingURL=D:/Bitbucket/Project/DMF/trunk/src/src/src/polyfills.js.map
+__webpack_require__(591);
+__webpack_require__(1016);
+//# sourceMappingURL=D:/Datacenter/src/src/src/polyfills.js.map
 
-/***/ },
-
-/***/ 737:
-/***/ function(module, exports) {
-
-module.exports = ".clr-icon.clr-clarity-logo {\n  background-image: url(../images/clarity_logo.svg); }\n\n.bars {\n  color: #fafafa;\n  margin-top: 12px; }\n\n.header-actions {\n  /* .logout:before{\n    content:\"|\";\n    padding-right: 15px;\n\n  }*/ }\n  .header-actions a {\n    font-size: 16px;\n    font-weight: 400;\n    font-family: Metropolis, \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif;\n    letter-spacing: .01em;\n    color: #fafafa;\n    line-height: 60px;\n    text-decoration: none;\n    margin-right: 1rem;\n    position: relative; }\n\n.main-container {\n  background: #fff; }\n  .main-container .content-area {\n    overflow-y: inherit; }\n\n.visible, .mobile-tab {\n  display: none; }\n\n@media (max-width: 767px) {\n  .header {\n    display: inherit; }\n    .header .branding {\n      padding: 0 5px; }\n  .desktop {\n    display: none; }\n  .mobile-tab {\n    display: block; } }\n"
-
-/***/ },
+/***/ }),
 
 /***/ 738:
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".clr-icon.clr-clarity-logo {\n  background-image: url(../images/clarity_logo.svg); }\n\n.bars {\n  color: #fafafa;\n  margin-top: 12px; }\n\n.header-actions {\n  /* .logout:before{\r\n    content:\"|\";\r\n    padding-right: 15px;\r\n\r\n  }*/ }\n  .header-actions a {\n    font-size: 16px;\n    font-weight: 400;\n    font-family: Metropolis, \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif;\n    letter-spacing: .01em;\n    color: #fafafa;\n    line-height: 60px;\n    text-decoration: none;\n    margin-right: 1rem;\n    position: relative; }\n\n.main-container {\n  background: #fff; }\n  .main-container .content-area {\n    overflow-y: inherit; }\n\n.visible, .mobile-tab {\n  display: none; }\n\n@media (max-width: 767px) {\n  .header {\n    display: inherit; }\n    .header .branding {\n      padding: 0 5px; }\n  .desktop {\n    display: none; }\n  .mobile-tab {\n    display: block; } }\n"
 
-/***/ },
+/***/ }),
 
 /***/ 739:
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 module.exports = ""
 
-/***/ },
+/***/ }),
 
 /***/ 740:
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ 741:
+/***/ (function(module, exports) {
 
 module.exports = ".refresh {\n  font-size: 22px;\n  float: right;\n  display: block;\n  clear: both;\n  padding-bottom: 10px; }\n  .refresh span {\n    font-size: 12px;\n    padding-left: 5px; }\n\ntr:nth-child(even) {\n  background: #D9E4EA; }\n\ntd, th {\n  text-align: left; }\n"
 
-/***/ },
+/***/ }),
 
-/***/ 741:
-/***/ function(module, exports) {
+/***/ 742:
+/***/ (function(module, exports) {
 
 module.exports = ".login-wrapper {\n  background: none; }\n  .login-wrapper .login {\n    margin: 0 auto; }\n    .login-wrapper .login:after {\n      display: none; }\n    .login-wrapper .login .login-group .btn {\n      margin-top: 20px; }\n"
 
-/***/ },
-
-/***/ 743:
-/***/ function(module, exports) {
-
-module.exports = "<clr-main-container>\n  <clr-header>\n    <button class=\"navbar-toggler hidden-md-up bars\" [ngClass]=\"{'visible': InVisible,'clr-nav-level-1':showNav}\" type=\"button\" (click)=\"toggleClass();\">&#9776;</button>\n    <div class=\"branding\">\n      <a  class=\"nav-link\">\n        <span class=\"clr-icon clr-clarity-logo\"></span>\n        <span class=\"title desktop\">Datacenter Management Framework</span>\n        <span class=\"title mobile-tab\">DCMF</span>\n      </a>\n    </div>\n    <div class=\"header-actions\">\n          <a  [routerLink]=\"['/login']\" [ngClass]=\"{'visible': !InVisible}\">Login </a>\n          <a  [routerLink]=\"['/home']\" [ngClass]=\"{'visible': InVisible}\" >Welcome {{UserName}} </a>\n          <a  [ngClass]=\"{'visible': InVisible}\" class=\"logout\" (click)=\"onlogout()\">Logout</a> \n    </div>\n  </clr-header>\n  \n  <div class=\"content-container\">\n    <div class=\"content-area\">\n      <router-outlet></router-outlet>\n    </div>\n    <nav class=\"sidenav\" [ngClass]=\"{'visible': InVisible,'clr-nav-level-1':showNav}\">\n    <section class=\"sidenav-content\">\n      <a class=\"nav-link\"  [routerLink]=\"['/home']\" [class.active]=\"router.url==='/home' || router.url==='/'\">Home</a>\n      <a class=\"nav-link\"  [routerLink]=\"['/about']\" [class.active]=\"router.url==='/about'\">About</a>\n      <section class=\"nav-group collapsible\">\n        <input id=\"tab2\" type=\"checkbox\">\n        <label for=\"tab2\">VM</label>\n        <ul class=\"nav-list\">\n            <li><a class=\"nav-link\"  [routerLink]=\"['/createVM']\" [class.active]=\"router.url==='/createVM'\">Create VM</a></li>\n            <li><a class=\"nav-link\" routerlinkactive=\"active\"[routerLink]=\"['/monitor']\" [class.active]=\"router.url==='/monitor'\">Monitor</a></li>          \n        </ul>\n      </section>\n    </section>\n  </nav>\n</div>\n</clr-main-container>\n\n<clr-modal [(clrModalOpen)]=\"open\">\n  <h3 class=\"modal-title\">Information </h3>\n  <div class=\"modal-body\">\n    <p>{{modelMsg}}</p>\n  </div>\n  <div class=\"modal-footer\">\n    <button type=\"button\" class=\"btn btn-primary\" (click)=\"onCancel()\">Ok</button>\n  </div>\n</clr-modal>\n\n"
-
-/***/ },
+/***/ }),
 
 /***/ 744:
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
-module.exports = "<h1>VM Creation Form</h1>\n<form   class=\"form\" [formGroup]=\"vmcreationForm\" (ngSubmit)=\"onSubmit(vmcreationForm.value)\" [hidden]=\"submitted\">\n    <section class=\"form-block\">\n        <div class=\"form-group\">\n            <label for=\"Name\">Name</label>\n            <label for=\"Name\" aria-haspopup=\"true\" role=\"tooltip\" class=\"tooltip tooltip-validation tooltip-md\" [class.invalid]=\"vmcreationForm.get('Name').invalid\n                    && (vmcreationForm.get('Name').dirty || vmcreationForm.get('Name').touched)\">\n                <input type=\"text\" id=\"Name\"   placeholder=\"Enter  name\" formControlName=\"Name\" required>\n                <span class=\"tooltip-content\">\n                    Name is Required.\n                </span>\n            </label>\n        </div>\n        <div class=\"form-group\">\n            <label for=\"description\">Description</label>\n            <textarea id=\"description\" rows=\"5\" formControlName=\"description\" required></textarea>\n        </div>\n        <!--<div class=\"form-group\">\n            <label for=\"description\">Description</label>\n            <label for=\"description\" aria-haspopup=\"true\" role=\"tooltip\" class=\"tooltip tooltip-validation tooltip-md\" [class.invalid]=\"vmcreationForm.get('description').invalid\n                    && (vmcreationForm.get('description').dirty || vmcreationForm.get('description').touched)\">\n                <textarea id=\"description\"  formControlName=\"description\" rows=\"5\" required ></textarea>\n                <span class=\"tooltip-content\">\n                    Description is Required.\n                </span>\n            </label>\n        </div> -->\n        <div class=\"form-group\">\n            <label for=\"type\">Type</label>\n            <label for=\"type\" aria-haspopup=\"true\" role=\"tooltip\" class=\"tooltip tooltip-validation tooltip-md\" [class.invalid]=\"vmcreationForm.get('type').invalid\n                    && (vmcreationForm.get('type').dirty || vmcreationForm.get('type').touched)\">\n                <input type=\"text\" id=\"type\" formControlName=\"type\" readonly>\n                <span class=\"tooltip-content\">\n                    Type is Required.\n                </span>\n            </label>\n        </div>\n        <div class=\"form-group\">\n            <label for=\"operation\">Operation</label>\n            <label for=\"operation\" aria-haspopup=\"true\" role=\"tooltip\" class=\"tooltip tooltip-validation tooltip-md\" [class.invalid]=\"vmcreationForm.get('operation').invalid\n                    && (vmcreationForm.get('operation').dirty || vmcreationForm.get('operation').touched)\">\n                <input type=\"text\" id=\"operation\" formControlName=\"operation\" readonly>\n                <span class=\"tooltip-content\">\n                    Operation is Required.\n                </span>\n            </label>\n        </div>\n        <div class=\"form-group\">\n            <label for=\"vmName\">VM Name</label>\n            <label for=\"vmName\" aria-haspopup=\"true\" role=\"tooltip\" class=\"tooltip tooltip-validation tooltip-md\" [class.invalid]=\"vmcreationForm.get('vmName').invalid\n                    && (vmcreationForm.get('vmName').dirty || vmcreationForm.get('vmName').touched)\">\n                <input type=\"text\" id=\"vmName\"   placeholder=\"Enter VM name\" formControlName=\"vmName\" required>\n                <span class=\"tooltip-content\">\n                    VM Name is Required.\n                </span>\n            </label>\n        </div>\n        <div class=\"form-group\">\n            <label for=\"OS\">Operating System</label>\n            <label for=\"OS\" aria-haspopup=\"true\" role=\"tooltip\" class=\"tooltip tooltip-validation tooltip-md\" [class.invalid]=\"vmcreationForm.get('OS').invalid\n                    && (vmcreationForm.get('OS').dirty || vmcreationForm.get('OS').touched)\">\n               \n                <div class=\"select form-control\">\n                    <select id=\"exampleSelect1\" value=\"osList[0]\" formControlName=\"OS\" >\n                        <option *ngFor=\"let os of osList\" value=\"{{os.version}}\">{{os.name}}</option>\n                    </select>\n                </div>\n                \n                <span class=\"tooltip-content\">\n                    Operating System Name is Required.\n                </span>\n            </label>\n        </div>\n        <div class=\"form-group\">\n            <label for=\"diskSize\">Disk Size (GB) </label>\n            <label for=\"diskSize\" aria-haspopup=\"true\" role=\"tooltip\" class=\"tooltip tooltip-validation tooltip-md\" [class.invalid]=\"vmcreationForm.get('diskSize').invalid\n                    && (vmcreationForm.get('diskSize').dirty || vmcreationForm.get('diskSize').touched)\">\n                <input type=\"text\" id=\"diskSize\"  placeholder=\"Enter Disk Size in GBs\" formControlName=\"diskSize\" (keypress)=\"onlyNumberKey($event)\"  required>\n                <span class=\"tooltip-content\">\n                    Disk Size is Required.\n                </span>\n            </label>\n        </div>\n        <div class=\"form-group\">\n            <label for=\"cpuCore\">CPU Core</label>\n            <label for=\"cpuCore\" aria-haspopup=\"true\" role=\"tooltip\" class=\"tooltip tooltip-validation tooltip-md\" [class.invalid]=\"vmcreationForm.get('cpuCore').invalid\n                    && (vmcreationForm.get('cpuCore').dirty || vmcreationForm.get('cpuCore').touched)\">\n              \n           \n            <div class=\"select\">\n                <select id=\"cpuCore\" formControlName=\"cpuCore\">\n                    <option>1</option>\n                    <option>2</option>                    \n                </select>\n            </div>\n       \n                <span class=\"tooltip-content\">\n                    CPU Core is Required.\n                </span>\n            </label>\n        </div>\n\n        <div class=\"form-group\">\n            <label for=\"Memory\">Memory (MB) </label>\n            <label for=\"Memory\" aria-haspopup=\"true\" role=\"tooltip\" class=\"tooltip tooltip-validation tooltip-md\" [class.invalid]=\"vmcreationForm.get('Memory').invalid\n                    && (vmcreationForm.get('Memory').dirty || vmcreationForm.get('Memory').touched)\">\n                <input type=\"text\" id=\"Memory\"  placeholder=\"Enter Memory \" formControlName=\"Memory\" (keypress)=\"onlyNumberKey($event)\" required>\n                <span class=\"tooltip-content\">\n                    Memory is Required.\n                </span>\n            </label>\n        </div>\n        <div class=\"form-group\">\n            <input type=\"hidden\" id=\"type\" value=\"CREATE\" formControlName=\"type\" />\n        </div>\n        <button type=\"submit\" class=\"btn btn-primary\">Create</button>\n        <button type=\"button\" class=\"btn btn-warning\" (click)=\"redirectToHome()\">Cancel</button>\n    </section>\n</form>"
+module.exports = "<clr-main-container>\r\n  <clr-header>\r\n    <button class=\"navbar-toggler hidden-md-up bars\" [ngClass]=\"{'visible': InVisible,'clr-nav-level-1':showNav}\" type=\"button\" (click)=\"toggleClass();\">&#9776;</button>\r\n    <div class=\"branding\">\r\n      <a  class=\"nav-link\">\r\n        <span class=\"clr-icon clr-clarity-logo\"></span>\r\n        <span class=\"title desktop\">Datacenter Management Framework</span>\r\n        <span class=\"title mobile-tab\">DCMF</span>\r\n      </a>\r\n    </div>\r\n    <div class=\"header-actions\">\r\n          <a  [routerLink]=\"['/login']\" [ngClass]=\"{'visible': !InVisible}\">Login </a>\r\n          <a  [routerLink]=\"['/home']\" [ngClass]=\"{'visible': InVisible}\" >Welcome {{UserName}} </a>\r\n          <a  [ngClass]=\"{'visible': InVisible}\" class=\"logout\" (click)=\"onlogout()\">Logout</a> \r\n    </div>\r\n  </clr-header>\r\n  \r\n  <div class=\"content-container\">\r\n    <div class=\"content-area\">\r\n      <router-outlet></router-outlet>\r\n    </div>\r\n    <nav class=\"sidenav\" [ngClass]=\"{'visible': InVisible,'clr-nav-level-1':showNav}\">\r\n    <section class=\"sidenav-content\">\r\n      <a class=\"nav-link\"  [routerLink]=\"['/home']\" [class.active]=\"router.url==='/home' || router.url==='/'\">Home</a>\r\n      <a class=\"nav-link\"  [routerLink]=\"['/about']\" [class.active]=\"router.url==='/about'\">About</a>\r\n      <section class=\"nav-group collapsible\">\r\n        <input id=\"tab2\" type=\"checkbox\">\r\n        <label for=\"tab2\">VM</label>\r\n        <ul class=\"nav-list\">\r\n            <li><a class=\"nav-link\"  [routerLink]=\"['/createVM']\" [class.active]=\"router.url==='/createVM'\">Create VM</a></li>\r\n            <li><a class=\"nav-link\" routerlinkactive=\"active\"[routerLink]=\"['/monitor']\" [class.active]=\"router.url==='/monitor'\">Monitor</a></li>          \r\n        </ul>\r\n      </section>\r\n    </section>\r\n  </nav>\r\n</div>\r\n</clr-main-container>\r\n\r\n<clr-modal [(clrModalOpen)]=\"open\">\r\n  <h3 class=\"modal-title\">Information </h3>\r\n  <div class=\"modal-body\">\r\n    <p>{{modelMsg}}</p>\r\n  </div>\r\n  <div class=\"modal-footer\">\r\n    <button type=\"button\" class=\"btn btn-primary\" (click)=\"onCancel()\">Ok</button>\r\n  </div>\r\n</clr-modal>\r\n\r\n"
 
-/***/ },
+/***/ }),
 
 /***/ 745:
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
-module.exports = "<clr-stack-view>\n    <clr-stack-header>Monitor VM</clr-stack-header>\n\n    <clr-stack-block [clrSbExpanded]=\"true\">\n        <clr-stack-label>Name - Name</clr-stack-label>\n        <clr-stack-content>VM ID - ID</clr-stack-content>\n         <clr-stack-block>\n            <clr-stack-label>Disk Usage</clr-stack-label>\n            <clr-stack-content>Sub-content 2</clr-stack-content>\n        </clr-stack-block>\n         <clr-stack-block>\n            <clr-stack-label>Memory Usage</clr-stack-label>\n            <clr-stack-content>Sub-content 2</clr-stack-content>\n        </clr-stack-block>\n        <clr-stack-block>\n            <clr-stack-label>CPU Usage</clr-stack-label>\n            <clr-stack-content>Sub-content 2</clr-stack-content>\n        </clr-stack-block>\n        <clr-stack-block>\n            <clr-stack-label>Up Time</clr-stack-label>\n            <clr-stack-content>Sub-content 2</clr-stack-content>\n        </clr-stack-block>\n    </clr-stack-block>\n\n    <clr-stack-block >\n        <clr-stack-label>Label 2</clr-stack-label>\n        <clr-stack-content>Content 2</clr-stack-content>\n        <clr-stack-block>\n            <clr-stack-label>Sub-label 3</clr-stack-label>\n            <clr-stack-content>Sub-content 3</clr-stack-content>\n        </clr-stack-block>\n        <clr-stack-block>\n            <clr-stack-label>Sub-label 4</clr-stack-label>\n            <clr-stack-content>Sub-content 4</clr-stack-content>\n        </clr-stack-block>\n        <clr-stack-block>\n            <clr-stack-label>Sub-label 5</clr-stack-label>\n            <clr-stack-content>Sub-content 5</clr-stack-content>\n        </clr-stack-block>\n    </clr-stack-block>\n\n    <clr-stack-block>\n        <clr-stack-label>Label 3</clr-stack-label>\n        <clr-stack-content>Content 3</clr-stack-content>\n        <clr-stack-block>\n            <clr-stack-label>Sub-label 6</clr-stack-label>\n            <clr-stack-content>Sub-content 6</clr-stack-content>\n        </clr-stack-block>\n        <clr-stack-block>\n            <clr-stack-label>Sub-label 7</clr-stack-label>\n            <clr-stack-content>Sub-content 7</clr-stack-content>\n        </clr-stack-block>\n    </clr-stack-block>\n"
+module.exports = "<h1>VM Creation Form</h1>\r\n<form   class=\"form\" [formGroup]=\"vmcreationForm\" (ngSubmit)=\"onSubmit(vmcreationForm.value)\" [hidden]=\"submitted\">\r\n    <section class=\"form-block\">\r\n        <div class=\"form-group\">\r\n            <label for=\"Name\">Name</label>\r\n            <label for=\"Name\" aria-haspopup=\"true\" role=\"tooltip\" class=\"tooltip tooltip-validation tooltip-md\" [class.invalid]=\"vmcreationForm.get('Name').invalid\r\n                    && (vmcreationForm.get('Name').dirty || vmcreationForm.get('Name').touched)\">\r\n                <input type=\"text\" id=\"Name\"   placeholder=\"Enter  name\" formControlName=\"Name\" required>\r\n                <span class=\"tooltip-content\">\r\n                    Name is Required.\r\n                </span>\r\n            </label>\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <label for=\"description\">Description</label>\r\n            <textarea id=\"description\" rows=\"5\" formControlName=\"description\" required></textarea>\r\n        </div>\r\n        <!--<div class=\"form-group\">\r\n            <label for=\"description\">Description</label>\r\n            <label for=\"description\" aria-haspopup=\"true\" role=\"tooltip\" class=\"tooltip tooltip-validation tooltip-md\" [class.invalid]=\"vmcreationForm.get('description').invalid\r\n                    && (vmcreationForm.get('description').dirty || vmcreationForm.get('description').touched)\">\r\n                <textarea id=\"description\"  formControlName=\"description\" rows=\"5\" required ></textarea>\r\n                <span class=\"tooltip-content\">\r\n                    Description is Required.\r\n                </span>\r\n            </label>\r\n        </div> -->\r\n        <div class=\"form-group\">\r\n            <label for=\"type\">Type</label>\r\n            <label for=\"type\" aria-haspopup=\"true\" role=\"tooltip\" class=\"tooltip tooltip-validation tooltip-md\" [class.invalid]=\"vmcreationForm.get('type').invalid\r\n                    && (vmcreationForm.get('type').dirty || vmcreationForm.get('type').touched)\">\r\n                <input type=\"text\" id=\"type\" formControlName=\"type\" readonly>\r\n                <span class=\"tooltip-content\">\r\n                    Type is Required.\r\n                </span>\r\n            </label>\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <label for=\"operation\">Operation</label>\r\n            <label for=\"operation\" aria-haspopup=\"true\" role=\"tooltip\" class=\"tooltip tooltip-validation tooltip-md\" [class.invalid]=\"vmcreationForm.get('operation').invalid\r\n                    && (vmcreationForm.get('operation').dirty || vmcreationForm.get('operation').touched)\">\r\n                <input type=\"text\" id=\"operation\" formControlName=\"operation\" readonly>\r\n                <span class=\"tooltip-content\">\r\n                    Operation is Required.\r\n                </span>\r\n            </label>\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <label for=\"vmName\">VM Name</label>\r\n            <label for=\"vmName\" aria-haspopup=\"true\" role=\"tooltip\" class=\"tooltip tooltip-validation tooltip-md\" [class.invalid]=\"vmcreationForm.get('vmName').invalid\r\n                    && (vmcreationForm.get('vmName').dirty || vmcreationForm.get('vmName').touched)\">\r\n                <input type=\"text\" id=\"vmName\"   placeholder=\"Enter VM name\" formControlName=\"vmName\" required>\r\n                <span class=\"tooltip-content\">\r\n                    VM Name is Required.\r\n                </span>\r\n            </label>\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <label for=\"OS\">Operating System</label>\r\n            <label for=\"OS\" aria-haspopup=\"true\" role=\"tooltip\" class=\"tooltip tooltip-validation tooltip-md\" [class.invalid]=\"vmcreationForm.get('OS').invalid\r\n                    && (vmcreationForm.get('OS').dirty || vmcreationForm.get('OS').touched)\">\r\n               \r\n                <div class=\"select form-control\">\r\n                    <select id=\"exampleSelect1\" value=\"osList[0]\" formControlName=\"OS\" >\r\n                        <option *ngFor=\"let os of osList\" value=\"{{os.version}}\">{{os.name}}</option>\r\n                    </select>\r\n                </div>\r\n                \r\n                <span class=\"tooltip-content\">\r\n                    Operating System Name is Required.\r\n                </span>\r\n            </label>\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <label for=\"diskSize\">Disk Size (GB) </label>\r\n            <label for=\"diskSize\" aria-haspopup=\"true\" role=\"tooltip\" class=\"tooltip tooltip-validation tooltip-md\" [class.invalid]=\"vmcreationForm.get('diskSize').invalid\r\n                    && (vmcreationForm.get('diskSize').dirty || vmcreationForm.get('diskSize').touched)\">\r\n                <input type=\"text\" id=\"diskSize\"  placeholder=\"Enter Disk Size in GBs\" formControlName=\"diskSize\" (keypress)=\"onlyNumberKey($event)\"  required>\r\n                <span class=\"tooltip-content\">\r\n                    Disk Size is Required.\r\n                </span>\r\n            </label>\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <label for=\"cpuCore\">CPU Core</label>\r\n            <label for=\"cpuCore\" aria-haspopup=\"true\" role=\"tooltip\" class=\"tooltip tooltip-validation tooltip-md\" [class.invalid]=\"vmcreationForm.get('cpuCore').invalid\r\n                    && (vmcreationForm.get('cpuCore').dirty || vmcreationForm.get('cpuCore').touched)\">\r\n              \r\n           \r\n            <div class=\"select\">\r\n                <select id=\"cpuCore\" formControlName=\"cpuCore\">\r\n                    <option>1</option>\r\n                    <option>2</option>                    \r\n                </select>\r\n            </div>\r\n       \r\n                <span class=\"tooltip-content\">\r\n                    CPU Core is Required.\r\n                </span>\r\n            </label>\r\n        </div>\r\n\r\n        <div class=\"form-group\">\r\n            <label for=\"Memory\">Memory (MB) </label>\r\n            <label for=\"Memory\" aria-haspopup=\"true\" role=\"tooltip\" class=\"tooltip tooltip-validation tooltip-md\" [class.invalid]=\"vmcreationForm.get('Memory').invalid\r\n                    && (vmcreationForm.get('Memory').dirty || vmcreationForm.get('Memory').touched)\">\r\n                <input type=\"text\" id=\"Memory\"  placeholder=\"Enter Memory \" formControlName=\"Memory\" (keypress)=\"onlyNumberKey($event)\" required>\r\n                <span class=\"tooltip-content\">\r\n                    Memory is Required.\r\n                </span>\r\n            </label>\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <input type=\"hidden\" id=\"type\" value=\"CREATE\" formControlName=\"type\" />\r\n        </div>\r\n        <button type=\"submit\" class=\"btn btn-primary\">Create</button>\r\n        <button type=\"button\" class=\"btn btn-warning\" (click)=\"redirectToHome()\">Cancel</button>\r\n    </section>\r\n</form>"
 
-/***/ },
+/***/ }),
 
 /***/ 746:
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
-module.exports = "<!--\n  ~ Copyright (c) 2016 VMware, Inc. All Rights Reserved.\n  ~ This software is released under MIT license.\n  ~ The full license information can be found in LICENSE in the root directory of this project.\n  -->\n<!--<p>This is a page to help demonstrate routing.</p>\n<button class=\"btn btn-primary\" (click)=\"open = true\">Show modal</button>\n<clr-modal [(clrModalOpen)]=\"open\">\n  <h3 class=\"modal-title\">I have a nice title</h3>\n  <div class=\"modal-body\">\n    <p>But not much to say...</p>\n  </div>\n  <div class=\"modal-footer\">\n    <button type=\"button\" class=\"btn btn-outline\" (click)=\"open = false\">Cancel</button>\n    <button type=\"button\" class=\"btn btn-primary\" (click)=\"open = false\">Ok</button>\n  </div>\n</clr-modal>-->\n\n<p>This is the framework used for creating and managing VMs. Its a workflow based framework.</p>"
+module.exports = "<clr-stack-view>\r\n    <clr-stack-header>Monitor VM</clr-stack-header>\r\n\r\n    <clr-stack-block [clrSbExpanded]=\"true\">\r\n        <clr-stack-label>Name - Name</clr-stack-label>\r\n        <clr-stack-content>VM ID - ID</clr-stack-content>\r\n         <clr-stack-block>\r\n            <clr-stack-label>Disk Usage</clr-stack-label>\r\n            <clr-stack-content>Sub-content 2</clr-stack-content>\r\n        </clr-stack-block>\r\n         <clr-stack-block>\r\n            <clr-stack-label>Memory Usage</clr-stack-label>\r\n            <clr-stack-content>Sub-content 2</clr-stack-content>\r\n        </clr-stack-block>\r\n        <clr-stack-block>\r\n            <clr-stack-label>CPU Usage</clr-stack-label>\r\n            <clr-stack-content>Sub-content 2</clr-stack-content>\r\n        </clr-stack-block>\r\n        <clr-stack-block>\r\n            <clr-stack-label>Up Time</clr-stack-label>\r\n            <clr-stack-content>Sub-content 2</clr-stack-content>\r\n        </clr-stack-block>\r\n    </clr-stack-block>\r\n\r\n    <clr-stack-block >\r\n        <clr-stack-label>Label 2</clr-stack-label>\r\n        <clr-stack-content>Content 2</clr-stack-content>\r\n        <clr-stack-block>\r\n            <clr-stack-label>Sub-label 3</clr-stack-label>\r\n            <clr-stack-content>Sub-content 3</clr-stack-content>\r\n        </clr-stack-block>\r\n        <clr-stack-block>\r\n            <clr-stack-label>Sub-label 4</clr-stack-label>\r\n            <clr-stack-content>Sub-content 4</clr-stack-content>\r\n        </clr-stack-block>\r\n        <clr-stack-block>\r\n            <clr-stack-label>Sub-label 5</clr-stack-label>\r\n            <clr-stack-content>Sub-content 5</clr-stack-content>\r\n        </clr-stack-block>\r\n    </clr-stack-block>\r\n\r\n    <clr-stack-block>\r\n        <clr-stack-label>Label 3</clr-stack-label>\r\n        <clr-stack-content>Content 3</clr-stack-content>\r\n        <clr-stack-block>\r\n            <clr-stack-label>Sub-label 6</clr-stack-label>\r\n            <clr-stack-content>Sub-content 6</clr-stack-content>\r\n        </clr-stack-block>\r\n        <clr-stack-block>\r\n            <clr-stack-label>Sub-label 7</clr-stack-label>\r\n            <clr-stack-content>Sub-content 7</clr-stack-content>\r\n        </clr-stack-block>\r\n    </clr-stack-block>\r\n"
 
-/***/ },
+/***/ }),
 
 /***/ 747:
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
-module.exports = "<div class=\"forgotpw\">\n    <p>Enter your email address to get the link for password reset</p>\n    <form class=\"login\" [formGroup]=\"forgotPwdfrm\" (ngSubmit)=\"onlogin(forgotPwdfrm.value)\">\n      <label> Email </label> \n    <input type=\"email\" formControlName=\"Email\" id=\"email\" />\n    <div class=\"button\">\n        <button type=\"submit\" class=\"btn btn-primary\">Confirm</button>\n        <button type=\"button\" class=\"btn btn-warning\" (click)=\"onCancel()\">Cancel</button>\n    </div>\n    </form>    \n</div>\n\n    \n    \n"
+module.exports = "<!--\r\n  ~ Copyright (c) 2016 VMware, Inc. All Rights Reserved.\r\n  ~ This software is released under MIT license.\r\n  ~ The full license information can be found in LICENSE in the root directory of this project.\r\n  -->\r\n<!--<p>This is a page to help demonstrate routing.</p>\r\n<button class=\"btn btn-primary\" (click)=\"open = true\">Show modal</button>\r\n<clr-modal [(clrModalOpen)]=\"open\">\r\n  <h3 class=\"modal-title\">I have a nice title</h3>\r\n  <div class=\"modal-body\">\r\n    <p>But not much to say...</p>\r\n  </div>\r\n  <div class=\"modal-footer\">\r\n    <button type=\"button\" class=\"btn btn-outline\" (click)=\"open = false\">Cancel</button>\r\n    <button type=\"button\" class=\"btn btn-primary\" (click)=\"open = false\">Ok</button>\r\n  </div>\r\n</clr-modal>-->\r\n\r\n<p>This is the framework used for creating and managing VMs. Its a workflow based framework.</p>"
 
-/***/ },
+/***/ }),
 
 /***/ 748:
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
-module.exports = "<!--\n  ~ Copyright (c) 2016 VMware, Inc. All Rights Reserved.\n  ~ This software is released under MIT license.\n  ~ The full license information can be found in LICENSE in the root directory of this project.\n  -->\n\n<!--<clr-stack-view>\n    <clr-stack-header>List of Requests</clr-stack-header>\n    <clr-stack-block *ngFor=\"let re of Requestdata;let i = index\">\n        <clr-stack-label>Request ID - {{re.id}}</clr-stack-label>\n        <clr-stack-label>Request Type - {{re.type}}</clr-stack-label>\n        <clr-stack-label>Request Status - {{re.status}}</clr-stack-label>\n        <clr-stack-block>\n            <clr-stack-label>Memory</clr-stack-label>\n            <clr-stack-content>{{re.data[0].Memory}}</clr-stack-content>\n        </clr-stack-block>\n        <clr-stack-block>\n            <clr-stack-label>cpuCore</clr-stack-label>\n            <clr-stack-content>{{re.data[0].cpuCore}}</clr-stack-content>\n        </clr-stack-block>\n        <clr-stack-block>\n            <clr-stack-label>diskSize</clr-stack-label>\n            <clr-stack-content>{{re.data[0].diskSize}}</clr-stack-content>\n        </clr-stack-block>\n        <clr-stack-block>\n            <clr-stack-label>vmName</clr-stack-label>\n            <clr-stack-content>{{re.data[0].vmName}}</clr-stack-content>\n        </clr-stack-block>\n    </clr-stack-block>\n</clr-stack-view> -->\n<h1> List of Requests</h1> \n<pagination-controls (pageChange)=\"p = $event\" *ngIf=\"count>10\"></pagination-controls>\n<div class=\"refresh\">\n    <button (click)=\"onRefresh()\"> &#x21bb;</button><span>{{refresh_time | date:\"medium\"}}</span></div>\n<table class=\"table table-responsive\">\n    <thead>\n        <tr>\n            <th>ID</th>\n            <th>vmName</th>           \n            <th>Memory</th>\n            <th>cpuCore</th>\n            <th>diskSize</th>\n            <th>OS</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr *ngFor=\"let re of Requestdata | paginate: { itemsPerPage: 10, currentPage: p }\">\n            <td>{{re.id}}</td>\n            <td>{{re.vmName}}</td>          \n            <td>{{re.memory}}</td>\n            <td>{{re.cores}}</td>\n            <td>{{re.storage}}</td>\n            <td>{{re.os}}</td>\n        </tr>\n        <tr *ngIf=\"count==0\">\n            <td colspan=\"7\">No data found</td>\n        </tr>\n    </tbody>\n</table>\n"
+module.exports = "<div class=\"forgotpw\">\r\n    <p>Enter your email address to get the link for password reset</p>\r\n    <form class=\"login\" [formGroup]=\"forgotPwdfrm\" (ngSubmit)=\"onlogin(forgotPwdfrm.value)\">\r\n      <label> Email </label> \r\n    <input type=\"email\" formControlName=\"Email\" id=\"email\" />\r\n    <div class=\"button\">\r\n        <button type=\"submit\" class=\"btn btn-primary\">Confirm</button>\r\n        <button type=\"button\" class=\"btn btn-warning\" (click)=\"onCancel()\">Cancel</button>\r\n    </div>\r\n    </form>    \r\n</div>\r\n\r\n    \r\n    \r\n"
 
-/***/ },
+/***/ }),
 
 /***/ 749:
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
-module.exports = "<div class=\"login-wrapper\">\n    \n    <form class=\"login\" [formGroup]=\"loginForm\" (ngSubmit)=\"onlogin(loginForm.value)\">\n        <label class=\"title\">\n            Company Name<span class=\"trademark\">&#8482;</span>\n            Product Name&#174;\n        </label>\n        <div class=\"login-group\">\n            <!--<div class=\"auth-source select\">\n                <select id=\"login-auth-source-1\" formControlName=\"UserType\">\n                    <option>Local Users</option>\n                    <option>Administrator</option>\n                </select>\n            </div>-->\n                <input class=\"username\" type=\"text\" id=\"login_username\" placeholder=\"Username\" formControlName=\"userId\" required/>\n                <input class=\"password\" type=\"password\" id=\"login_password\" placeholder=\"Password\" formControlName=\"password\"  required/>\n                <input type=\"hidden\" id=\"userAgent\" formControlName=\"userAgent\"/>\n  \n            <div class=\"checkbox\">\n                <input type=\"checkbox\" id=\"rememberme\">\n                <label for=\"rememberme\">\n                    Remember me\n                </label>\n            </div>\n            <div  [ngClass]=\"{'visible': !InVisible,error :InVisible,active :InVisible}\">\n                {{result}} \n            </div>\n            <button type=\"submit\" class=\"btn btn-primary\">LOG IN</button>\n            <a [routerLink]=\"['signup']\" class=\"signup\">Sign up for an account</a>\n            <a [routerLink]=\"['forgotpw']\" class=\"signup\">Forgot Password?</a>\n        </div>\n    </form>     \n</div>"
+module.exports = "<!--\r\n  ~ Copyright (c) 2016 VMware, Inc. All Rights Reserved.\r\n  ~ This software is released under MIT license.\r\n  ~ The full license information can be found in LICENSE in the root directory of this project.\r\n  -->\r\n\r\n<!--<clr-stack-view>\r\n    <clr-stack-header>List of Requests</clr-stack-header>\r\n    <clr-stack-block *ngFor=\"let re of Requestdata;let i = index\">\r\n        <clr-stack-label>Request ID - {{re.id}}</clr-stack-label>\r\n        <clr-stack-label>Request Type - {{re.type}}</clr-stack-label>\r\n        <clr-stack-label>Request Status - {{re.status}}</clr-stack-label>\r\n        <clr-stack-block>\r\n            <clr-stack-label>Memory</clr-stack-label>\r\n            <clr-stack-content>{{re.data[0].Memory}}</clr-stack-content>\r\n        </clr-stack-block>\r\n        <clr-stack-block>\r\n            <clr-stack-label>cpuCore</clr-stack-label>\r\n            <clr-stack-content>{{re.data[0].cpuCore}}</clr-stack-content>\r\n        </clr-stack-block>\r\n        <clr-stack-block>\r\n            <clr-stack-label>diskSize</clr-stack-label>\r\n            <clr-stack-content>{{re.data[0].diskSize}}</clr-stack-content>\r\n        </clr-stack-block>\r\n        <clr-stack-block>\r\n            <clr-stack-label>vmName</clr-stack-label>\r\n            <clr-stack-content>{{re.data[0].vmName}}</clr-stack-content>\r\n        </clr-stack-block>\r\n    </clr-stack-block>\r\n</clr-stack-view> -->\r\n<h1> List of Requests</h1> \r\n<pagination-controls (pageChange)=\"p = $event\" *ngIf=\"count>10\"></pagination-controls>\r\n<div class=\"refresh\">\r\n    <button (click)=\"onRefresh()\"> &#x21bb;</button><span>{{refresh_time | date:\"medium\"}}</span></div>\r\n<table class=\"table table-responsive\">\r\n    <thead>\r\n        <tr>\r\n            <th>ID</th>\r\n            <th>vmName</th>           \r\n            <th>Memory</th>\r\n            <th>cpuCore</th>\r\n            <th>diskSize</th>\r\n            <th>OS</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n        <tr *ngFor=\"let re of Requestdata | paginate: { itemsPerPage: 10, currentPage: p }\">\r\n            <td>{{re.id}}</td>\r\n            <td>{{re.vmName}}</td>          \r\n            <td>{{re.memory}}</td>\r\n            <td>{{re.cores}}</td>\r\n            <td>{{re.storage}}</td>\r\n            <td>{{re.os}}</td>\r\n        </tr>\r\n        <tr *ngIf=\"count==0\">\r\n            <td colspan=\"7\">No data found</td>\r\n        </tr>\r\n    </tbody>\r\n</table>\r\n"
 
-/***/ },
+/***/ }),
 
 /***/ 750:
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
-module.exports = "<h1>SignUp Form</h1>\n<form class=\"form\" [formGroup]=\"signupForm\" (ngSubmit)=\"onSubmit(signupForm.value)\" [hidden]=\"submitted\">\n    <section class=\"form-block\">\n        <div class=\"form-group\">\n            <label for=\"email\">E-Mail</label>\n            <label for=\"email\" aria-haspopup=\"true\" role=\"tooltip\" class=\"tooltip tooltip-validation tooltip-md\"\n            [class.invalid]=\"signupForm.get('email').invalid\n                    && (signupForm.get('email').dirty || signupForm.get('email').touched)\">\n                <input type=\"email\" id=\"email\"   placeholder=\"Enter email address\" formControlName=\"email\" required>\n                <span class=\"tooltip-content\">\n                    Email is Required.\n                </span>\n            </label>\n        </div>\n        <div class=\"form-group\">\n            <label for=\"username\">User Name</label>\n            <label for=\"username\" aria-haspopup=\"true\" role=\"tooltip\" class=\"tooltip tooltip-validation tooltip-md\"\n            [class.invalid]=\"signupForm.get('username').invalid\n                    && (signupForm.get('username').dirty || signupForm.get('username').touched)\">\n                <input type=\"text\" id=\"username\" placeholder=\"Enter User name\" formControlName=\"username\" required>\n                <span class=\"tooltip-content\">\n                    User Name is Required.\n                </span>\n            </label>\n        </div>\n        <div class=\"form-group\">\n            <label for=\"password\">Password</label>\n            <label for=\"password\" aria-haspopup=\"true\" role=\"tooltip\" class=\"tooltip tooltip-validation tooltip-md\"\n            [class.invalid]=\"signupForm.get('password').invalid\n                    && (signupForm.get('password').dirty || signupForm.get('password').touched)\">\n                <input type=\"password\" id=\"password\"  placeholder=\"Enter Password\" formControlName=\"password\" required>\n                <span class=\"tooltip-content\">\n                    Password is Required.\n                </span>\n            </label>\n        </div>\n        <button type=\"submit\" class=\"btn btn-primary\" >Create an Account</button>\n        <button type=\"button\" class=\"btn btn-warning\" (click)=\"onCancel()\">Cancel</button>\n    </section>\n</form>"
+module.exports = "<div class=\"login-wrapper\">\r\n    \r\n    <form class=\"login\" [formGroup]=\"loginForm\" (ngSubmit)=\"onlogin(loginForm.value)\">\r\n        <label class=\"title\">\r\n            Company Name<span class=\"trademark\">&#8482;</span>\r\n            Product Name&#174;\r\n        </label>\r\n        <div class=\"login-group\">\r\n            <!--<div class=\"auth-source select\">\r\n                <select id=\"login-auth-source-1\" formControlName=\"UserType\">\r\n                    <option>Local Users</option>\r\n                    <option>Administrator</option>\r\n                </select>\r\n            </div>-->\r\n                <input class=\"username\" type=\"text\" id=\"login_username\" placeholder=\"Username\" formControlName=\"userId\" required/>\r\n                <input class=\"password\" type=\"password\" id=\"login_password\" placeholder=\"Password\" formControlName=\"password\"  required/>\r\n                <input type=\"hidden\" id=\"userAgent\" formControlName=\"userAgent\"/>\r\n  \r\n            <div class=\"checkbox\">\r\n                <input type=\"checkbox\" id=\"rememberme\">\r\n                <label for=\"rememberme\">\r\n                    Remember me\r\n                </label>\r\n            </div>\r\n            <div  [ngClass]=\"{'visible': !InVisible,error :InVisible,active :InVisible}\">\r\n                {{result}} \r\n            </div>\r\n            <button type=\"submit\" class=\"btn btn-primary\">LOG IN</button>\r\n            <a [routerLink]=\"['signup']\" class=\"signup\">Sign up for an account</a>\r\n            <a [routerLink]=\"['forgotpw']\" class=\"signup\">Forgot Password?</a>\r\n        </div>\r\n    </form>     \r\n</div>"
 
-/***/ },
+/***/ }),
+
+/***/ 751:
+/***/ (function(module, exports) {
+
+module.exports = "<h1>SignUp Form</h1>\r\n<form class=\"form\" [formGroup]=\"signupForm\" (ngSubmit)=\"onSubmit(signupForm.value)\" [hidden]=\"submitted\">\r\n    <section class=\"form-block\">\r\n        <div class=\"form-group\">\r\n            <label for=\"email\">E-Mail</label>\r\n            <label for=\"email\" aria-haspopup=\"true\" role=\"tooltip\" class=\"tooltip tooltip-validation tooltip-md\"\r\n            [class.invalid]=\"signupForm.get('email').invalid\r\n                    && (signupForm.get('email').dirty || signupForm.get('email').touched)\">\r\n                <input type=\"email\" id=\"email\"   placeholder=\"Enter email address\" formControlName=\"email\" required>\r\n                <span class=\"tooltip-content\">\r\n                    Email is Required.\r\n                </span>\r\n            </label>\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <label for=\"username\">User Name</label>\r\n            <label for=\"username\" aria-haspopup=\"true\" role=\"tooltip\" class=\"tooltip tooltip-validation tooltip-md\"\r\n            [class.invalid]=\"signupForm.get('username').invalid\r\n                    && (signupForm.get('username').dirty || signupForm.get('username').touched)\">\r\n                <input type=\"text\" id=\"username\" placeholder=\"Enter User name\" formControlName=\"username\" required>\r\n                <span class=\"tooltip-content\">\r\n                    User Name is Required.\r\n                </span>\r\n            </label>\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <label for=\"password\">Password</label>\r\n            <label for=\"password\" aria-haspopup=\"true\" role=\"tooltip\" class=\"tooltip tooltip-validation tooltip-md\"\r\n            [class.invalid]=\"signupForm.get('password').invalid\r\n                    && (signupForm.get('password').dirty || signupForm.get('password').touched)\">\r\n                <input type=\"password\" id=\"password\"  placeholder=\"Enter Password\" formControlName=\"password\" required>\r\n                <span class=\"tooltip-content\">\r\n                    Password is Required.\r\n                </span>\r\n            </label>\r\n        </div>\r\n        <button type=\"submit\" class=\"btn btn-primary\" >Create an Account</button>\r\n        <button type=\"button\" class=\"btn btn-warning\" (click)=\"onCancel()\">Cancel</button>\r\n    </section>\r\n</form>"
+
+/***/ }),
 
 /***/ 93:
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1007,10 +1007,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(1);
-var http_1 = __webpack_require__(235);
+var http_1 = __webpack_require__(236);
 var Subject_1 = __webpack_require__(11);
-var router_1 = __webpack_require__(49);
-__webpack_require__(269);
+var router_1 = __webpack_require__(48);
+__webpack_require__(270);
 var CommonService = (function () {
     function CommonService(http, router) {
         this.http = http;
@@ -1155,9 +1155,9 @@ var CommonService = (function () {
     var _a, _b;
 }());
 exports.CommonService = CommonService;
-//# sourceMappingURL=D:/Bitbucket/Project/DMF/trunk/src/src/src/app/service/common.service.js.map
+//# sourceMappingURL=D:/Datacenter/src/src/src/app/service/common.service.js.map
 
-/***/ }
+/***/ })
 
-},[1016]);
+},[1018]);
 //# sourceMappingURL=main.bundle.map
