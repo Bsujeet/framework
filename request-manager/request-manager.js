@@ -45,6 +45,32 @@ function getRequest(requestId, callback) {
                 logger.error('Error occured while getting request from DB. Error:', err);
                 return callback(err);
             }
+            var status_summery = {};
+            status_summery.saved = 0;
+            status_summery.inporgress = 0;
+            status_summery.succeeded = 0;
+            status_summery.failed = 0;
+
+            for(var index in requests){
+                switch (requests[index].status) {
+                    case 'SAVED':
+                        status_summery.saved += 1;
+                        break;
+                    case 'INPROGRESS':
+                        status_summery.inporgress += 1;
+                        break;
+                    case 'SUCCEEDED':
+                        status_summery.succeeded += 1;
+                        break;
+                    case 'FAILED':
+                        status_summery.failed += 1;
+                        break;
+                    default:
+                        //Doing Nothing
+                        break;
+                }
+            }     
+            requests.push({"status_summery":status_summery});
             return callback(null, requests);
         });
     }
