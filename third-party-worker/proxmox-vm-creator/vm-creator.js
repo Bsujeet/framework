@@ -1,12 +1,14 @@
 'use strict';
 
 const request = require('request');
-const logger = require('winston');
 const config = require('./config');
+
+const logger = require.main.require('./logger');
+
 
 const createVMObj = {};
 const baseUrl = `https://${config.serverIp}:${config.port}/api2/json`;
-function runTask (task, callback) {
+function runTask(task, callback) {
     const inputParam = task.input_params;
     inputParam.forEach((element) => {
         createVMObj.ostype = 'other';
@@ -47,7 +49,7 @@ function runTask (task, callback) {
         })
         .then(() => {
             const outputParams = [{ name: 'vmId', value: createVMObj.vmid, type: 'STRING' },
-                                    { name: 'vmNode', value: createVMObj.nodeName, type: 'STRING' }
+            { name: 'vmNode', value: createVMObj.nodeName, type: 'STRING' }
             ];
             callback(null, 'SUCCEEDED', { myState: 'createVM SUCCEEDED' }, outputParams);
         })
@@ -56,24 +58,7 @@ function runTask (task, callback) {
         });
 }
 
-function makePostRequest (options) {
-    return new Promise((resolve, reject) => {
-        request(options, (error, response, body) => {
-            if (!error && response.statusCode === 200) {
-                const _response = JSON.parse(body);
-                resolve(_response.data);
-            } else {
-                if (error.code === 'EHOSTUNREACH' || error) {
-                    reject('Unable to reach at Proxmox server.');
-                }else{
-                    reject(response.statusMessage);
-                }
-            }
-        });
-    });
-}
-
-function makeGetRequest (options) {
+function makePostRequest(options) {
     return new Promise((resolve, reject) => {
         request(options, (error, response, body) => {
             if (!error && response.statusCode === 200) {
@@ -90,7 +75,24 @@ function makeGetRequest (options) {
     });
 }
 
-function getTicket () {
+function makeGetRequest(options) {
+    return new Promise((resolve, reject) => {
+        request(options, (error, response, body) => {
+            if (!error && response.statusCode === 200) {
+                const _response = JSON.parse(body);
+                resolve(_response.data);
+            } else {
+                if (error.code === 'EHOSTUNREACH' || error) {
+                    reject('Unable to reach at Proxmox server.');
+                } else {
+                    reject(response.statusMessage);
+                }
+            }
+        });
+    });
+}
+
+function getTicket() {
     const options = {
         url: `${baseUrl}/access/ticket`,
         method: 'POST',
@@ -112,7 +114,7 @@ function getTicket () {
     return ticket;
 }
 
-function getNode (tonkenDetials) {
+function getNode(tonkenDetials) {
     const options = {
         url: `${baseUrl}/nodes`,
         method: 'GET',
@@ -133,7 +135,7 @@ function getNode (tonkenDetials) {
     return node;
 }
 
-function getNextVMID (tonkenDetials) {
+function getNextVMID(tonkenDetials) {
     const options = {
         url: `${baseUrl}/cluster/nextid`,
         method: 'GET',
@@ -154,7 +156,7 @@ function getNextVMID (tonkenDetials) {
     return vmid;
 }
 
-function createVM (tonkenDetials) {
+function createVM(tonkenDetials) {
     const options = {
         url: `${baseUrl}/nodes/${createVMObj.nodeName}/qemu`,
         method: 'POST',

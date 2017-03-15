@@ -1,12 +1,14 @@
 'use strict';
 
 const request = require('request');
-const logger = require('winston');
 const config = require('./config');
+
+const logger = require.main.require('./logger');
+
 
 const vmObj = {};
 const baseUrl = `https://${config.serverIp}:${config.port}/api2/json`;
-function runTask (task, callback) {
+function runTask(task, callback) {
     const inputParam = task.input_params;
     inputParam.forEach((element) => {
         switch (element.name) {
@@ -36,7 +38,7 @@ function runTask (task, callback) {
         });
 }
 
-function makePostRequest (options) {
+function makePostRequest(options) {
     return new Promise((resolve, reject) => {
         request(options, (error, response, body) => {
             if (!error && response.statusCode === 200) {
@@ -53,7 +55,7 @@ function makePostRequest (options) {
     });
 }
 
-function getTicket () {
+function getTicket() {
     const options = {
         url: `${baseUrl}/access/ticket`,
         method: 'POST',
@@ -75,7 +77,7 @@ function getTicket () {
     return ticket;
 }
 
-function powerOnVM (tonkenDetials) {
+function powerOnVM(tonkenDetials) {
     const options = {
         url: `${baseUrl}/nodes/${vmObj.nodeName}/qemu/${vmObj.vmid}/status/start`,
         method: 'POST',

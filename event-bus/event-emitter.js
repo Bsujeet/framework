@@ -1,7 +1,8 @@
 'use strict';
 
 const EventEmitter = require('events');
-const logger = require('winston');
+
+const logger = require.main.require('./logger');
 
 const emitter = new EventEmitter();
 

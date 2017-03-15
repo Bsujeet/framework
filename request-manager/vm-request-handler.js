@@ -1,12 +1,12 @@
 'use strict';
 
-const logger = require('winston');
+const logger = require.main.require('./logger');
 const Request = require('../models/request');
 const Job = require('../models/job');
 const ResourceManager = require('../resource-manager');
 const workflow = require('../models/workflow/static-vm-workflow'); // TODO get it from DB
 
-function createRequest (reqBody, callback) {
+function createRequest(reqBody, callback) {
     switch (reqBody.operation) {
         case 'CREATE': {
             const resourceItems = [];
@@ -119,7 +119,7 @@ function createRequest (reqBody, callback) {
     }
 }
 
-function onRequestComplete (request) {
+function onRequestComplete(request) {
     const jobId = request.jobId;
     Job.findById(jobId, {}, (err, job) => {
         if (err) {

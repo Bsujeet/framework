@@ -1,8 +1,8 @@
 'use strict';
 
-const logger = require('winston');
+const logger = require.main.require('./logger');
 
-function appErrorHandler (err, req, res) {
+function appErrorHandler(err, req, res) {
     logger.error('Error happened during server start', err.stack);
     res.status(500).send('Something broke!');
     res.end();

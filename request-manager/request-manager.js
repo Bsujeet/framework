@@ -1,6 +1,6 @@
 'use strict';
 
-const logger = require('winston');
+const logger = require.main.require('./logger');
 const Request = require('../models/request');
 const EventBus = require('../event-bus');
 // Require below modules just to initialize them. These module has no direct dependency

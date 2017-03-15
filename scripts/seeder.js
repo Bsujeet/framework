@@ -1,10 +1,10 @@
 'use strict';
 
 const seeder = require('mongoose-seed');
-const logger = require('winston');
 const config = require('../config');
 const data = require('./seed-data/data');
 
+const logger = require.main.require('./logger');
 
 // Connect to MongoDB via Mongoose
 const connectionString = `mongodb://${config.MongoDB.host}:${config.MongoDB.port}/${config.MongoDB.db}`;

@@ -1,10 +1,10 @@
 'use strict';
 
-const logger = require('winston');
+const logger = require.main.require('./logger');
 const Job = require('../models/job');
 const EventBus = require('../event-bus');
 
-function populateTaskParameters (job, stepId) {
+function populateTaskParameters(job, stepId) {
     const step = job.steps.filter((step) => { return step.stepId === stepId; })[0];
 
     const parameterMappings = job.parameter_mappings.filter((mapping) => { return mapping.to.step === stepId; });
@@ -48,7 +48,7 @@ function populateTaskParameters (job, stepId) {
 }
 
 
-function executeJob (jobId) {
+function executeJob(jobId) {
     logger.info('Start executeJob for JobId:', jobId);
     Job.findById(jobId, {}, (err, job) => {
         if (err) {

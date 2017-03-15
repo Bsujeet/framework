@@ -1,10 +1,10 @@
 'use strict';
 
-const logger = require('winston');
+const logger = require.main.require('./logger');
 const Inventory = require('../models/inventory');
 const Resource = require('../models/resource');
 
-function removeResearvation (resourceid, callback) {
+function removeResearvation(resourceid, callback) {
     Resource.findById(resourceid, {}, (err, resource) => {
         if (err) {
             logger.error('Error occured in getting resource. Error', err);
@@ -26,7 +26,7 @@ function removeResearvation (resourceid, callback) {
     });
 }
 
-function assignResource (resourceid, additionalInfo, callback) {
+function assignResource(resourceid, additionalInfo, callback) {
     Resource.findById(resourceid, {}, (err, resource) => {
         if (err) {
             logger.error('Error occured in getting resource. Error', err);
@@ -50,19 +50,19 @@ function assignResource (resourceid, additionalInfo, callback) {
     });
 }
 
-function getInventory (callback) {
+function getInventory(callback) {
     Inventory.find({}, { reservations: 0 }, (err, data) => {
         return callback(err, data);
     });
 }
 
-function getResources (userId, callback) {
+function getResources(userId, callback) {
     Resource.find({}, { reservations: 0 }, (err, data) => {
         return callback(err, data);
     });
 }
 
-function reserveResource (name, type, inventoryItems, userId, callback) {
+function reserveResource(name, type, inventoryItems, userId, callback) {
     const resource = new Resource({
         name,
         type,
@@ -90,7 +90,7 @@ function reserveResource (name, type, inventoryItems, userId, callback) {
     });
 }
 
-function reserveAsync (inventoryItems, callback) {
+function reserveAsync(inventoryItems, callback) {
     const success = [];
     const failures = [];
     let counter = 0;
@@ -122,7 +122,7 @@ function reserveAsync (inventoryItems, callback) {
     }
 }
 
-function undoReservationAsync (reservations, callback) {
+function undoReservationAsync(reservations, callback) {
     let counter = 0;
     let status = true;
     for (let idx = 0; idx < reservations.length; idx++) {
@@ -143,7 +143,7 @@ function undoReservationAsync (reservations, callback) {
     }
 }
 
-function assignAsync (reservations, callback) {
+function assignAsync(reservations, callback) {
     const success = [];
     const failures = [];
     let counter = 0;

@@ -2,7 +2,7 @@
 
 'use strict';
 
-const logger = require('winston');
+const logger = require.main.require('./logger');
 const Job = require('../models/job');
 const EventBus = require('../event-bus');
 
@@ -11,7 +11,7 @@ EventBus.Emitter.on(EventBus.Events.TASK_ENQUEUE, (data) => {
     executeTask(data.jobId);
 });
 
-function executeFlowStep (step, job) {
+function executeFlowStep(step, job) {
     logger.info('Start Executing flow step. Step Name:', step.name);
     switch (step.name) {
         case 'START':
@@ -53,7 +53,7 @@ function executeFlowStep (step, job) {
     }
 }
 
-function executeActionStep (queuedTask, job) {
+function executeActionStep(queuedTask, job) {
     logger.info('Start Executing Action step. Step Name:', queuedTask.name);
     if (queuedTask.state === 'PREPARED' || queuedTask.state === 'WAITING') {
         queuedTask.state = 'RUNNING';
@@ -108,21 +108,21 @@ function executeActionStep (queuedTask, job) {
                     EventBus.Emitter.emit(EventBus.Events.TASK_UPDATE, { jobId: job.get('id') });
                 });
             })
-            .catch((err) => {
-                logger.error('Error occured while running task on worker module. Error:', err);
-                queuedTask.state = 'FAILED';
-                job.save((err, job) => {
-                    if (err) {
-                        return logger.error('Error occured while saving job to DB. Error:', err);
-                    }
-                    EventBus.Emitter.emit(EventBus.Events.TASK_UPDATE, { jobId: job.get('id') });
+                .catch((err) => {
+                    logger.error('Error occured while running task on worker module. Error:', err);
+                    queuedTask.state = 'FAILED';
+                    job.save((err, job) => {
+                        if (err) {
+                            return logger.error('Error occured while saving job to DB. Error:', err);
+                        }
+                        EventBus.Emitter.emit(EventBus.Events.TASK_UPDATE, { jobId: job.get('id') });
+                    });
                 });
-            });
         });
     }
 }
 
-function executeTask (jobId) {
+function executeTask(jobId) {
     logger.info('Start ExecuteTask for JobId:', jobId);
     Job.findById(jobId, {}, (err, job) => {
         if (err) {
