@@ -9,14 +9,15 @@ const baseUrl = `https://${config.serverIp}:${config.port}/api2/json`;
 function runTask (task, callback) {
     const inputParam = task.input_params;
     inputParam.forEach((element) => {
-        switch ((element.name).toLowerCase()) {
-            case 'vmid':
-                vmObj.vmid = element.value;
+        switch (element.name) {
+            case 'vmID':
+                vmObj.vmID = element.value;
                 break;
-            case 'vmnode':
-                vmObj.nodeName = element.value;
+            case 'vmNode':
+                vmObj.vmNode = element.value;
                 break;
             default:
+                // Nothing Todo
                 break;
         }
     }, this);
@@ -25,14 +26,16 @@ function runTask (task, callback) {
         .then((data) => {
             vmObj.CSRFPreventionToken = data.CSRFPreventionToken;
             vmObj.ticket = data.ticket;
-            return powerOnVM(vmObj);
+            return powerOffVM(vmObj);
         })
         .then(() => {
-            const outputParams = [];
-            callback(null, 'SUCCEEDED', { myState: 'Powered on SUCCEEDED' }, outputParams);
+            const outputParams = [{ name: 'vmID', value: vmObj.vmID, type: 'NUMBER' },
+                                    { name: 'vmNode', value: vmObj.vmNode, type: 'STRING' }
+            ];
+            callback(null, 'SUCCEEDED', { myState: 'Power Off VM SUCCEEDED' }, outputParams);
         })
         .catch((err) => {
-            callback(new Error(`VM Power ON Failed: ${err}`));
+            callback(new Error(`Power Off VM Failed: ${err}`));
         });
 }
 
@@ -55,6 +58,23 @@ function makePostRequest (options) {
     });
 }
 
+/* function makeGetRequest (options) {
+    return new Promise((resolve, reject) => {
+        request(options, (error, response, body) => {
+            if (!error && response.statusCode === 200) {
+                const _response = JSON.parse(body);
+                resolve(_response.data);
+            } else {
+                if (error.code === 'EHOSTUNREACH' || error) {
+                    reject('Unable to reach at Proxmox server.');
+                } else {
+                    reject(response.statusMessage);
+                }
+            }
+        });
+    });
+} */
+
 function getTicket () {
     const options = {
         url: `${baseUrl}/access/ticket`,
@@ -70,16 +90,16 @@ function getTicket () {
     const ticket = makePostRequest(options);
     ticket.then((result) => {
         // save Token and ticket
-        logger.info(`Proxmox login to power on vm succesfully: ${result}`);
+        logger.info(`Proxmox login succesfully: ${result}`);
     }).catch((err) => {
-        logger.error('Proxmox login to power on vm failed: ', err);
+        logger.error('Proxmox login failed: ', err);
     });
     return ticket;
 }
 
-function powerOnVM (tonkenDetials) {
+function powerOffVM (tonkenDetials) {
     const options = {
-        url: `${baseUrl}/nodes/${vmObj.nodeName}/qemu/${vmObj.vmid}/status/start`,
+        url: `${baseUrl}/nodes/${vmObj.vmNode}/qemu/${vmObj.vmID}/status/stop`,
         method: 'POST',
         rejectUnauthorized: false,
         headers: {
@@ -92,9 +112,9 @@ function powerOnVM (tonkenDetials) {
     const ticket = makePostRequest(options);
     ticket.then(() => {
         // save Token and ticket
-        logger.info('Proxmox Power on vm succesfully:');
+        logger.info(`VM ${vmObj.vmID} Power off succesfully`);
     }).catch((err) => {
-        logger.error('Proxmox Power on vm failed: ', err);
+        logger.error('Proxmox Power off failed: ', err);
     });
     return ticket;
 }

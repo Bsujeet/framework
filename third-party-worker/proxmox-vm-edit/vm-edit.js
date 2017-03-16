@@ -1,53 +1,48 @@
 'use strict';
 
-const request = require('request');
+const request = require('request'); 
 const logger = require.main.require('./logger');
 const config = require('./config');
 
-const createVMObj = {};
+const vmObj = {};
 const baseUrl = `https://${config.serverIp}:${config.port}/api2/json`;
 function runTask (task, callback) {
     const inputParam = task.input_params;
     inputParam.forEach((element) => {
-        createVMObj.ostype = 'other';
         switch (element.name) {
-            case 'vmName':
-                createVMObj.vmName = element.value;
+            case 'vmID':
+                vmObj.vmID = element.value;
+                break;
+            case 'vmNode':
+                vmObj.vmNode = element.value;
                 break;
             case 'vmCore':
-                createVMObj.cores = element.value;
+                vmObj.vmCore = element.value;
                 break;
             case 'vmMemory':
-                createVMObj.memory = element.value;
+                vmObj.vmMemory = element.value;
                 break;
             case 'vmStorage':
-                createVMObj.ide0 = `local:${element.value},format=qcow2`;
-                break;
-            case 'vmOS':
-                createVMObj.ide2 = `local:iso/${element.value},media=cdrom`;
+                vmObj.vmStorage = element.value;
                 break;
             default:
+                // Nothing Todo
                 break;
         }
     }, this);
 
     getTicket()
         .then((data) => {
-            createVMObj.CSRFPreventionToken = data.CSRFPreventionToken;
-            createVMObj.ticket = data.ticket;
-            return getNode(createVMObj);
-        })
-        .then((data) => {
-            createVMObj.nodeName = data[0].node;
-            return getNextVMID(createVMObj);
-        })
-        .then((data) => {
-            createVMObj.vmid = data;
-            return createVM(createVMObj);
+            vmObj.CSRFPreventionToken = data.CSRFPreventionToken;
+            vmObj.ticket = data.ticket;
+            return editVMCoreAndMemory(vmObj);
         })
         .then(() => {
-            const outputParams = [{ name: 'vmId', value: createVMObj.vmid, type: 'STRING' },
-            { name: 'vmNode', value: createVMObj.nodeName, type: 'STRING' }
+            return editVMDisk(vmObj);
+        })
+        .then(() => {
+            const outputParams = [{ name: 'vmID', value: vmObj.vmID, type: 'NUMBER' },
+                                    { name: 'vmNode', value: vmObj.vmNode, type: 'STRING' }
             ];
             callback(null, 'SUCCEEDED', { myState: 'createVM SUCCEEDED' }, outputParams);
         })
@@ -57,21 +52,6 @@ function runTask (task, callback) {
 }
 
 function makePostRequest (options) {
-    return new Promise((resolve, reject) => {
-        request(options, (error, response, body) => {
-            if (!error && response.statusCode === 200) {
-                const _response = JSON.parse(body);
-                resolve(_response.data);
-            } else if (error.code === 'EHOSTUNREACH' || error) {
-                reject('Unable to reach at Proxmox server.');
-            } else {
-                reject(response.statusMessage);
-            }
-        });
-    });
-}
-
-function makeGetRequest (options) {
     return new Promise((resolve, reject) => {
         request(options, (error, response, body) => {
             try {
@@ -89,6 +69,23 @@ function makeGetRequest (options) {
         });
     });
 }
+
+/* function makeGetRequest (options) {
+    return new Promise((resolve, reject) => {
+        request(options, (error, response, body) => {
+            if (!error && response.statusCode === 200) {
+                const _response = JSON.parse(body);
+                resolve(_response.data);
+            } else {
+                if (error.code === 'EHOSTUNREACH' || error) {
+                    reject('Unable to reach at Proxmox server.');
+                } else {
+                    reject(response.statusMessage);
+                }
+            }
+        });
+    });
+} */
 
 function getTicket () {
     const options = {
@@ -112,52 +109,10 @@ function getTicket () {
     return ticket;
 }
 
-function getNode (tonkenDetials) {
+function editVMCoreAndMemory (tonkenDetials) {
     const options = {
-        url: `${baseUrl}/nodes`,
-        method: 'GET',
-        rejectUnauthorized: false,
-        headers: {
-            'User-Agent': 'request',
-            'Content-Type': 'application/x-www-form-urlencoded',
-            Cookie: `PVEAuthCookie=${tonkenDetials.ticket}`,
-            CSRFPreventionToken: tonkenDetials.CSRFPreventionToken
-        }
-    };
-    const node = makeGetRequest(options);
-    node.then(() => {
-        logger.info('Proxmox getNode call succesfull:');
-    }).catch((err) => {
-        logger.error('Proxmox gaetNode failed: ', err);
-    });
-    return node;
-}
-
-function getNextVMID (tonkenDetials) {
-    const options = {
-        url: `${baseUrl}/cluster/nextid`,
-        method: 'GET',
-        rejectUnauthorized: false,
-        headers: {
-            'User-Agent': 'request',
-            'Content-Type': 'application/x-www-form-urlencoded',
-            Cookie: `PVEAuthCookie=${tonkenDetials.ticket}`,
-            CSRFPreventionToken: tonkenDetials.CSRFPreventionToken
-        }
-    };
-    const vmid = makeGetRequest(options);
-    vmid.then(() => {
-        logger.info('Proxmox vmid call succesfull:');
-    }).catch((err) => {
-        logger.error('Proxmox vmid failed: ', err);
-    });
-    return vmid;
-}
-
-function createVM (tonkenDetials) {
-    const options = {
-        url: `${baseUrl}/nodes/${createVMObj.nodeName}/qemu`,
-        method: 'POST',
+        url: `${baseUrl}/nodes/${vmObj.vmNode}/qemu/${vmObj.vmID}/config`,
+        method: 'PUT',
         rejectUnauthorized: false,
         headers: {
             'User-Agent': 'request',
@@ -165,22 +120,37 @@ function createVM (tonkenDetials) {
             Cookie: `PVEAuthCookie=${tonkenDetials.ticket}`,
             CSRFPreventionToken: tonkenDetials.CSRFPreventionToken
         },
-        qs: {
-            vmid: tonkenDetials.vmid,
-            ostype: tonkenDetials.ostype,
-            ide2: tonkenDetials.ide2,
-            ide0: tonkenDetials.ide0,
-            cores: tonkenDetials.cores,
-            memory: tonkenDetials.memory,
-            name: tonkenDetials.vmName
-        }
+        qs: { cores: vmObj.vmCore, memory: vmObj.vmMemory }
     };
     const ticket = makePostRequest(options);
     ticket.then(() => {
         // save Token and ticket
-        logger.info('Proxmox createVM succesfully:');
+        logger.info(`VM ${vmObj.vmID} Core and Memory edit succesfully`);
     }).catch((err) => {
-        logger.error('Proxmox createVM failed: ', err);
+        logger.error('VM Core and Memory edit failed: ', err);
+    });
+    return ticket;
+}
+
+function editVMDisk (tonkenDetials) {
+    const options = {
+        url: `${baseUrl}/nodes/${vmObj.vmNode}/qemu/${vmObj.vmID}/resize`,
+        method: 'PUT',
+        rejectUnauthorized: false,
+        headers: {
+            'User-Agent': 'request',
+            'Content-Type': 'application/x-www-form-urlencoded',
+            Cookie: `PVEAuthCookie=${tonkenDetials.ticket}`,
+            CSRFPreventionToken: tonkenDetials.CSRFPreventionToken
+        },
+        qs: { disk: 'ide0', size: `+${vmObj.vmStorage}G` }
+    };
+    const ticket = makePostRequest(options);
+    ticket.then(() => {
+        // save Token and ticket
+        logger.info(`VM ${vmObj.vmID} Disk Size edit succesfully`);
+    }).catch((err) => {
+        logger.error('VM Disk Size edit failed: ', err);
     });
     return ticket;
 }
