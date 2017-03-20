@@ -31,7 +31,8 @@ router.get('/api/v1/job/:jobId', api.request.getJob);
 router.get('/api/v1/job', api.request.getJob);
 
 // Resource
-// router.get('/api/v1/requests', api.resources.get)
+router.get('/api/v1/requests/inventory', api.resources.get);
+router.get('/api/v1/requests/resources', api.resources.get);
 
 
 
