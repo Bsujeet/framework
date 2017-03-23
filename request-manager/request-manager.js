@@ -6,6 +6,7 @@ const EventBus = require('../event-bus');
 // Require below modules just to initialize them. These module has no direct dependency
 require('../workflow-manager');
 require('../task-executer');
+
 // End
 const VMRequestHandler = require('./vm-request-handler');
 
@@ -21,7 +22,9 @@ function createNewRequest(reqBody, callback) {
                 if (err) {
                     return callback(err);
                 }
-                EventBus.Emitter.emit(EventBus.Events.NEW_JOB, { jobId: data.jobId });
+                EventBus.Emitter.emit(EventBus.Events.NEW_JOB, {
+                    jobId: data.jobId
+                });
                 return callback(null, data);
             });
             break;
@@ -70,7 +73,9 @@ function getRequest(requestId, callback) {
                         break;
                 }
             }
-            requests.push({ status_summery: statusSummery });
+            // requests.push({
+            //     status_summery: statusSummery
+            // });
             return callback(null, requests);
         });
     }
@@ -85,6 +90,7 @@ function onRequestComplete(requestId) {
         switch (request.type) {
             case 'VM':
                 VMRequestHandler.onRequestComplete(request);
+
                 break;
             default:
                 logger.error('Request Type not supported. Type:', request.type);

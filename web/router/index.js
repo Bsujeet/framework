@@ -6,7 +6,7 @@ const api = require('./api');
 const router = express.Router();
 router.get('/', (req, res) => {
   // res.json({ 'test': 'for default' });
-    res.render('index.html');
+  res.render('index.html');
 });
 // endpoints
 // Login
@@ -37,5 +37,3 @@ router.get('/api/v1/requests/resources', api.resources.get);
 
 
 module.exports = router;
-
-

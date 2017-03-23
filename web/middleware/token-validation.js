@@ -14,15 +14,22 @@ function tokenValidationFactory(options) {
                 User.verifyToken(token, (err, user) => {
                     if (err) {
                         return res.status(401)
-                            .send({ status: false, message: 'Invalid token! Please login again.' })
+                            .send({
+                                status: false,
+                                message: 'Invalid token! Please login again.'
+                            })
                             .end();
                     }
+                    global.SocketToken = token;
                     req.userId = user.userId;
                     return next();
                 });
             } else {
                 return res.status(401)
-                    .send({ status: false, message: 'No token provided.' })
+                    .send({
+                        status: false,
+                        message: 'No token provided.'
+                    })
                     .end();
             }
         }

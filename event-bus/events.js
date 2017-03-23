@@ -7,5 +7,6 @@ module.exports = {
     REQUEST_UPDATE: 'requestupdate',
     TASK_UPDATE: 'taskupdate',
     JOB_UPDATE: 'jobupdate',
-    JOB_COMPLETE: 'jobcomplete'
+    JOB_COMPLETE: 'jobcomplete',
+    BROWSER_PUSH: 'browserpush'
 };
