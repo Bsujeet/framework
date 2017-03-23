@@ -23,13 +23,11 @@ global.activeSocketUser = [];
 // Socket for user created
 io.on('connection', (socket) => {
     if (socket.handshake.query.token) {
-        console.log('socket connected');
         const socketToken = socket.handshake.query.token;
         global.activeSocketUser[socketToken] = socket;
     }
     socket.on('disconnect', () => {
         if (socket.handshake.query.token) {
-            console.log('socket disconnected');
             const socketToken = socket.handshake.query.token;
             global.activeSocketUser[socketToken] = null;
         }

@@ -51,7 +51,9 @@ function assignResource(resourceid, additionalInfo, callback) {
 }
 
 function getInventory(userId, callback) {
-    Inventory.find({}, { reservations: 0 }, (err, data) => {
+    Inventory.find({}, {
+        reservations: 0
+    }, (err, data) => {
         if (err) {
             logger.error('Error occured while getting inventory from DB. Error:', err);
             return callback(err);
@@ -61,7 +63,9 @@ function getInventory(userId, callback) {
 }
 
 function getResources(userId, callback) {
-    Resource.find({}, { reservations: 0 }, (err, data) => {
+    Resource.find({}, {
+        reservations: 0
+    }, (err, data) => {
         if (err) {
             logger.error('Error occured while getting resources from DB. Error:', err);
             return callback(err);
@@ -145,7 +149,7 @@ function undoReservationAsync(reservations, callback) {
                 logger.info('Reservation removed for the resource: ', JSON.stringify(item));
             }
             if (counter === 0) {
-                callback(null, status);
+                callback(status);
             }
         });
     }

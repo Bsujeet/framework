@@ -1,7 +1,6 @@
 'use strict';
 
 const mongoose = require('mongoose');
-// const logger = require('winston');
 const logger = require.main.require('./logger');
 const config = require('../config');
 const app = require('./server');

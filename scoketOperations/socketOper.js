@@ -6,8 +6,12 @@ const EventBus = require('../event-bus');
 
 
 EventBus.Emitter.on(EventBus.Events.BROWSER_PUSH, (data) => {
-    if (global.SocketToken && global.activeSocketUser[global.SocketToken]) {
-        senduserNotification(data.updatedRequestData);
+    try {
+        if (global.SocketToken && global.activeSocketUser[global.SocketToken]) {
+            senduserNotification(data.updatedRequestData);
+        }
+    } catch (error) {
+        logger.info('error in socketOper.js ' + error);
     }
 });
 
