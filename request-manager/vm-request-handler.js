@@ -29,6 +29,7 @@ function createRequest(reqBody, callback) {
                 } else {
                     return callback(new Error('Missing reqired Parameter: vmName'), null);
                 }
+
                 // number_of_cores
                 const paramNumberOfCores = reqBody.parameters.filter((param) => {
                     return param.name === 'cores';
@@ -45,6 +46,7 @@ function createRequest(reqBody, callback) {
                 } else {
                     return callback(new Error('Missing reqired Parameter: cores'), null);
                 }
+
                 // memory
                 const paramMemory = reqBody.parameters.filter((param) => {
                     return param.name === 'memory';
@@ -61,6 +63,7 @@ function createRequest(reqBody, callback) {
                 } else {
                     return callback(new Error('Missing reqired Parameter: memory'), null);
                 }
+
                 // storage
                 const paramStorage = reqBody.parameters.filter((param) => {
                     return param.name === 'storage';
@@ -77,6 +80,7 @@ function createRequest(reqBody, callback) {
                 } else {
                     return callback(new Error('Missing reqired Parameter: storage'), null);
                 }
+
                 // OS
                 const paramOs = reqBody.parameters.filter((param) => {
                     return param.name === 'os';
@@ -88,6 +92,7 @@ function createRequest(reqBody, callback) {
                 } else {
                     return callback(new Error('Missing reqired Parameter: OS'), null);
                 }
+
                 const request = new Request({
                     name: reqBody.name,
                     type: reqBody.type,
@@ -281,9 +286,13 @@ function onRequestComplete(request) {
             return;
         }
         if (job.status === 'SUCCEEDED') {
-            const additionalInfo = {
-                vmId: '123'
-            }; // have to change it is hardcoded
+            // additionalInfo (vmId and vmNode) added for Create VM Workflow
+            let additionalInfo = {};
+            if (job.name === 'CREATE_VM') {
+                const outputParam = job.steps[1].output_params;
+                additionalInfo = { vmId: outputParam[0].value, vmNode: outputParam[1].value };
+            }
+
             ResourceManager.assignResource(request.resourceId, additionalInfo, (err) => {
                 if (err) {
                     return logger.error('Error occured while commiting reserved resources. Error:', err);
