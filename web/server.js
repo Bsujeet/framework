@@ -51,7 +51,7 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,DELETE,PUT');
     res.setHeader('Access-Control-Allow-Headers',
-        'X-Requested-With,content-type, Authorization,username,x-access-token');
+        'X-Requested-With,content-type, Authorization,username,x-access-token,refresh');
     next();
 });
 app.use(middleware.tokenValidation({

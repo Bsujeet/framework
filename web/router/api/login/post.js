@@ -47,16 +47,33 @@ function authenticate(req, resp) {
 
 function refreshVerifyToken(req, resp) {
     const token = req.headers['x-access-token'];
+    const ifRefresh = req.headers['refresh'];
     User.verifyToken(token, (err, user) => {
         if (err) {
             resp.status(200).send({
                 status: false
             });
         } else {
-            logger.info(`token verify for user ${user}`);
-            resp.status(200).send({
-                status: true
-            });
+            if (ifRefresh) {
+                User.refreshToken(user.userId, (err, token) => {
+                    if (err) {
+                        resp.status(200).send({
+                            status: false,
+                            data: 'unable to refresh token'
+                        });
+                    } else {
+                        resp.status(200).send({
+                            status: true,
+                            data: token
+                        });
+                    }
+                });
+            } else {
+                resp.status(200).send({
+                    status: true
+                });
+            }
+            // logger.info(`token verify for user ${user}`);
         }
     });
 }
