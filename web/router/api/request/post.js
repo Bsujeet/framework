@@ -32,7 +32,7 @@ function createRequest(req, resp) {
     reqBody.userId = req.userId;
     return RequestManager.createRequest(reqBody, (err, data) => {
         if (err) {
-            return resp.status(400).send({
+            return resp.status(200).send({
                 status: false,
                 err
             }).end();
