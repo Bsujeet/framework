@@ -38,8 +38,6 @@ io.on('connection', (socket) => {
 // Add all the routes with methods, which doesn't require authentication, to this list
 const unprotectedRoutes = [
     'POST:/api/v1/login',
-    'OPTIONS:/api/v1/login',
-    'OPTIONS:/api/v1/request',
     'GET:/',
     'POST:/api/v1/user'
 ];

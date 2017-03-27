@@ -12,6 +12,7 @@ router.get('/', (req, res) => {
 // Login
 router.post('/api/v1/login', api.login.post);
 router.delete('/api/v1/login', api.login.delete);
+router.get('/api/v1/tokenRefresh', api.login.refresh);
 
 
 // User

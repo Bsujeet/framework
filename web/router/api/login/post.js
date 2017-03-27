@@ -3,6 +3,8 @@
 const joi = require('joi');
 const User = require('../../../../models/user');
 
+const logger = require.main.require('./logger');
+
 const reqSchema = joi.object({
         userId: joi.string()
             .required(),
@@ -43,4 +45,23 @@ function authenticate(req, resp) {
     });
 }
 
-module.exports = authenticate;
+function refreshVerifyToken(req, resp) {
+    const token = req.headers['x-access-token'];
+    User.verifyToken(token, (err, user) => {
+        if (err) {
+            resp.status(200).send({
+                status: false
+            });
+        } else {
+            logger.info(`token verify for user ${user}`);
+            resp.status(200).send({
+                status: true
+            });
+        }
+    });
+}
+
+module.exports = {
+    authenticate,
+    refreshVerifyToken
+};
