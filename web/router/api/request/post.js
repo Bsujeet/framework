@@ -30,16 +30,16 @@ function createRequest(req, resp) {
         });
     }
     reqBody.userId = req.userId;
-    return RequestManager.createRequest(reqBody, (err, data) => {
+    return RequestManager.createRequest(reqBody, (err, dataResult) => {
         if (err) {
-            return resp.status(200).send({
+            return resp.status(400).send({
                 status: false,
-                err
+                message: err
             }).end();
         }
         return resp.status(200).send({
             status: true,
-            data
+            data: dataResult
         }).end();
     });
 }
