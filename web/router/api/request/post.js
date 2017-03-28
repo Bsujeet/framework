@@ -34,7 +34,7 @@ function createRequest(req, resp) {
         if (err) {
             return resp.status(400).send({
                 status: false,
-                message: err
+                message: err.message
             }).end();
         }
         return resp.status(200).send({
