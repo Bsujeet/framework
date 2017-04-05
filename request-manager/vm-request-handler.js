@@ -277,7 +277,7 @@ function createRequest(reqBody, callback) {
                                     break;
                                 } else if (dbInventryItemName === resourceItems[i].name && dbInventryItemName === 'storage') {
                                     if (resourceItems[i].qty < dbInventory.inventory_items[index].qty) {
-                                        return callback(new Error('Cannot dicrease Disk size:'), null);
+                                        return callback(new Error('Proxmox not allow to decrease Disk Size feature.'), null);
                                     } else if (resourceItems[i].qty === dbInventory.inventory_items[index].qty) {
                                         resourceItems[i].qty = 0;
                                     } else {
