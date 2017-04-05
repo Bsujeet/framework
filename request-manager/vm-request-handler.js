@@ -393,12 +393,13 @@ function onRequestComplete(request) {
                                         // Update Core, Storage, Memory and Resource ID in Resource DB
                                         for (let index = 0; index < orignalResourceInventory.inventory_items.length; index++) {
                                             let dbInventryItemName = orignalResourceInventory.inventory_items[index].name;
-                                            // Hard code property check need to remove
-                                            dbInventryItemName = dbInventryItemName === 'cpu' ? 'cores' : dbInventryItemName;
+                                            
                                             for (let i = 0; i < objectToCompare.inventory_items.length; i++) {
                                                 if (dbInventryItemName === objectToCompare.inventory_items[i].name) {
                                                     // request iteration need to remove (solution: put add/remove property in resource DB)
                                                     for (let j = 0; j < request.parameters.length-1; j++) {
+                                                        // Hard code property check need to remove
+                                                        dbInventryItemName = dbInventryItemName === 'cpu' ? 'cores' : dbInventryItemName;
                                                         if (request.parameters[j].name === dbInventryItemName) {
                                                             if (request.parameters[j].value > orignalResourceInventory.inventory_items[index].qty){
                                                                 orignalResourceInventory.inventory_items[index].qty =
