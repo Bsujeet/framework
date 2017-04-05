@@ -291,7 +291,7 @@ function createRequest(reqBody, callback) {
                         // Update Requset data incase of storage is increase
                         try {
                             for (let i = 0; i < resourceItems.length; i++) {
-                                if (resourceItems[i].name === 'storage' && resourceItems[i].qty > 0) {
+                                if (resourceItems[i].name === 'storage') {
                                     for (let index = 0; index < editVMWorkflow.parameters.length; index++) {
                                         if (editVMWorkflow.parameters[index].name === 'storage') {
                                             editVMWorkflow.parameters[index].value = resourceItems[i].qty;
