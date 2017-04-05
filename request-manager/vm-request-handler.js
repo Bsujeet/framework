@@ -256,32 +256,39 @@ function createRequest(reqBody, callback) {
                 }
 
                 // Get Resources for given resourceId and calculate diff for resource reservation
-                Resource.findById(resourceId, {}, (err, dbInventory) => {
+                Resource.findById(resourceId, {}, (err, resourceInventory) => {
                     if (err) {
                         return callback(err);
                     }
-                    if (dbInventory == null) {
+                    if (resourceInventory == null) {
                         return callback(err);
                     } else {
-                        for (let index = 0; index < dbInventory.inventory_items.length; index++) {
-                            const dbInventryItemName = dbInventory.inventory_items[index].name;
+                        for (let index = 0; index < resourceInventory.inventory_items.length; index++) {
+                            const resourceInventryItemName = resourceInventory.inventory_items[index].name;
                             for (let i = 0; i < resourceItems.length; i++) {
-                                /*if (dbInventryItemName === resourceItems[i].name && dbInventryItemName !== 'storage') {
-                                    const diff = resourceItems[i].qty - dbInventory.inventory_items[index].qty;
+                                /*if (resourceInventryItemName === resourceItems[i].name && resourceInventryItemName !== 'storage') {
+                                    const diff = resourceItems[i].qty - resourceInventory.inventory_items[index].qty;
                                     resourceItems[i].qty = diff < 0 ? diff * -1 : diff;
                                     break;
                                 }*/
-                                if (dbInventryItemName === resourceItems[i].name && dbInventryItemName !== 'storage') {
-                                    const diff = resourceItems[i].qty - dbInventory.inventory_items[index].qty;
-                                    resourceItems[i].qty = diff < 0 ? diff * -1 : diff;
+                                if (resourceInventryItemName === resourceItems[i].name && resourceInventryItemName !== 'storage') {
+                                    let diff;
+                                    if(resourceInventory.inventory_items[index].qty > resourceItems[i].qty){
+                                        diff = resourceInventory.inventory_items[index].qty - resourceItems[i].qty;
+                                    }else {
+                                        diff = resourceItems[i].qty - resourceInventory.inventory_items[index].qty;
+                                    }
+                                    resourceItems[i].qty = diff;
+                                    /*const diff = resourceItems[i].qty - resourceInventory.inventory_items[index].qty;
+                                    resourceItems[i].qty = diff < 0 ? diff * -1 : diff;*/
                                     break;
-                                } else if (dbInventryItemName === resourceItems[i].name && dbInventryItemName === 'storage') {
-                                    if (resourceItems[i].qty < dbInventory.inventory_items[index].qty) {
-                                        return callback(new Error('Proxmox not allow to decrease Disk Size feature.'), null);
-                                    } else if (resourceItems[i].qty === dbInventory.inventory_items[index].qty) {
+                                } else if (resourceInventryItemName === resourceItems[i].name && resourceInventryItemName === 'storage') {
+                                    if (resourceItems[i].qty < resourceInventory.inventory_items[index].qty) {
+                                        return callback(new Error('Cannot decrease Disk size'), null);
+                                    } else if (resourceItems[i].qty === resourceInventory.inventory_items[index].qty) {
                                         resourceItems[i].qty = 0;
                                     } else {
-                                        const staorageDiff = resourceItems[i].qty - dbInventory.inventory_items[index].qty;
+                                        const staorageDiff = resourceItems[i].qty - resourceInventory.inventory_items[index].qty;
                                         resourceItems[i].qty = staorageDiff;
                                     }
                                     break;
@@ -302,13 +309,13 @@ function createRequest(reqBody, callback) {
                         } catch (error) {
                             logger.error('Error Occured during update Requset data incase of storage is increase. Error:', error);
                         }
-                        
+
                         ResourceManager.modifyReserveResource(vmname, vmId, resourceId, 'VM', resourceItems, 'admin', (err, resource) => {
                             if (err) {
                                 logger.error('Error Occured in resource reservation. Error:', err);
                                 return callback(err, null);
                             }
-                            
+
                             const job = new Job(editVMWorkflow);
                             request.jobId = job.get('id');
                             request.resourceId = resource.get('id');
@@ -372,30 +379,43 @@ function onRequestComplete(request) {
                     if (request.parameters[key].name === 'resourceId') {
                         const requestID = request.parameters[key].value;
                         let objectToCompare = {};
-                        Resource.findById(request.resourceId, {}, (err, tempDBInventory) => {
+                        Resource.findById(request.resourceId, {}, (err, tempResourceInventory) => {
                             // To remove Temprary resource-data from resource DB
                             if (err) {
                                 return logger.error('Error occured while fetching resource from Resource DB. Error:', err);
                             } else {
-                                objectToCompare = tempDBInventory;
+                                objectToCompare = tempResourceInventory;
                                 // Find Original resource data from Resource DB
-                                Resource.findById(requestID, {}, (err, tempDBInventory) => {
+                                Resource.findById(requestID, {}, (err, orignalResourceInventory) => {
                                     if (err) {
                                         return logger.error('Error occured while fetching orignal resource from Resource DB. Error:', err);
                                     } else {
                                         // Update Core, Storage, Memory and Resource ID in Resource DB
-                                        for (let index = 0; index < tempDBInventory.inventory_items.length; index++) {
-                                            const dbInventryItemName = tempDBInventory.inventory_items[index].name;
+                                        for (let index = 0; index < orignalResourceInventory.inventory_items.length; index++) {
+                                            let dbInventryItemName = orignalResourceInventory.inventory_items[index].name;
+                                            // Hard code property check need to remove
+                                            dbInventryItemName = dbInventryItemName === 'cpu' ? 'cores' : dbInventryItemName;
                                             for (let i = 0; i < objectToCompare.inventory_items.length; i++) {
                                                 if (dbInventryItemName === objectToCompare.inventory_items[i].name) {
-                                                    tempDBInventory.inventory_items[index].qty = objectToCompare.inventory_items[i].qty
-                                                        + tempDBInventory.inventory_items[index].qty;
+                                                    // request iteration need to remove (solution: put add/remove property in resource DB)
+                                                    for (let j = 0; j < request.parameters.length-1; j++) {
+                                                        if (request.parameters[j].name === dbInventryItemName) {
+                                                            if (request.parameters[j].value > orignalResourceInventory.inventory_items[index].qty){
+                                                                orignalResourceInventory.inventory_items[index].qty =
+                                                                objectToCompare.inventory_items[i].qty + orignalResourceInventory.inventory_items[index].qty;
+                                                            } else {
+                                                                orignalResourceInventory.inventory_items[index].qty = orignalResourceInventory.inventory_items[index].qty - objectToCompare.inventory_items[i].qty;
+                                                            }
+                                                        }
+                                                    }
+                                                   /* orignalResourceInventory.inventory_items[index].qty = objectToCompare.inventory_items[i].qty
+                                                        + orignalResourceInventory.inventory_items[index].qty;*/
                                                     break;
                                                 }
                                             }
                                         }
-                                        Resource.inventory_items = tempDBInventory.inventory_items;
-                                        tempDBInventory.save((err, resource) => {
+                                        Resource.inventory_items = orignalResourceInventory.inventory_items;
+                                        orignalResourceInventory.save((err, resource) => {
                                             if (err) {
                                                 return logger.error('Error occured while updating orignal resource from Resource DB. Error:', err);
                                             } else {
