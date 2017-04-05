@@ -10,6 +10,20 @@ module.exports = {
     kill_step: '4',
     parameters: [
         {
+            name: 'vmName',
+            value: '104',
+            type: 'STRING',
+            default: '',
+            required: true
+        },
+        {
+            name: 'resourceId',
+            value: '',
+            type: 'STRING',
+            default: '',
+            required: true
+        },
+        {
             name: 'vm_Id',
             value: '104',
             type: 'NUMBER',
@@ -55,6 +69,26 @@ module.exports = {
         }
     ],
     parameter_mappings: [
+        {
+            from: {
+                step: 'workflow',
+                parameter: 'resourceId'
+            },
+            to: {
+                step: '2',
+                parameter: 'resourceId'
+            }
+        },
+        {
+            from: {
+                step: 'workflow',
+                parameter: 'vmName'
+            },
+            to: {
+                step: '2',
+                parameter: 'vmName'
+            }
+        },
         {
             from: {
                 step: 'workflow',
@@ -167,6 +201,16 @@ module.exports = {
             module: 'proxmox-vm-poweroff',
             icon: '',
             input_params: [
+                {
+                    name: 'resourceId',
+                    value: '',
+                    type: 'STRING'
+                },
+                {
+                    name: 'vmName',
+                    value: '',
+                    type: 'STRING'
+                },
                 {
                     name: 'vmID',
                     value: '',

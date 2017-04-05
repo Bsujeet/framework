@@ -16,6 +16,12 @@ const ResourceSchema = new Schema({
         type: String,
         validate: [required, 'Name of the Resource is required']
     },
+    vmId: {
+        type: Number
+    },
+    resourceId: {
+        type: String
+    },
     type: {
         type: String,
         enum: ['VM', 'OTHERS']

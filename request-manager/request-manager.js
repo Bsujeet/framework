@@ -73,9 +73,6 @@ function getRequest(requestId, callback) {
                         break;
                 }
             }
-            // requests.push({
-            //     status_summery: statusSummery
-            // });
             return callback(null, requests);
         });
     }

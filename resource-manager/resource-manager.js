@@ -62,15 +62,79 @@ function getInventory(userId, callback) {
     });
 }
 
-function getResources(userId, callback) {
+function getResources(resourceId, callback) {
+    if (resourceId) {
+        Resource.findById(resourceId, {}, (err, data) => {
+            if (err) {
+                logger.error(`Error occured while getting resources from DB. Error: resourceId = ${resourceId}`, err);
+                return callback(err);
+            }
+            return callback(null, data);
+        });
+    } else {
+        Resource.find({}, {
+            reservations: 0
+        }, (err, data) => {
+            if (err) {
+                logger.error('Error occured while getting resources from DB. Error:', err);
+                return callback(err);
+            }
+            return callback(null, data);
+        });
+    }
+}
+
+function getResourcesToEdit(userId, callback) {
     Resource.find({}, {
         reservations: 0
     }, (err, data) => {
+        const resData = [];
         if (err) {
             logger.error('Error occured while getting resources from DB. Error:', err);
             return callback(err);
         }
-        return callback(null, data);
+        for (let index = 0; index < data.length; index++) {
+            const _data = data[index];
+            if (_data.status === 'ASSIGNED') {
+                const tempObj = {};
+                tempObj.vmName = _data.name;
+                tempObj.vmId = _data.additionalInfo.vmId;
+                tempObj.vmNode = _data.additionalInfo.vmNode;
+                tempObj.requestId = _data._id;
+                resData.push(tempObj);
+            }
+        }
+        return callback(null, resData);
+    });
+}
+
+function modifyReserveResource(name, vmId, resourceId, type, inventoryItems, userId, callback) {
+    const resource = new Resource({
+        name,
+        vmId,
+        resourceId,
+        type,
+        inventory_items: [],
+        status: 'RESERVED',
+        userId
+    });
+
+    reserveAsync(inventoryItems, (err, reservations) => {
+        if (err) {
+            return callback(err);
+        }
+        resource.inventory_items = reservations;
+        resource.save((err, resource) => {
+            if (err) {
+                undoReservationAsync(reservations, (err) => {
+                    if (err) {
+                        return callback(new Error('Reservation failed. Unable to store resource'));
+                    }
+                });
+            } else {
+                return callback(null, resource);
+            }
+        });
     });
 }
 
@@ -185,8 +249,10 @@ function assignAsync(reservations, callback) {
 
 module.exports = {
     reserveResource,
+    modifyReserveResource,
     removeResearvation,
     assignResource,
     getInventory,
-    getResources
+    getResources,
+    getResourcesToEdit
 };

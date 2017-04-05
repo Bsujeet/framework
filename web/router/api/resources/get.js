@@ -21,8 +21,15 @@ function findRequest (req, resp) {
             }
             return resp.status(200).send({ status: true, data: requests }).end();
         });
-    } else if (req.url === '/api/v1/requests/resources') {
-        RequestManager.getResources(reqParams.requestId, (err, requests) => {
+    } else if (req.url.indexOf('/api/v1/requests/resources') > -1 && req.url !== '/api/v1/requests/resources/edit') { //if (req.url === '/api/v1/requests/resources') {
+        RequestManager.getResources(reqParams.resourceId, (err, requests) => {
+            if (err) {
+                return resp.status(400).send({ status: false, message: 'Unable to find request' }).end();
+            }
+            return resp.status(200).send({ status: true, data: requests }).end();
+        });
+    } else if (req.url === '/api/v1/requests/resources/edit') {
+        RequestManager.getResourcesToEdit(reqParams.requestId, (err, requests) => {
             if (err) {
                 return resp.status(400).send({ status: false, message: 'Unable to find request' }).end();
             }

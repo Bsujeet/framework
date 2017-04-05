@@ -7,10 +7,22 @@ const ResourceManager = require('../resource-manager');
 const workflow = require('../models/workflow/static-vm-workflow'); // TODO get it from DB
 const editVMWorkflow = require('../models/workflow/static-vm-edit-workflow'); // TODO get it from DB
 const EventBus = require('../event-bus');
+const Resource = require('../models/resource');
 
 require('../scoketOperations');
 
 function createRequest(reqBody, callback) {
+
+    const request = new Request({
+        name: reqBody.name,
+        type: reqBody.type,
+        operation: reqBody.operation,
+        description: reqBody.description,
+        requestedBy: reqBody.userId,
+        status: 'SAVED',
+        parameters: reqBody.parameters
+    });
+
     switch (reqBody.operation) {
         case 'CREATE':
             {
@@ -93,16 +105,6 @@ function createRequest(reqBody, callback) {
                     return callback(new Error('Missing reqired Parameter: OS'), null);
                 }
 
-                const request = new Request({
-                    name: reqBody.name,
-                    type: reqBody.type,
-                    operation: reqBody.operation,
-                    description: reqBody.description,
-                    requestedBy: reqBody.userId,
-                    status: 'SAVED',
-                    parameters: reqBody.parameters
-                });
-
                 ResourceManager.reserveResource(vmname, 'VM', resourceItems, 'admin', (err, resource) => {
                     if (err) {
                         logger.error('Error Occured in resource reservation. Error:', err);
@@ -146,13 +148,43 @@ function createRequest(reqBody, callback) {
             {
                 const resourceItems = [];
                 let vmname = '';
+                let vmId = '';
+                let resourceId = '';
                 // Populate editVMWorkflow parameters
+
+                // resourceId
+                const paramResourceId = reqBody.parameters.filter((param) => {
+                    return param.name === 'resourceId';
+                });
+                if (paramResourceId.length === 1) { // TODO: Add more validations as required
+                    resourceId = paramResourceId[0].value;
+                    editVMWorkflow.parameters.filter((param) => {
+                        return param.name === 'resourceId';
+                    })[0].value = paramResourceId[0].value;
+                } else {
+                    return callback(new Error('Missing reqired Parameter: resourceId'), null);
+                }
+
+
+                // vmName
+                const paramVmName = reqBody.parameters.filter((param) => {
+                    return param.name === 'vmName';
+                });
+                if (paramVmName.length === 1) { // TODO: Add more validations as required
+                    vmname = paramVmName[0].value;
+                    editVMWorkflow.parameters.filter((param) => {
+                        return param.name === 'vmName';
+                    })[0].value = paramVmName[0].value;
+                } else {
+                    return callback(new Error('Missing reqired Parameter: vmName'), null);
+                }
+
                 // vm_Id
                 const paramVmId = reqBody.parameters.filter((param) => {
                     return param.name === 'vm_Id';
                 });
                 if (paramVmId.length === 1) { // TODO: Add more validations as required
-                    vmname = paramVmId[0].value;
+                    vmId = paramVmId[0].value;
                     editVMWorkflow.parameters.filter((param) => {
                         return param.name === 'vm_Id';
                     })[0].value = paramVmId[0].value;
@@ -211,7 +243,7 @@ function createRequest(reqBody, callback) {
                     return callback(new Error('Missing reqired Parameter: storage'), null);
                 }
 
-                //vmNode
+                // vmNode
                 const paramOs = reqBody.parameters.filter((param) => {
                     return param.name === 'vm_node';
                 });
@@ -223,52 +255,93 @@ function createRequest(reqBody, callback) {
                     return callback(new Error('Missing reqired Parameter: vmNode'), null);
                 }
 
-                const request = new Request({
-                    name: reqBody.name,
-                    type: reqBody.type,
-                    operation: reqBody.operation,
-                    description: reqBody.description,
-                    requestedBy: reqBody.userId,
-                    status: 'SAVED',
-                    parameters: reqBody.parameters
-                });
-
-                ResourceManager.reserveResource(vmname, 'VM', resourceItems, 'admin', (err, resource) => {
+                // Get Resources for given resourceId and calculate diff for resource reservation
+                Resource.findById(resourceId, {}, (err, dbInventory) => {
                     if (err) {
-                        logger.error('Error Occured in resource reservation. Error:', err);
-                        return callback(err, null);
+                        return callback(err);
                     }
-                    const job = new Job(editVMWorkflow);
-                    request.jobId = job.get('id');
-                    request.resourceId = resource.get('id');
-                    job.requestId = request.get('id');
-                    request.save((err) => {
-                        if (err) {
-                            logger.error('Error occured while saving request to DB. Error:', err);
-                            return callback(err, null);
+                    if (dbInventory == null) {
+                        return callback(err);
+                    } else {
+                        for (let index = 0; index < dbInventory.inventory_items.length; index++) {
+                            const dbInventryItemName = dbInventory.inventory_items[index].name;
+                            for (let i = 0; i < resourceItems.length; i++) {
+                                /*if (dbInventryItemName === resourceItems[i].name && dbInventryItemName !== 'storage') {
+                                    const diff = resourceItems[i].qty - dbInventory.inventory_items[index].qty;
+                                    resourceItems[i].qty = diff < 0 ? diff * -1 : diff;
+                                    break;
+                                }*/
+                                if (dbInventryItemName === resourceItems[i].name && dbInventryItemName !== 'storage') {
+                                    const diff = resourceItems[i].qty - dbInventory.inventory_items[index].qty;
+                                    resourceItems[i].qty = diff < 0 ? diff * -1 : diff;
+                                    break;
+                                } else if (dbInventryItemName === resourceItems[i].name && dbInventryItemName === 'storage') {
+                                    if (resourceItems[i].qty < dbInventory.inventory_items[index].qty) {
+                                        return callback(new Error('Cannot dicrease Disk size:'), null);
+                                    } else if (resourceItems[i].qty === dbInventory.inventory_items[index].qty) {
+                                        resourceItems[i].qty = 0;
+                                    } else {
+                                        const staorageDiff = resourceItems[i].qty - dbInventory.inventory_items[index].qty;
+                                        resourceItems[i].qty = staorageDiff;
+                                    }
+                                    break;
+                                }
+                            }
                         }
-
-                        job.save((err) => {
+                        // Update Requset data incase of storage is increase
+                        try {
+                            for (let i = 0; i < resourceItems.length; i++) {
+                                if (resourceItems[i].name === 'storage' && resourceItems[i].qty > 0) {
+                                    for (let index = 0; index < editVMWorkflow.parameters.length; index++) {
+                                        if (editVMWorkflow.parameters[index].name === 'storage') {
+                                            editVMWorkflow.parameters[index].value = resourceItems[i].qty;
+                                        }
+                                    }
+                                }
+                            }
+                        } catch (error) {
+                            logger.error('Error Occured during update Requset data incase of storage is increase. Error:', error);
+                        }
+                        
+                        ResourceManager.modifyReserveResource(vmname, vmId, resourceId, 'VM', resourceItems, 'admin', (err, resource) => {
                             if (err) {
-                                logger.error('Error occured while saving job to DB. Error:', err);
-                                logger.info('Start rollback of Request Saved.');
-                                // Rollback request save operation
-                                // TODO: Test below code
-                                ResourceManager.removeResearvation(resource.resourceId, (err) => {
-                                    if (err) {
-                                        return logger.error('Error occured while removing reservation. Error:', err);
-                                    }
-                                });
-                                request.remove((err) => {
-                                    if (err) {
-                                        return logger.error('Error occured while deleting request from DB. Error:', err);
-                                    }
-                                });
+                                logger.error('Error Occured in resource reservation. Error:', err);
                                 return callback(err, null);
                             }
-                            callback(null, request);
+                            
+                            const job = new Job(editVMWorkflow);
+                            request.jobId = job.get('id');
+                            request.resourceId = resource.get('id');
+                            job.requestId = request.get('id');
+                            request.save((err) => {
+                                if (err) {
+                                    logger.error('Error occured while saving request to DB. Error:', err);
+                                    return callback(err, null);
+                                }
+
+                                job.save((err) => {
+                                    if (err) {
+                                        logger.error('Error occured while saving job to DB. Error:', err);
+                                        logger.info('Start rollback of Request Saved.');
+                                        // Rollback request save operation
+                                        // TODO: Test below code
+                                        ResourceManager.removeResearvation(resource.resourceId, (err) => {
+                                            if (err) {
+                                                return logger.error('Error occured while removing reservation. Error:', err);
+                                            }
+                                        });
+                                        request.remove((err) => {
+                                            if (err) {
+                                                return logger.error('Error occured while deleting request from DB. Error:', err);
+                                            }
+                                        });
+                                        return callback(err, null);
+                                    }
+                                    callback(null, request);
+                                });
+                            });
                         });
-                    });
+                    }
                 });
                 break;
             }
@@ -288,9 +361,67 @@ function onRequestComplete(request) {
         if (job.status === 'SUCCEEDED') {
             // additionalInfo (vmId and vmNode) added for Create VM Workflow
             let additionalInfo = {};
-            if (job.name === 'CREATE_VM') {
+            const outputParam = job.steps[1].output_params;
+            additionalInfo = { vmId: outputParam[0].value, vmNode: outputParam[1].value };
+            /* if (job.name === 'CREATE_VM') {
                 const outputParam = job.steps[1].output_params;
                 additionalInfo = { vmId: outputParam[0].value, vmNode: outputParam[1].value };
+            } else*/ if (job.name === 'EDIT_VM') {
+                for (const key in request.parameters) {
+                    // Get resouce ID which is given by User
+                    if (request.parameters[key].name === 'resourceId') {
+                        const requestID = request.parameters[key].value;
+                        let objectToCompare = {};
+                        Resource.findById(request.resourceId, {}, (err, tempDBInventory) => {
+                            // To remove Temprary resource-data from resource DB
+                            if (err) {
+                                return logger.error('Error occured while fetching resource from Resource DB. Error:', err);
+                            } else {
+                                objectToCompare = tempDBInventory;
+                                // Find Original resource data from Resource DB
+                                Resource.findById(requestID, {}, (err, tempDBInventory) => {
+                                    if (err) {
+                                        return logger.error('Error occured while fetching orignal resource from Resource DB. Error:', err);
+                                    } else {
+                                        // Update Core, Storage, Memory and Resource ID in Resource DB
+                                        for (let index = 0; index < tempDBInventory.inventory_items.length; index++) {
+                                            const dbInventryItemName = tempDBInventory.inventory_items[index].name;
+                                            for (let i = 0; i < objectToCompare.inventory_items.length; i++) {
+                                                if (dbInventryItemName === objectToCompare.inventory_items[i].name) {
+                                                    tempDBInventory.inventory_items[index].qty = objectToCompare.inventory_items[i].qty
+                                                        + tempDBInventory.inventory_items[index].qty;
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                        Resource.inventory_items = tempDBInventory.inventory_items;
+                                        tempDBInventory.save((err, resource) => {
+                                            if (err) {
+                                                return logger.error('Error occured while updating orignal resource from Resource DB. Error:', err);
+                                            } else {
+                                                Resource.remove({ _id: request.resourceId }, (err, res) => {
+                                                    if (err) {
+                                                        return logger.error('Error occured while removing temp resource from Resource DB. Error:', err);
+                                                    } else {
+                                                        logger.info('Resource DB is updated successfully.');
+                                                        request.save((err, resource) => {
+                                                            if (err) {
+                                                                return logger.error('Error occured during update resource Id in Request DB. Error:', err);
+                                                            } else {
+                                                                logger.info('Request DB is updated successfully.');
+                                                            }
+                                                        });
+                                                    }
+                                                });
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                        break;
+                    }
+                }
             }
 
             ResourceManager.assignResource(request.resourceId, additionalInfo, (err) => {
