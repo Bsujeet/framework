@@ -6,7 +6,7 @@ const envVarsSchema = joi.object({
     DBPORT: joi.number()
         .default(27017),
     DBHOST: joi.string()
-        .default('172.17.163.56'),
+        .default('localhost'),
     DB: joi.string()
         .default('dcmf')
 })

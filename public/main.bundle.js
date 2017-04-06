@@ -3,49 +3,119 @@ webpackJsonp([1,4],{
 /***/ 1000:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <md-toolbar color=\"primary\" class=\"col-12\">\n    <h5>Datacenter Management Framework</h5>\n  </md-toolbar>\n</div>\n<div class=\"row\">\n  <div class=\"col-sm-10 col-md-6 col-lg-4 offset-sm-1 offset-md-3 offset-lg-4\">\n    <md-card class=\"login-wrapper\">\n      <md-card-header>        \n        <md-card-title ><h5 style=\"text-align: center\"> Datacenter Management Framework </h5></md-card-title>\n      </md-card-header>\n      <hr>\n      <md-card-content>\n        <form class=\"login\" [formGroup]=\"loginForm\" (ngSubmit)=\"onlogin()\">\n          <div class=\"form-group\">\n            <md-input-container class=\"col-12\">\n              <input mdInput placeholder=\"UserName\" type=\"text\" formControlName=\"userId\" required />\n            </md-input-container>\n          </div>\n\n          <div class=\"form-group\">\n            <md-input-container class=\"col-12\">\n              <input mdInput placeholder=\"Password\" type=\"password\" formControlName=\"password\" required />\n            </md-input-container>\n          </div>\n          <div class=\"form-group\">\n            <span [ngClass]=\"{'error':!InVisible,'active':!InVisible}\">\n          {{result}}\n        </span>\n          </div>\n          <div class=\"form-group\">\n            <md-card-actions class=\"col-12\">\n              <button md-raised-button type=\"submit\" class=\"my-success-btn\" color=\"primary\">LOG IN</button>\n            </md-card-actions>\n          </div>\n        </form>\n      </md-card-content>\n    </md-card>\n  </div>\n</div>"
+module.exports = "<md-card class=\"col-sm-10 col-md-6 col-lg-4 offset-sm-1 offset-md-3 offset-lg-4\">\r\n  <md-card-title>\r\n    <h4>VM Creation Form</h4>\r\n  </md-card-title>\r\n  <md-card-content>\r\n    <form class=\"create-vm-form\" [formGroup]=\"vmcreationForm\" (ngSubmit)=\"onSubmit(vmcreationForm.value)\" [hidden]=\"submitted\">\r\n      <div class=\"form-group\">\r\n        <md-input-container class=\"col-12\">\r\n          <input mdInput placeholder=\"Type\" formControlName=\"type\" id=\"type\" readonly>\r\n        </md-input-container>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <md-select placeholder=\"Operation\" formControlName=\"operation\" (ngModelChange)=\"onOperationChange($event)\" required class=\"col-12\">\r\n          <md-option *ngFor=\"let operat of operationList\" value=\"{{operat.value}}\">\r\n            {{ operat.name }}\r\n          </md-option>\r\n        </md-select>\r\n      </div>\r\n    </form>\r\n  </md-card-content>\r\n  <template form-host></template>\r\n</md-card>\r\n"
 
 /***/ }),
 
 /***/ 1001:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"mat-sidenav-focus-trap\">\n  <div class=\"cdk-focus-trap-content\">\n    <nav class=\"main\">\n      <ul>\n        <li class=\"for-mobile\"><span>Welcome {{User}}</span></li>\n        <li *ngFor=\"let list of links\">\n          <a *ngIf=\"list.submenu==undefined \" [routerLink]=\"[list.path]\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" (click)=\"sidenav.close()\"><i class=\"material-icons list-icons\">{{list.icon}}</i>{{list.name}}</a>\n          <nav class=\"sub\" *ngIf=\"list.submenu!=undefined\">\n            <h6 *ngIf=\"list.submenu!=undefined\" (click)=\"submenu($event)\">{{list.name}}<i class=\"material-icons\" [hidden]=\"shown\">&#xE315;</i><i class=\"material-icons\" [hidden]=\"!shown\">&#xE313;</i></h6>\n            <ul [hidden]=\"shown\">\n              <li *ngFor=\"let menu of list.submenu\"><a [routerLink]=\"[menu.path]\" (click)=\"sidenav.close() ;submenu($event)\"><i class=\"material-icons list-icons\">{{menu.icon}}</i>{{menu.name}}</a></li>\n            </ul>\n          </nav>\n        </li>\n        <li class=\"for-mobile\"><a href=\"javascript:void(0)\" (click)=\"logout()\"><i class=\"material-icons list-icons\">power_settings_new</i>Logout</a></li>\n      </ul>\n    </nav>\n  </div>\n</div>"
+module.exports = "<md-card-content>\r\n    <form class=\"create-vm-form\" [formGroup]=\"vmcreationForm\" (ngSubmit)=\"onSubmit(vmcreationForm.value)\" [hidden]=\"submitted\">\r\n      <div class=\"form-group\">\r\n        <md-input-container class=\"col-12\">\r\n          <input mdInput placeholder=\"Name\" formControlName=\"Name\" id=\"Name\" required>\r\n        </md-input-container>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <md-input-container class=\"col-12\">\r\n          <textarea cols=\"40\" rows=\"5\" mdInput placeholder=\"Description\" formControlName=\"description\" id=\"description\" required></textarea>\r\n        </md-input-container>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <md-input-container class=\"col-12\">\r\n          <input mdInput placeholder=\"VM Name\" formControlName=\"vmName\" id=\"vmName\" required>\r\n        </md-input-container>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <md-select placeholder=\"Operating System\" formControlName=\"os\" required class=\"col-12\">\r\n          <md-option *ngFor=\"let os of osList\" value=\"{{os.version}}\">\r\n            {{ os.name }}\r\n          </md-option>\r\n        </md-select>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <md-input-container class=\"col-12\">\r\n          <input mdInput placeholder=\"Disk Size (GB)\" formControlName=\"storage\" id=\"diskSize\" (keypress)=\"onlyNumberKey($event)\" required>\r\n        </md-input-container>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <md-select placeholder=\"CPU Core\" formControlName=\"cores\" id=\"cpuCore\" required class=\"col-12\">\r\n          <md-option value=\"1\">1</md-option>\r\n          <md-option value=\"2\">2</md-option>\r\n        </md-select>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <md-input-container class=\"col-12\">\r\n          <input mdInput placeholder=\"Memory (MB)\" formControlName=\"memory\" id=\"Memory\" (keypress)=\"onlyNumberKey($event)\" required>\r\n        </md-input-container>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <md-card-actions class=\"col-12\">\r\n          <button type=\"submit\" md-raised-button class=\"my-success-btn\" color=\"primary\">Create</button>\r\n          <button type=\"button\" md-raised-button class=\"my-cancel-btn\" (click)=\"backToHome()\">Cancel</button>\r\n        </md-card-actions>\r\n      </div>\r\n    </form>\r\n  </md-card-content>\r\n"
 
 /***/ }),
 
 /***/ 1002:
 /***/ (function(module, exports) {
 
-module.exports = "<ng2-smart-table class=\"table table-striped table-responsive\" [settings]=\"settings\" [source]=\"parameters\" ></ng2-smart-table>\n<button type=\"button\" md-raised-button class=\"my-cancel-btn\" style=\"float: right\" (click)=\"dialogRef.close()\" color=\"primary\">OK</button>\n"
+module.exports = "<md-card-content>\r\n    <form class=\"create-vm-form\" [formGroup]=\"vmeditForm\" (ngSubmit)=\"onSubmit(vmeditForm.value)\" [hidden]=\"submitted\" >\r\n      \r\n      <div class=\"form-group\">\r\n        <md-select placeholder=\"VM Name\" formControlName=\"vmName\" (change)=\"onVMChange($event)\" required class=\"col-12\" [(ngModel)]=\"vm\">\r\n          <md-option *ngFor=\"let vm of vmList\" value=\"{{vm.requestId}}\">\r\n            {{ vm.vmName + ' VM ID: ' + vm.vmId}}\r\n          </md-option>\r\n        </md-select>\r\n      </div>\r\n      \r\n      <div class=\"form-group\">\r\n        <md-input-container class=\"col-12\">\r\n          <input mdInput placeholder=\"Name\" formControlName=\"Name\" id=\"Name\" required>\r\n        </md-input-container>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <md-input-container class=\"col-12\">\r\n          <textarea cols=\"40\" rows=\"5\" mdInput placeholder=\"Description\" formControlName=\"description\" id=\"description\" required></textarea>\r\n        </md-input-container>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <md-input-container class=\"col-12\">\r\n          <input mdInput placeholder=\"Disk Size (GB)\" formControlName=\"storage\" id=\"diskSize\"  required>          \r\n        </md-input-container>\r\n      </div>\r\n      <!--<div class=\"form-group\">\r\n        <md-input-container class=\"col-12\">\r\n          <input mdInput placeholder=\"Increase Disk Size (GB)\" formControlName=\"storage_inc\" id=\"diskSizeInc\" (keypress)=\"onlyNumberKey($event)\" required>\r\n        </md-input-container>\r\n      </div>-->\r\n      <div class=\"form-group\">\r\n        <md-select placeholder=\"CPU Core\" formControlName=\"cores\" id=\"cpuCore\" required class=\"col-12\">\r\n          <md-option value=\"1\">1</md-option>\r\n          <md-option value=\"2\">2</md-option>\r\n        </md-select>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <md-input-container class=\"col-12\">\r\n          <input mdInput placeholder=\"Memory (MB)\" formControlName=\"memory\" id=\"Memory\" (keypress)=\"onlyNumberKey($event)\" required>\r\n        </md-input-container>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <md-card-actions class=\"col-12\">\r\n          <button type=\"submit\" md-raised-button class=\"my-success-btn\"  color=\"primary\">Create</button>\r\n          <button type=\"button\" md-raised-button class=\"my-cancel-btn\" (click)=\"backToHome()\">Cancel</button>\r\n        </md-card-actions>\r\n      </div>\r\n    </form>\r\n  </md-card-content>\r\n"
 
 /***/ }),
 
 /***/ 1003:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n  <md-card class=\"col-12\">\r\n    <md-card-title>\r\n      <h2>Requests</h2>\r\n    </md-card-title>\r\n    <md-card-content>\r\n      <button type=\"button\" md-raised-button class=\"my-success-btn\" (click)=\"addNewRequest()\"  color=\"primary\">New</button>\r\n      <hr>\r\n      <ng2-smart-table class=\"table table-striped table-responsive\" [settings]=\"settings\" [source]=\"data\" (edit)=\"onEdit($event)\" (userRowSelect)=\"onUserRowSelect($event)\" ></ng2-smart-table>\r\n    </md-card-content>\r\n  </md-card>\r\n</div>"
+module.exports = "<p>\n  about works!\n</p>\n"
 
 /***/ }),
 
 /***/ 1004:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n<md-card class=\"col-12\">\n  <md-card-title>\n    <h2>Resouces</h2>\n  </md-card-title>\n  <md-card-content>\n        <ng2-smart-table class=\"table table-striped table-responsive\" [settings]=\"settings\" [source]=\"data\"   (userRowSelect)=\"onUserRowSelect($event)\"></ng2-smart-table>\n  </md-card-content>\n</md-card>\n</div>"
+module.exports = "<p>\n  construction works!\n</p>\n"
 
 /***/ }),
 
 /***/ 1005:
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  {{data.message}}\n</p>\n<button type=\"button\" md-raised-button class=\"my-cancel-btn\" style=\"float: right\" (click)=\"dialogRef.close()\">Ok</button>"
+module.exports = "<div class=\"row\">\n  <div class=\"col-12\">\n    <div class=\"col-10 offset-1 justify-content-xs-center\">\n      <md-card class=\"col-sx-12 col-sm-12 col-md-6 col-lg-4 \" *ngFor=\"let i of chartData\"> <!--class=\"col-sx-5 col-sm-5 col-md-4 col-lg-4 \"-->\n        <md-card-title>\n          <h3>{{i.name |uppercase}}</h3>\n        </md-card-title>\n        <md-card-content>\n          <div style=\"display: block\">\n            <canvas baseChart [datasets]=\"i.datasets\" [labels]=\"i.label\" [chartType]=\"i.chart\" [colors]=\"colorsOverride\" (chartHover)=\"chartHovered($event)\"\n              (chartClick)=\"chartClicked($event)\"></canvas>\n          </div>\n        </md-card-content>\n      </md-card>\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
-/***/ 1259:
+/***/ 1006:
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n   {{data.message}}\n</p>\n<button type=\"button\" md-button class=\"my-cancel-btn\" style=\"float:right\" (click)=\"dialogRef.close()\" color=\"primary\">OK</button>"
+
+/***/ }),
+
+/***/ 1007:
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n   {{data.message}}\n</p>\n<button type=\"button\" md-button class=\"my-cancel-btn\" style=\"float:right\" (click)=\"dialogRef.close()\" color=\"primary\">OK</button>"
+
+/***/ }),
+
+/***/ 1008:
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row header\">\r\n    <md-toolbar color=\"primary\" class=\"col-12\">\r\n        <md-icon (click)=\"sidenav.toggle()\" class=\"spacing pointer\">menu</md-icon>\r\n        <span class=\"header-title\">Datacenter Management Framework</span>\r\n        <span class=\"example-fill-remaining-space\"></span>\r\n        <span class=\"for-desktop after-bar\">Welcome {{User}}</span>\r\n        <span class=\"for-desktop pointer\" (click)=\"logout()\">Logout</span>\r\n    </md-toolbar>\r\n</div>\r\n<div class=\"row rest-content\">\r\n    <md-sidenav-container>\r\n        <md-sidenav #sidenav mode=\"side\" opened=\"showHideMenu()\" class=\"col-sx-3 col-sm-3 col-md-auto col-lg-auto border-left-0\"> <!--class=\"col-sx-3 col-sm-3 col-md-3 col-lg-2 border-left-0\"-->\r\n            <!-- sidenav content -->\r\n            <app-nav [sidenav]=\"sidenav\"></app-nav>\r\n        </md-sidenav>\r\n        <!-- primary content -->\r\n        <div class=\"col-12\">\r\n            <router-outlet></router-outlet>\r\n        </div>\r\n    </md-sidenav-container>\r\n</div>"
+
+/***/ }),
+
+/***/ 1009:
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  inventory works!\n</p>\n"
+
+/***/ }),
+
+/***/ 1010:
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\n  <md-toolbar color=\"primary\" class=\"col-12\">\n    <h5>Datacenter Management Framework</h5>\n  </md-toolbar>\n</div>\n<div class=\"row\">\n  <div class=\"col-sm-10 col-md-6 col-lg-4 offset-sm-1 offset-md-3 offset-lg-4\">\n    <md-card class=\"login-wrapper\">\n      <md-card-header>        \n        <md-card-title ><h5 style=\"text-align: center\"> Datacenter Management Framework </h5></md-card-title>\n      </md-card-header>\n      <hr>\n      <md-card-content>\n        <form class=\"login\" [formGroup]=\"loginForm\" (ngSubmit)=\"onlogin()\">\n          <div class=\"form-group\">\n            <md-input-container class=\"col-12\">\n              <input mdInput placeholder=\"UserName\" type=\"text\" formControlName=\"userId\" required />\n            </md-input-container>\n          </div>\n\n          <div class=\"form-group\">\n            <md-input-container class=\"col-12\">\n              <input mdInput placeholder=\"Password\" type=\"password\" formControlName=\"password\" required />\n            </md-input-container>\n          </div>\n          <div class=\"form-group\">\n            <span [ngClass]=\"{'error':!InVisible,'active':!InVisible}\">\n          {{result}}\n        </span>\n          </div>\n          <div class=\"form-group\">\n            <md-card-actions class=\"col-12\">\n              <button md-raised-button type=\"submit\" class=\"my-success-btn\" color=\"primary\">LOG IN</button>\n            </md-card-actions>\n          </div>\n        </form>\n      </md-card-content>\n    </md-card>\n  </div>\n</div>"
+
+/***/ }),
+
+/***/ 1011:
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"mat-sidenav-focus-trap\">\n  <div class=\"cdk-focus-trap-content\">\n    <nav class=\"main\">\n      <ul>\n        <li class=\"for-mobile\"><span>Welcome {{User}}</span></li>\n        <li *ngFor=\"let list of links\">\n          <a *ngIf=\"list.submenu==undefined \" [routerLink]=\"[list.path]\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" (click)=\"sidenav.close()\"><i class=\"material-icons list-icons\">{{list.icon}}</i>{{list.name}}</a>\n          <nav class=\"sub\" *ngIf=\"list.submenu!=undefined\">\n            <h6 *ngIf=\"list.submenu!=undefined\" (click)=\"submenu($event)\">{{list.name}}<i class=\"material-icons\" [hidden]=\"shown\">&#xE315;</i><i class=\"material-icons\" [hidden]=\"!shown\">&#xE313;</i></h6>\n            <ul [hidden]=\"shown\">\n              <li *ngFor=\"let menu of list.submenu\"><a [routerLink]=\"[menu.path]\" (click)=\"sidenav.close();submenu($event)\"><i class=\"material-icons list-icons\">{{menu.icon}}</i>{{menu.name}}</a></li>\n            </ul>\n          </nav>\n        </li>\n        <li class=\"for-mobile\"><a href=\"javascript:void(0)\" (click)=\"logout()\"><i class=\"material-icons list-icons\">power_settings_new</i>Logout</a></li>\n      </ul>\n    </nav>\n  </div>\n</div>\n<!--(click)=\"sidenav.close()\"-->"
+
+/***/ }),
+
+/***/ 1012:
+/***/ (function(module, exports) {
+
+module.exports = "<ng2-smart-table  [settings]=\"settings\" [source]=\"parameters\" ></ng2-smart-table>\n<button type=\"button\" md-button class=\"my-cancel-btn\" style=\"float: right\" (click)=\"dialogRef.close()\" color=\"primary\">OK</button>\n"
+
+/***/ }),
+
+/***/ 1013:
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\"> \r\n  <md-card class=\"col-10 offset-1\">\r\n    <md-card-title>\r\n      <h2>Requests</h2>\r\n    </md-card-title>\r\n    <md-card-content>\r\n      <button type=\"button\" md-raised-button class=\"my-success-btn\" (click)=\"addNewRequest()\"  color=\"primary\">New / Edit</button>\r\n      <hr>\r\n      <ng2-smart-table class=\"table table-striped table-responsive\" [settings]=\"settings\" [source]=\"data\" (infoColumn)=\"onUserRowSelect($event)\" (edit)=\"onEdit($event)\" ></ng2-smart-table>\r\n    </md-card-content>\r\n  </md-card>\r\n</div>"
+
+/***/ }),
+
+/***/ 1014:
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\n<md-card class=\"col-10 offset-1\">\n  <md-card-title>\n    <h2>Resouces</h2>\n  </md-card-title>\n  <md-card-content>\n        <ng2-smart-table class=\"table table-responsive\" [settings]=\"settings\" [source]=\"data\" (infoColumn)=\"onUserRowSelect($event)\"></ng2-smart-table>\n  </md-card-content>\n</md-card>\n</div>"
+
+/***/ }),
+
+/***/ 1015:
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  {{data.message}}\n</p>\n<button type=\"button\" md-button class=\"my-cancel-btn\" style=\"float: right\" (click)=\"dialogRef.close()\">Ok</button>"
+
+/***/ }),
+
+/***/ 1268:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(648);
+module.exports = __webpack_require__(652);
 
 
 /***/ }),
@@ -55,7 +125,7 @@ module.exports = __webpack_require__(648);
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__(33);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PopUpDialogComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -124,8 +194,8 @@ var PopUpDialogComponent = (function () {
     PopUpDialogComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-pop-up-dialog',
-            template: __webpack_require__(1002),
-            styles: [__webpack_require__(973)]
+            template: __webpack_require__(1012),
+            styles: [__webpack_require__(981)]
         }),
         __param(1, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_1__angular_material__["c" /* MD_DIALOG_DATA */])), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["d" /* MdDialogRef */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_material__["d" /* MdDialogRef */]) === 'function' && _a) || Object, Object])
@@ -137,308 +207,13 @@ var PopUpDialogComponent = (function () {
 
 /***/ }),
 
-/***/ 463:
+/***/ 277:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(90);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_material__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__service_common_service__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__success_dialog_success_dialog_component__ = __webpack_require__(473);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CreateVmComponent; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-var CreateVmComponent = (function () {
-    function CreateVmComponent(_fb, router, CS, dialog) {
-        this._fb = _fb;
-        this.router = router;
-        this.CS = CS;
-        this.dialog = dialog;
-        this.cancelFlag = true;
-        this.osList = [{ name: 'Ubuntu 8', version: 'ubuntu-8.04-desktop-amd64.iso' },
-            { name: 'Ubuntu 14', version: 'ubuntu-14.04.1-server-amd64.iso' },
-            { name: 'CentOS 7', version: 'CentOS-7-x86_64-Minimal-1611.iso' },
-            { name: 'Windows Server 64bit', version: '8250.0WIN8_X64_SERVER.ISO' }];
-        this.vmcreationForm = this._fb.group({
-            Name: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["g" /* Validators */].required],
-            description: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["g" /* Validators */].required],
-            type: ['VM', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["g" /* Validators */].required],
-            operation: ['CREATE', [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["g" /* Validators */].required]],
-            vmName: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["g" /* Validators */].required],
-            os: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["g" /* Validators */].required],
-            storage: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["g" /* Validators */].required],
-            cores: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["g" /* Validators */].required],
-            memory: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["g" /* Validators */].required],
-        });
-    }
-    CreateVmComponent.prototype.showDialog = function (msg) {
-        var _this = this;
-        var dialogRef = this.dialog.open(__WEBPACK_IMPORTED_MODULE_5__success_dialog_success_dialog_component__["a" /* SuccessDialogComponent */], {
-            data: {
-                message: "Request has been successfully " + msg
-            }
-        });
-        dialogRef.afterClosed().subscribe(function (result) {
-            _this.CS.router.navigateByUrl('home/requests');
-        });
-    };
-    CreateVmComponent.prototype.onSubmit = function () {
-        var _this = this;
-        var model = this.vmcreationForm.value;
-        this.formdata = { name: model.Name, description: model.description, type: model.type, operation: model.operation, parameters: [{ name: "vmName", value: model.vmName, type: "STRING" }, { name: "cores", value: model.cores, type: "NUMBER" }, { name: "memory", value: model.memory, type: "NUMBER" }, { name: "storage", value: model.storage, type: "NUMBER" }, { name: "os", value: model.os, type: "STRING" }] };
-        this.CS.postService('/api/v1/request', this.formdata).subscribe(function (data) {
-            var str = new String(data.message);
-            _this.Res = data;
-            if (_this.Res.status) {
-                _this.showDialog(_this.Res.data.status);
-                _this.vmcreationForm.reset();
-                _this.CS.removeStorage("createvm");
-            }
-        }, function (err) {
-            if (err.status == 401) {
-                _this.CS.showDialog(err);
-            }
-            else {
-                _this.CS.ShowErrorDialog(err);
-            }
-        }, function () { console.log("err"); });
-    };
-    CreateVmComponent.prototype.backToHome = function () {
-        this.CS.removeStorage("createvm");
-        this.router.navigateByUrl('home/requests');
-    };
-    CreateVmComponent.prototype.ngOnInit = function () {
-        this.setFormData();
-    };
-    CreateVmComponent.prototype.onlyNumberKey = function (event) {
-        var charCode = (event.which) ? event.which : event.keyCode;
-        if (charCode != 46 && charCode > 31
-            && (charCode < 48 || charCode > 57))
-            return false;
-        return true;
-    };
-    CreateVmComponent.prototype.notAllowSpaces = function (event) {
-        var charCode = (event.which) ? event.which : event.keyCode;
-        return charCode !== 32;
-    };
-    CreateVmComponent.prototype.onlyAlphabets = function (event) {
-        var regex = /^[a-zA-Z]*$/;
-        var charCode = (event.which) ? event.which : event.keyCode;
-        if (regex.test(String.fromCharCode(charCode))) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    };
-    CreateVmComponent.prototype.setFormData = function () {
-        var tempObj = {};
-        tempObj = this.CS.recievData();
-        var finalObj;
-        if (tempObj) {
-            var invt = {};
-            for (var props in tempObj["parameters"]) {
-                var temp = tempObj["parameters"][props];
-                invt[temp["name"]] = temp["value"];
-            }
-            var tto = {
-                Name: tempObj["name"] || tempObj["Name"],
-                description: tempObj["description"],
-                type: tempObj["type"],
-                operation: tempObj["operation"]
-            };
-            finalObj = Object.assign(tto, invt);
-            this.vmcreationForm.setValue(finalObj);
-            this.CS.setStorage("createvm", JSON.stringify(finalObj));
-        }
-        else if (JSON.parse(this.CS.getStorage('createvm'))) {
-            finalObj = JSON.parse(this.CS.getStorage('createvm'));
-            this.vmcreationForm.setValue(finalObj);
-            this.CS.setStorage("createvm", JSON.stringify(finalObj));
-        }
-    };
-    CreateVmComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'app-create-vm',
-            template: __webpack_require__(992),
-            styles: [__webpack_require__(963)]
-        }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_forms__["h" /* FormBuilder */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_forms__["h" /* FormBuilder */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__service_common_service__["a" /* CommonService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_4__service_common_service__["a" /* CommonService */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__angular_material__["b" /* MdDialog */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__angular_material__["b" /* MdDialog */]) === 'function' && _d) || Object])
-    ], CreateVmComponent);
-    return CreateVmComponent;
-    var _a, _b, _c, _d;
-}());
-//# sourceMappingURL=create-vm.component.js.map
-
-/***/ }),
-
-/***/ 464:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AboutComponent; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var AboutComponent = (function () {
-    function AboutComponent() {
-    }
-    AboutComponent.prototype.ngOnInit = function () {
-    };
-    AboutComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'app-about',
-            template: __webpack_require__(993),
-            styles: [__webpack_require__(964)]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], AboutComponent);
-    return AboutComponent;
-}());
-//# sourceMappingURL=about.component.js.map
-
-/***/ }),
-
-/***/ 465:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__service_common_service__ = __webpack_require__(47);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DashboardComponent; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-var DashboardComponent = (function () {
-    function DashboardComponent(CS) {
-        this.CS = CS;
-        /*"#ECEAEB",
-                  "#19C5F5"*/
-        this.colorsOverride = [{
-                backgroundColor: [
-                    "#68B6DD",
-                    "#FED403"
-                ],
-                hoverBackgroundColor: [
-                    "#68B6DD",
-                    "#FED403"
-                ]
-            }];
-        this.chartData = [];
-        this.count = [1, 2, 3, 4, 5];
-    }
-    DashboardComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.CS.getService('/api/v1/requests/inventory').subscribe(function (data) {
-            _this.drawChart(data.data);
-        }, function (err) {
-            if (err.status == 401) {
-                _this.CS.showDialog(err);
-            }
-            else {
-                _this.CS.ShowErrorDialog(err);
-            }
-        }, function () { });
-    };
-    DashboardComponent.prototype.drawChart = function (data) {
-        var labels;
-        var dataArr;
-        for (var _i = 0, data_1 = data; _i < data_1.length; _i++) {
-            var props = data_1[_i];
-            var temp = {};
-            labels = [], dataArr = [];
-            for (var prop in props) {
-                switch (prop) {
-                    case "name":
-                        temp["name"] = props[prop];
-                        break;
-                    case "available_qty":
-                    case "used_qty":
-                        /* case "total_qty":*/
-                        labels.push(prop);
-                        dataArr.push(props[prop]);
-                        break;
-                }
-            }
-            this.datasets = [
-                {
-                    data: dataArr,
-                    backgroundColor: [
-                        "#f8cb00",
-                        "#F86C6B"
-                    ],
-                    hoverBackgroundColor: [
-                        "#F9D533",
-                        "#FA9797"
-                    ]
-                }];
-            temp["label"] = labels;
-            //temp["data"] = dataArr;
-            temp["datasets"] = this.datasets;
-            temp["chart"] = "doughnut";
-            this.chartData.push(temp);
-        }
-    };
-    // events
-    DashboardComponent.prototype.chartClicked = function (e) {
-        console.log(e);
-    };
-    DashboardComponent.prototype.chartHovered = function (e) {
-        console.log(e);
-    };
-    DashboardComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'app-dashboard',
-            template: __webpack_require__(995),
-            styles: [__webpack_require__(966)]
-        }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__service_common_service__["a" /* CommonService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__service_common_service__["a" /* CommonService */]) === 'function' && _a) || Object])
-    ], DashboardComponent);
-    return DashboardComponent;
-    var _a;
-}());
-//# sourceMappingURL=dashboard.component.js.map
-
-/***/ }),
-
-/***/ 466:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__(40);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DialogComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__(33);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SuccessDialogComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -454,164 +229,30 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 
 
 
-var DialogComponent = (function () {
-    function DialogComponent(dialogRef, data) {
+var SuccessDialogComponent = (function () {
+    function SuccessDialogComponent(dialogRef, data) {
         this.dialogRef = dialogRef;
         this.data = data;
     }
-    DialogComponent.prototype.ngOnInit = function () {
+    SuccessDialogComponent.prototype.ngOnInit = function () {
     };
-    DialogComponent = __decorate([
+    SuccessDialogComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'app-dialog',
-            template: __webpack_require__(996),
-            styles: [__webpack_require__(967)]
+            selector: 'app-success-dialog',
+            template: __webpack_require__(1015),
+            styles: [__webpack_require__(984)]
         }),
         __param(1, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_1__angular_material__["c" /* MD_DIALOG_DATA */])), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["d" /* MdDialogRef */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_material__["d" /* MdDialogRef */]) === 'function' && _a) || Object, Object])
-    ], DialogComponent);
-    return DialogComponent;
+    ], SuccessDialogComponent);
+    return SuccessDialogComponent;
     var _a;
 }());
-//# sourceMappingURL=dialog.component.js.map
+//# sourceMappingURL=success-dialog.component.js.map
 
 /***/ }),
 
-/***/ 467:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__(40);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ErrorDialogComponent; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
-
-
-var ErrorDialogComponent = (function () {
-    function ErrorDialogComponent(dialogRef, data) {
-        this.dialogRef = dialogRef;
-        this.data = data;
-    }
-    ErrorDialogComponent.prototype.ngOnInit = function () {
-    };
-    ErrorDialogComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'app-error-dialog',
-            template: __webpack_require__(997),
-            styles: [__webpack_require__(968)]
-        }),
-        __param(1, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_1__angular_material__["c" /* MD_DIALOG_DATA */])), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["d" /* MdDialogRef */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_material__["d" /* MdDialogRef */]) === 'function' && _a) || Object, Object])
-    ], ErrorDialogComponent);
-    return ErrorDialogComponent;
-    var _a;
-}());
-//# sourceMappingURL=error-dialog.component.js.map
-
-/***/ }),
-
-/***/ 468:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(90);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__service_common_service__ = __webpack_require__(47);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomeComponent; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-var HomeComponent = (function () {
-    function HomeComponent(CS, router, dialog) {
-        this.CS = CS;
-        this.router = router;
-        this.dialog = dialog;
-        this.height = window.innerHeight;
-    }
-    HomeComponent.prototype.onResize = function (event) {
-        this.height = window.innerHeight;
-    };
-    HomeComponent.prototype.ngOnInit = function () {
-        this.User = this.CS.getUserName();
-    };
-    HomeComponent.prototype.logout = function () {
-        this.CS.onlogout();
-    };
-    HomeComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            template: __webpack_require__(998),
-            styles: [__webpack_require__(969)],
-            host: {
-                '(window:resize)': 'onResize($event)'
-            }
-        }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__service_common_service__["a" /* CommonService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__service_common_service__["a" /* CommonService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["b" /* MdDialog */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_material__["b" /* MdDialog */]) === 'function' && _c) || Object])
-    ], HomeComponent);
-    return HomeComponent;
-    var _a, _b, _c;
-}());
-//# sourceMappingURL=home.component.js.map
-
-/***/ }),
-
-/***/ 469:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return InventoryComponent; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var InventoryComponent = (function () {
-    function InventoryComponent() {
-    }
-    InventoryComponent.prototype.ngOnInit = function () {
-    };
-    InventoryComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'app-inventory',
-            template: __webpack_require__(999),
-            styles: [__webpack_require__(970)]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], InventoryComponent);
-    return InventoryComponent;
-}());
-//# sourceMappingURL=inventory.component.js.map
-
-/***/ }),
-
-/***/ 47:
+/***/ 43:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -619,11 +260,11 @@ var InventoryComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(73);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Subject__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Subject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Subject__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__(90);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_material__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__component_dialog_dialog_component__ = __webpack_require__(466);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__component_error_dialog_error_dialog_component__ = __webpack_require__(467);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rxjs_Rx__ = __webpack_require__(131);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_material__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__component_dialog_dialog_component__ = __webpack_require__(471);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__component_error_dialog_error_dialog_component__ = __webpack_require__(472);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rxjs_Rx__ = __webpack_require__(188);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_rxjs_Rx__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CommonService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -889,15 +530,761 @@ var CommonService = (function () {
 
 /***/ }),
 
+/***/ 464:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__form_services__ = __webpack_require__(466);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CreateVmComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var CreateVmComponent = (function () {
+    function CreateVmComponent(formService) {
+        this.formService = formService;
+    }
+    CreateVmComponent.prototype.ngOnInit = function () {
+        this.vmForms = this.formService.getForms();
+    };
+    CreateVmComponent = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'app-create-vm',
+            template: "<div>\n                  <add-forms [vmForms]=\"vmForms\"></add-forms>\n               </div>",
+            styles: [__webpack_require__(490)]
+        }), 
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__form_services__["a" /* FormService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__form_services__["a" /* FormService */]) === 'function' && _a) || Object])
+    ], CreateVmComponent);
+    return CreateVmComponent;
+    var _a;
+}());
+//# sourceMappingURL=create-vm.component.js.map
+
+/***/ }),
+
+/***/ 465:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FormDirective; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var FormDirective = (function () {
+    function FormDirective(viewContainerRef) {
+        this.viewContainerRef = viewContainerRef;
+    }
+    FormDirective = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Directive"])({
+            selector: '[form-host]',
+        }), 
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewContainerRef"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewContainerRef"]) === 'function' && _a) || Object])
+    ], FormDirective);
+    return FormDirective;
+    var _a;
+}());
+//# sourceMappingURL=form.directive.js.map
+
+/***/ }),
+
+/***/ 466:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__form_create_vm_form_component__ = __webpack_require__(467);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__form_edit_vm_form_component__ = __webpack_require__(468);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__vm_forms__ = __webpack_require__(858);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FormService; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var FormService = (function () {
+    function FormService() {
+    }
+    FormService.prototype.getForms = function () {
+        return [
+            new __WEBPACK_IMPORTED_MODULE_3__vm_forms__["a" /* VMForms */](__WEBPACK_IMPORTED_MODULE_1__form_create_vm_form_component__["a" /* CreateVMFormComponent */], { name: 'Bombasto', bio: 'Brave as they come' }),
+            new __WEBPACK_IMPORTED_MODULE_3__vm_forms__["a" /* VMForms */](__WEBPACK_IMPORTED_MODULE_2__form_edit_vm_form_component__["a" /* EditVMFormComponent */], null),
+        ];
+    };
+    FormService = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(), 
+        __metadata('design:paramtypes', [])
+    ], FormService);
+    return FormService;
+}());
+//# sourceMappingURL=form.services.js.map
+
+/***/ }),
+
+/***/ 467:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_material__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__service_common_service__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__success_dialog_success_dialog_component__ = __webpack_require__(277);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CreateVMFormComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+var CreateVMFormComponent = (function () {
+    function CreateVMFormComponent(_fb, router, CS, dialog) {
+        this._fb = _fb;
+        this.router = router;
+        this.CS = CS;
+        this.dialog = dialog;
+        this.osList = [{ name: 'Ubuntu 8', version: 'ubuntu-8.04-desktop-amd64.iso' },
+            { name: 'Ubuntu 14', version: 'ubuntu-14.04.1-server-amd64.iso' },
+            { name: 'CentOS 7', version: 'CentOS-7-x86_64-Minimal-1611.iso' },
+            { name: 'Windows Server 64bit', version: '8250.0WIN8_X64_SERVER.ISO' }];
+        this.vmcreationForm = this._fb.group({
+            Name: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["g" /* Validators */].required],
+            description: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["g" /* Validators */].required],
+            type: ['VM', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["g" /* Validators */].required],
+            operation: ['CREATE', [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["g" /* Validators */].required]],
+            vmName: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["g" /* Validators */].required],
+            os: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["g" /* Validators */].required],
+            storage: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["g" /* Validators */].required],
+            cores: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["g" /* Validators */].required],
+            memory: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["g" /* Validators */].required],
+        });
+    }
+    CreateVMFormComponent.prototype.ngOnInit = function () {
+        console.log("Create Page on init this executes first");
+    };
+    CreateVMFormComponent.prototype.showDialog = function (msg) {
+        var _this = this;
+        var dialogRef = this.dialog.open(__WEBPACK_IMPORTED_MODULE_5__success_dialog_success_dialog_component__["a" /* SuccessDialogComponent */], {
+            data: {
+                message: "Request " + msg
+            }
+        });
+        dialogRef.afterClosed().subscribe(function (result) {
+            _this.CS.router.navigateByUrl('home/requests');
+        });
+    };
+    CreateVMFormComponent.prototype.onSubmit = function () {
+        var _this = this;
+        var model = this.vmcreationForm.value;
+        this.formdata = { name: model.Name, description: model.description, type: model.type, operation: model.operation, parameters: [{ name: "vmName", value: model.vmName, type: "STRING" }, { name: "cores", value: model.cores, type: "NUMBER" }, { name: "memory", value: model.memory, type: "NUMBER" }, { name: "storage", value: model.storage, type: "NUMBER" }, { name: "os", value: model.os, type: "STRING" }] };
+        this.CS.postService('/api/v1/request', this.formdata).subscribe(function (data) {
+            var str = new String(data.message);
+            _this.Res = data;
+            if (_this.Res.status) {
+                _this.showDialog(_this.Res.data.status == "SAVED" ? "Request has been saved successfully." : _this.Res.data.status);
+                _this.vmcreationForm.reset();
+                _this.CS.removeStorage("createvm");
+            }
+        }, function (err) {
+            var res = JSON.parse(err._body);
+            if (!res.status) {
+                console.log(err);
+                _this.showDialog("" + err.status + " " + res.message + " ");
+            }
+        }, function () { });
+    };
+    CreateVMFormComponent.prototype.backToHome = function () {
+        this.CS.removeStorage("createvm");
+        this.router.navigateByUrl('home/requests');
+    };
+    CreateVMFormComponent.prototype.onlyNumberKey = function (event) {
+        var charCode = (event.which) ? event.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+            && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+    };
+    __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
+        __metadata('design:type', Object)
+    ], CreateVMFormComponent.prototype, "data", void 0);
+    CreateVMFormComponent = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            template: __webpack_require__(1001)
+        }), 
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_forms__["h" /* FormBuilder */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_forms__["h" /* FormBuilder */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* Router */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* Router */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__service_common_service__["a" /* CommonService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_4__service_common_service__["a" /* CommonService */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__angular_material__["b" /* MdDialog */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_material__["b" /* MdDialog */]) === 'function' && _d) || Object])
+    ], CreateVMFormComponent);
+    return CreateVMFormComponent;
+    var _a, _b, _c, _d;
+}());
+//# sourceMappingURL=create-vm-form.component.js.map
+
+/***/ }),
+
+/***/ 468:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_material__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__service_common_service__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__success_dialog_success_dialog_component__ = __webpack_require__(277);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EditVMFormComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+var EditVMFormComponent = (function () {
+    function EditVMFormComponent(_fb, router, CS, dialog) {
+        this._fb = _fb;
+        this.router = router;
+        this.CS = CS;
+        this.dialog = dialog;
+        this.vmeditForm = this._fb.group({
+            Name: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["g" /* Validators */].required],
+            description: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["g" /* Validators */].required],
+            vmName: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["g" /* Validators */].required],
+            storage: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["g" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_1__angular_forms__["g" /* Validators */].required, this.checkNaN])],
+            cores: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["g" /* Validators */].required],
+            memory: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["g" /* Validators */].required],
+        });
+        this.storageErr = this.vmeditForm.controls["storage"];
+    }
+    EditVMFormComponent.prototype.checkNaN = function (fieldControl) {
+        return !isNaN(fieldControl.value) ? null : { notA: true };
+    };
+    EditVMFormComponent.prototype.ngOnInit = function () {
+        this.getData();
+    };
+    EditVMFormComponent.prototype.getData = function () {
+        var _this = this;
+        this.CS.getService('/api/v1/requests/resources/edit').subscribe(function (data) {
+            var str = new String(data.msg);
+            var success = data.success;
+            var DataArray;
+            var paramArray = {};
+            var final = [];
+            if (data.status) {
+                _this.vmList = data.data;
+            }
+            else if (!status && (str.includes("Failed to authenticate token") || str.includes("no token found"))) {
+                _this.CS.onlogout();
+            }
+        }, function (err) { console.log(err); }, function () { });
+    };
+    EditVMFormComponent.prototype.onVMChange = function (event) {
+        var _this = this;
+        this.selectedVM = event;
+        this.CS.getService('/api/v1/requests/resources/' + this.selectedVM.value).subscribe(function (data) {
+            if (data.status) {
+                var invt = {};
+                var finalObj = void 0;
+                var tempObj = {};
+                tempObj = data.data;
+                for (var props in tempObj["inventory_items"]) {
+                    var temp = tempObj["inventory_items"][props];
+                    var prop_name = temp["name"] == "cpu" ? "cores" : temp["name"];
+                    invt[prop_name] = temp["qty"].toString();
+                }
+                var tto = {
+                    Name: "",
+                    description: "",
+                    vmName: _this.selectedVM.value
+                };
+                finalObj = Object.assign(tto, invt);
+                _this.vmeditForm.setValue(finalObj);
+            }
+        }, function (err) { console.log(err); }, function () { });
+    };
+    EditVMFormComponent.prototype.onSubmit = function () {
+        var _this = this;
+        var model = this.vmeditForm.value;
+        var currentVM = {};
+        for (var prop in this.vmList) {
+            var vm = this.vmList[prop];
+            if (vm.requestId == this.selectedVM.value) {
+                currentVM = vm;
+            }
+        }
+        this.formdata = {
+            name: model.Name,
+            description: model.description,
+            type: 'VM',
+            operation: 'UPDATE',
+            parameters: [
+                {
+                    name: "vmName",
+                    value: currentVM["vmName"],
+                    type: "STRING"
+                },
+                {
+                    name: "resourceId",
+                    value: currentVM["requestId"],
+                    type: "STRING"
+                },
+                {
+                    name: "vm_Id",
+                    value: currentVM["vmId"],
+                    type: "NUMBER"
+                },
+                {
+                    name: "cores",
+                    value: model.cores,
+                    type: "NUMBER"
+                },
+                {
+                    name: "memory",
+                    value: model.memory,
+                    type: "NUMBER"
+                }, {
+                    name: "storage",
+                    value: model.storage /*diskSize*/,
+                    type: "NUMBER"
+                },
+                {
+                    name: "vm_node",
+                    value: currentVM["vmNode"],
+                    type: "STRING"
+                }
+            ]
+        };
+        this.CS.postService('/api/v1/request', this.formdata).subscribe(function (data) {
+            var str = new String(data.message);
+            _this.Res = data;
+            if (_this.Res.status) {
+                _this.showDialog(_this.Res.data.status);
+                _this.vmeditForm.reset();
+            }
+        }, function (err) {
+            var res = JSON.parse(err._body);
+            if (!res.status) {
+                console.log(err);
+                _this.showDialog("" + err.status + " " + res.message + " ");
+            }
+        });
+    };
+    EditVMFormComponent.prototype.backToHome = function () {
+        this.CS.removeStorage("createvm");
+        this.router.navigateByUrl('home/requests');
+    };
+    EditVMFormComponent.prototype.showDialog = function (msg) {
+        var _this = this;
+        var dialogRef = this.dialog.open(__WEBPACK_IMPORTED_MODULE_5__success_dialog_success_dialog_component__["a" /* SuccessDialogComponent */], {
+            data: {
+                message: "Request " + msg
+            }
+        });
+        dialogRef.afterClosed().subscribe(function (result) {
+            _this.CS.router.navigateByUrl('home/requests');
+        });
+    };
+    EditVMFormComponent.prototype.onlyNumberKey = function (event) {
+        var charCode = (event.which) ? event.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+            && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+    };
+    __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
+        __metadata('design:type', Object)
+    ], EditVMFormComponent.prototype, "data", void 0);
+    EditVMFormComponent = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            template: __webpack_require__(1002)
+        }), 
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_forms__["h" /* FormBuilder */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_forms__["h" /* FormBuilder */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* Router */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* Router */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__service_common_service__["a" /* CommonService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_4__service_common_service__["a" /* CommonService */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__angular_material__["b" /* MdDialog */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_material__["b" /* MdDialog */]) === 'function' && _d) || Object])
+    ], EditVMFormComponent);
+    return EditVMFormComponent;
+    var _a, _b, _c, _d;
+}());
+//# sourceMappingURL=edit-vm-form.component.js.map
+
+/***/ }),
+
+/***/ 469:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AboutComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var AboutComponent = (function () {
+    function AboutComponent() {
+    }
+    AboutComponent.prototype.ngOnInit = function () {
+    };
+    AboutComponent = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'app-about',
+            template: __webpack_require__(1003),
+            styles: [__webpack_require__(972)]
+        }), 
+        __metadata('design:paramtypes', [])
+    ], AboutComponent);
+    return AboutComponent;
+}());
+//# sourceMappingURL=about.component.js.map
+
+/***/ }),
+
 /***/ 470:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__service_common_service__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__(90);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Rx__ = __webpack_require__(131);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__service_common_service__ = __webpack_require__(43);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DashboardComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var DashboardComponent = (function () {
+    function DashboardComponent(CS) {
+        this.CS = CS;
+        /*
+                   "#68B6DD",
+                  "#FED403"*/
+        this.colorsOverride = [{
+                backgroundColor: [
+                    "#ECEAEB",
+                    "#3F51B5"
+                ],
+                hoverBackgroundColor: [
+                    "#ECEAEB",
+                    "#3F51B5"
+                ]
+            }];
+        this.chartData = [];
+        this.count = [1, 2, 3, 4, 5];
+    }
+    DashboardComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.CS.getService('/api/v1/requests/inventory').subscribe(function (data) {
+            _this.drawChart(data.data);
+        }, function (err) {
+            if (err.status == 401) {
+                _this.CS.showDialog(err);
+            }
+            else {
+                _this.CS.ShowErrorDialog(err);
+            }
+        }, function () { });
+    };
+    DashboardComponent.prototype.drawChart = function (data) {
+        var labels;
+        var dataArr;
+        for (var _i = 0, data_1 = data; _i < data_1.length; _i++) {
+            var props = data_1[_i];
+            var temp = {};
+            labels = [], dataArr = [];
+            for (var prop in props) {
+                switch (prop) {
+                    case "name":
+                        temp["name"] = props[prop];
+                        break;
+                    case "available_qty":
+                    case "used_qty":
+                        /* case "total_qty":*/
+                        labels.push(prop);
+                        dataArr.push(props[prop]);
+                        break;
+                }
+            }
+            this.datasets = [
+                {
+                    data: dataArr,
+                    backgroundColor: [
+                        "#f8cb00",
+                        "#F86C6B"
+                    ],
+                    hoverBackgroundColor: [
+                        "#F9D533",
+                        "#FA9797"
+                    ]
+                }];
+            temp["label"] = labels;
+            //temp["data"] = dataArr;
+            temp["datasets"] = this.datasets;
+            temp["chart"] = "doughnut";
+            this.chartData.push(temp);
+        }
+    };
+    // events
+    DashboardComponent.prototype.chartClicked = function (e) {
+        console.log(e);
+    };
+    DashboardComponent.prototype.chartHovered = function (e) {
+        console.log(e);
+    };
+    DashboardComponent = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'app-dashboard',
+            template: __webpack_require__(1005),
+            styles: [__webpack_require__(974)]
+        }), 
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__service_common_service__["a" /* CommonService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__service_common_service__["a" /* CommonService */]) === 'function' && _a) || Object])
+    ], DashboardComponent);
+    return DashboardComponent;
+    var _a;
+}());
+//# sourceMappingURL=dashboard.component.js.map
+
+/***/ }),
+
+/***/ 471:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__(33);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DialogComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+
+
+
+var DialogComponent = (function () {
+    function DialogComponent(dialogRef, data) {
+        this.dialogRef = dialogRef;
+        this.data = data;
+    }
+    DialogComponent.prototype.ngOnInit = function () {
+    };
+    DialogComponent = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'app-dialog',
+            template: __webpack_require__(1006),
+            styles: [__webpack_require__(975)]
+        }),
+        __param(1, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_1__angular_material__["c" /* MD_DIALOG_DATA */])), 
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["d" /* MdDialogRef */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_material__["d" /* MdDialogRef */]) === 'function' && _a) || Object, Object])
+    ], DialogComponent);
+    return DialogComponent;
+    var _a;
+}());
+//# sourceMappingURL=dialog.component.js.map
+
+/***/ }),
+
+/***/ 472:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__(33);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ErrorDialogComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+
+
+var ErrorDialogComponent = (function () {
+    function ErrorDialogComponent(dialogRef, data) {
+        this.dialogRef = dialogRef;
+        this.data = data;
+    }
+    ErrorDialogComponent.prototype.ngOnInit = function () {
+    };
+    ErrorDialogComponent = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'app-error-dialog',
+            template: __webpack_require__(1007),
+            styles: [__webpack_require__(976)]
+        }),
+        __param(1, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_1__angular_material__["c" /* MD_DIALOG_DATA */])), 
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["d" /* MdDialogRef */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_material__["d" /* MdDialogRef */]) === 'function' && _a) || Object, Object])
+    ], ErrorDialogComponent);
+    return ErrorDialogComponent;
+    var _a;
+}());
+//# sourceMappingURL=error-dialog.component.js.map
+
+/***/ }),
+
+/***/ 473:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__service_common_service__ = __webpack_require__(43);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomeComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var HomeComponent = (function () {
+    function HomeComponent(CS, router, dialog) {
+        this.CS = CS;
+        this.router = router;
+        this.dialog = dialog;
+        this.height = window.innerHeight;
+    }
+    HomeComponent.prototype.onResize = function (event) {
+        this.height = window.innerHeight;
+    };
+    HomeComponent.prototype.ngOnInit = function () {
+        this.User = this.CS.getUserName();
+    };
+    HomeComponent.prototype.logout = function () {
+        this.CS.onlogout();
+    };
+    HomeComponent.prototype.showHideMenu = function () {
+        return false;
+    };
+    HomeComponent = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            template: __webpack_require__(1008),
+            styles: [__webpack_require__(977)],
+            host: {
+                '(window:resize)': 'onResize($event)'
+            }
+        }), 
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__service_common_service__["a" /* CommonService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__service_common_service__["a" /* CommonService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["b" /* MdDialog */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_material__["b" /* MdDialog */]) === 'function' && _c) || Object])
+    ], HomeComponent);
+    return HomeComponent;
+    var _a, _b, _c;
+}());
+//# sourceMappingURL=home.component.js.map
+
+/***/ }),
+
+/***/ 474:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return InventoryComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var InventoryComponent = (function () {
+    function InventoryComponent() {
+    }
+    InventoryComponent.prototype.ngOnInit = function () {
+    };
+    InventoryComponent = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'app-inventory',
+            template: __webpack_require__(1009),
+            styles: [__webpack_require__(978)]
+        }), 
+        __metadata('design:paramtypes', [])
+    ], InventoryComponent);
+    return InventoryComponent;
+}());
+//# sourceMappingURL=inventory.component.js.map
+
+/***/ }),
+
+/***/ 475:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__service_common_service__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Rx__ = __webpack_require__(188);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_Rx__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -954,8 +1341,8 @@ var LoginComponent = (function () {
     LoginComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-login',
-            template: __webpack_require__(1000),
-            styles: [__webpack_require__(971)]
+            template: __webpack_require__(1010),
+            styles: [__webpack_require__(979)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__angular_forms__["h" /* FormBuilder */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_forms__["h" /* FormBuilder */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__service_common_service__["a" /* CommonService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__service_common_service__["a" /* CommonService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* Router */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* Router */]) === 'function' && _c) || Object])
     ], LoginComponent);
@@ -966,17 +1353,18 @@ var LoginComponent = (function () {
 
 /***/ }),
 
-/***/ 471:
+/***/ 476:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__service_common_service__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_smart_table__ = __webpack_require__(300);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__service_common_service__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_smart_table__ = __webpack_require__(301);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_smart_table___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_ng2_smart_table__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_material__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_material__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pop_up_dialog_pop_up_dialog_component__ = __webpack_require__(276);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_platform_browser__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_platform_browser__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__request_data__ = __webpack_require__(862);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RequestComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -993,6 +1381,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var RequestComponent = (function () {
     function RequestComponent(CS, dialog, DS, element) {
         var _this = this;
@@ -1000,7 +1389,9 @@ var RequestComponent = (function () {
         this.dialog = dialog;
         this.DS = DS;
         this.element = element;
-        this.input = '<i class="material-icons pointer" (click)="onUserRowSelect()">info</i>';
+        //data: LocalDataSource;
+        this.data = __WEBPACK_IMPORTED_MODULE_6__request_data__["a" /* requestData */].data;
+        this.data = new __WEBPACK_IMPORTED_MODULE_2_ng2_smart_table__["LocalDataSource"]();
         this.settings = {
             edit: {
                 confirmSave: true
@@ -1022,12 +1413,14 @@ var RequestComponent = (function () {
                     title: 'Status'
                 },
                 createdOn: {
-                    title: 'Created On'
+                    title: 'Created On',
+                    sortDirection: 'desc'
                 },
-                Info: {
+                Actions: {
                     title: 'Info',
                     type: 'html',
-                    valuePrepareFunction: function (value) { return _this.DS.bypassSecurityTrustHtml(_this.input); }
+                    valuePrepareFunction: function (value) { return _this.DS.bypassSecurityTrustHtml('<i appInfo class="material-icons pointer" >info</i>'); },
+                    filter: false
                 }
             },
             actions: {
@@ -1039,31 +1432,15 @@ var RequestComponent = (function () {
                 display: true
             },
             mode: 'external',
-            editor: {
-                type: 'checkbox',
-                config: {
-                    true: true,
-                    false: false
-                }
-            }
         };
     }
     RequestComponent.prototype.getData = function () {
         var _this = this;
         this.CS.getService('/api/v1/request').subscribe(function (data) {
-            var str = new String(data.msg);
-            var success = data.success;
             var DataArray;
-            var paramArray = {};
-            var final = [];
             if (data.status) {
-                _this.Requestdata = [];
                 DataArray = data.data;
-                _this.data = new __WEBPACK_IMPORTED_MODULE_2_ng2_smart_table__["LocalDataSource"]();
                 _this.data.load(DataArray);
-            }
-            else if (!status && (str.includes("Failed to authenticate token") || str.includes("no token found")) /*(str.indexOf("Failed to authenticate token")>-1||str.indexOf("no token found"))*/) {
-                _this.CS.onlogout();
             }
         }, function (err) {
             console.log(err);
@@ -1076,7 +1453,6 @@ var RequestComponent = (function () {
         }, function () { });
     };
     RequestComponent.prototype.ngOnInit = function () {
-        //this.CS.isLoggedIn();
         this.getData();
     };
     RequestComponent.prototype.onEdit = function (event) {
@@ -1099,8 +1475,8 @@ var RequestComponent = (function () {
     RequestComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-request',
-            template: __webpack_require__(1003),
-            styles: [__webpack_require__(974)]
+            template: __webpack_require__(1013),
+            styles: [__webpack_require__(982)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__service_common_service__["a" /* CommonService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__service_common_service__["a" /* CommonService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_material__["b" /* MdDialog */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__angular_material__["b" /* MdDialog */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_5__angular_platform_browser__["e" /* DomSanitizer */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_5__angular_platform_browser__["e" /* DomSanitizer */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === 'function' && _d) || Object])
     ], RequestComponent);
@@ -1111,16 +1487,16 @@ var RequestComponent = (function () {
 
 /***/ }),
 
-/***/ 472:
+/***/ 477:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__service_common_service__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_smart_table__ = __webpack_require__(300);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__service_common_service__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_smart_table__ = __webpack_require__(301);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_smart_table___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_ng2_smart_table__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_material__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_material__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pop_up_dialog_pop_up_dialog_component__ = __webpack_require__(276);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ResourcesComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1162,16 +1538,18 @@ var ResourcesComponent = (function () {
                     editable: false
                 },
                 createdAt: {
-                    title: "Created At"
+                    title: "Created At",
+                    sortDirection: 'desc'
                 },
                 status: {
                     title: "Status",
                     editable: false
                 },
-                Info: {
+                Actions: {
                     title: 'Info',
                     type: 'html',
-                    valuePrepareFunction: function (value) { return _this.DS.bypassSecurityTrustHtml(_this.input); }
+                    valuePrepareFunction: function (value) { return _this.DS.bypassSecurityTrustHtml('<i appInfo class="material-icons pointer" >info</i>'); },
+                    filter: false
                 }
             },
             actions: {
@@ -1180,13 +1558,17 @@ var ResourcesComponent = (function () {
                 delete: false
             },
             pager: {
-                display: true
+                display: true,
+                perPage: 10
             }, edit: {
                 confirmSave: true
             }
         };
+        this.data = new __WEBPACK_IMPORTED_MODULE_2_ng2_smart_table__["LocalDataSource"]();
+    }
+    ResourcesComponent.prototype.getResourceList = function () {
+        var _this = this;
         this.CS.getService('/api/v1/requests/resources').subscribe(function (data) {
-            _this.data = new __WEBPACK_IMPORTED_MODULE_2_ng2_smart_table__["LocalDataSource"]();
             _this.data.load(data.data);
         }, function (err) {
             if (err.status == 401) {
@@ -1196,12 +1578,12 @@ var ResourcesComponent = (function () {
                 _this.CS.ShowErrorDialog(err);
             }
         });
-    }
+    };
     ResourcesComponent.prototype.ngOnInit = function () {
+        this.getResourceList();
     };
     ResourcesComponent.prototype.onUserRowSelect = function (event) {
         var data = event.data;
-        console.log(data);
         this.showPopup(data.inventory_items, data.additionalInfo);
     };
     ResourcesComponent.prototype.showPopup = function (data, additionalInfo) {
@@ -1215,8 +1597,8 @@ var ResourcesComponent = (function () {
     ResourcesComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-resources',
-            template: __webpack_require__(1004),
-            styles: [__webpack_require__(975)]
+            template: __webpack_require__(1014),
+            styles: [__webpack_require__(983)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__service_common_service__["a" /* CommonService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__service_common_service__["a" /* CommonService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__angular_material__["b" /* MdDialog */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_4__angular_material__["b" /* MdDialog */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser__["e" /* DomSanitizer */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser__["e" /* DomSanitizer */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === 'function' && _d) || Object])
     ], ResourcesComponent);
@@ -1227,58 +1609,13 @@ var ResourcesComponent = (function () {
 
 /***/ }),
 
-/***/ 473:
+/***/ 478:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__(40);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SuccessDialogComponent; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
-
-
-
-var SuccessDialogComponent = (function () {
-    function SuccessDialogComponent(dialogRef, data) {
-        this.dialogRef = dialogRef;
-        this.data = data;
-    }
-    SuccessDialogComponent.prototype.ngOnInit = function () {
-    };
-    SuccessDialogComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'app-success-dialog',
-            template: __webpack_require__(1005),
-            styles: [__webpack_require__(976)]
-        }),
-        __param(1, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_1__angular_material__["c" /* MD_DIALOG_DATA */])), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["d" /* MdDialogRef */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_material__["d" /* MdDialogRef */]) === 'function' && _a) || Object, Object])
-    ], SuccessDialogComponent);
-    return SuccessDialogComponent;
-    var _a;
-}());
-//# sourceMappingURL=success-dialog.component.js.map
-
-/***/ }),
-
-/***/ 474:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(90);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_service__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_service__ = __webpack_require__(43);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthgaurdService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1311,7 +1648,25 @@ var AuthgaurdService = (function () {
 
 /***/ }),
 
-/***/ 647:
+/***/ 490:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(12)();
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 651:
 /***/ (function(module, exports) {
 
 function webpackEmptyContext(req) {
@@ -1320,20 +1675,20 @@ function webpackEmptyContext(req) {
 webpackEmptyContext.keys = function() { return []; };
 webpackEmptyContext.resolve = webpackEmptyContext;
 module.exports = webpackEmptyContext;
-webpackEmptyContext.id = 647;
+webpackEmptyContext.id = 651;
 
 
 /***/ }),
 
-/***/ 648:
+/***/ 652:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__(773);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_app_module__ = __webpack_require__(852);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(856);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__(777);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_app_module__ = __webpack_require__(856);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(864);
 
 
 
@@ -1346,7 +1701,7 @@ __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dyna
 
 /***/ }),
 
-/***/ 851:
+/***/ 855:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1369,8 +1724,8 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-root',
-            template: __webpack_require__(991),
-            styles: [__webpack_require__(977)]
+            template: __webpack_require__(999),
+            styles: [__webpack_require__(985)]
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
@@ -1380,41 +1735,47 @@ var AppComponent = (function () {
 
 /***/ }),
 
-/***/ 852:
+/***/ 856:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(73);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_material__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ng2_charts_ng2_charts__ = __webpack_require__(984);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_material__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ng2_charts_ng2_charts__ = __webpack_require__(992);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ng2_charts_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_ng2_charts_ng2_charts__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ng2_smart_table__ = __webpack_require__(300);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ng2_smart_table__ = __webpack_require__(301);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ng2_smart_table___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_ng2_smart_table__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_hammerjs__ = __webpack_require__(978);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_hammerjs__ = __webpack_require__(986);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_hammerjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_hammerjs__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_chart_js__ = __webpack_require__(859);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_chart_js__ = __webpack_require__(867);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_chart_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_chart_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__app_route__ = __webpack_require__(853);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__app_component__ = __webpack_require__(851);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__component_login_login_component__ = __webpack_require__(470);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__component_home_home_component__ = __webpack_require__(468);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__component_VM_create_vm_create_vm_component__ = __webpack_require__(463);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__component_about_about_component__ = __webpack_require__(464);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__service_common_service__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__component_nav_nav_component__ = __webpack_require__(855);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__component_dashboard_dashboard_component__ = __webpack_require__(465);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__component_request_request_component__ = __webpack_require__(471);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__component_resources_resources_component__ = __webpack_require__(472);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__component_dialog_dialog_component__ = __webpack_require__(466);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__component_inventory_inventory_component__ = __webpack_require__(469);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__component_construction_construction_component__ = __webpack_require__(854);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__component_success_dialog_success_dialog_component__ = __webpack_require__(473);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__app_route__ = __webpack_require__(857);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__app_component__ = __webpack_require__(855);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__component_login_login_component__ = __webpack_require__(475);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__component_home_home_component__ = __webpack_require__(473);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__component_VM_create_vm_create_vm_component__ = __webpack_require__(464);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__component_about_about_component__ = __webpack_require__(469);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__service_common_service__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__component_nav_nav_component__ = __webpack_require__(861);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__component_dashboard_dashboard_component__ = __webpack_require__(470);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__component_request_request_component__ = __webpack_require__(476);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__component_resources_resources_component__ = __webpack_require__(477);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__component_dialog_dialog_component__ = __webpack_require__(471);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__component_inventory_inventory_component__ = __webpack_require__(474);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__component_construction_construction_component__ = __webpack_require__(860);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__component_success_dialog_success_dialog_component__ = __webpack_require__(277);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__component_pop_up_dialog_pop_up_dialog_component__ = __webpack_require__(276);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__service_authgaurd_service__ = __webpack_require__(474);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__component_error_dialog_error_dialog_component__ = __webpack_require__(467);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__service_authgaurd_service__ = __webpack_require__(478);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__component_error_dialog_error_dialog_component__ = __webpack_require__(472);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__shared_info_directive__ = __webpack_require__(863);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__component_VM_create_vm_vmoperation_form_component__ = __webpack_require__(859);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__component_VM_create_vm_form_create_vm_form_component__ = __webpack_require__(467);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__component_VM_create_vm_form_edit_vm_form_component__ = __webpack_require__(468);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__component_VM_create_vm_form_directive__ = __webpack_require__(465);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__component_VM_create_vm_form_services__ = __webpack_require__(466);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1425,6 +1786,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
+
+
+
+
+
 
 
 
@@ -1472,7 +1839,11 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_22__component_construction_construction_component__["a" /* ConstructionComponent */],
                 __WEBPACK_IMPORTED_MODULE_23__component_success_dialog_success_dialog_component__["a" /* SuccessDialogComponent */],
                 __WEBPACK_IMPORTED_MODULE_24__component_pop_up_dialog_pop_up_dialog_component__["a" /* PopUpDialogComponent */],
-                __WEBPACK_IMPORTED_MODULE_26__component_error_dialog_error_dialog_component__["a" /* ErrorDialogComponent */]
+                __WEBPACK_IMPORTED_MODULE_26__component_error_dialog_error_dialog_component__["a" /* ErrorDialogComponent */],
+                __WEBPACK_IMPORTED_MODULE_27__shared_info_directive__["a" /* InfoDirective */], __WEBPACK_IMPORTED_MODULE_28__component_VM_create_vm_vmoperation_form_component__["a" /* VMOperationFormComponent */],
+                __WEBPACK_IMPORTED_MODULE_29__component_VM_create_vm_form_create_vm_form_component__["a" /* CreateVMFormComponent */],
+                __WEBPACK_IMPORTED_MODULE_30__component_VM_create_vm_form_edit_vm_form_component__["a" /* EditVMFormComponent */],
+                __WEBPACK_IMPORTED_MODULE_31__component_VM_create_vm_form_directive__["a" /* FormDirective */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -1485,9 +1856,9 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_6_ng2_smart_table__["Ng2SmartTableModule"]
             ],
             entryComponents: [
-                __WEBPACK_IMPORTED_MODULE_20__component_dialog_dialog_component__["a" /* DialogComponent */], __WEBPACK_IMPORTED_MODULE_23__component_success_dialog_success_dialog_component__["a" /* SuccessDialogComponent */], __WEBPACK_IMPORTED_MODULE_24__component_pop_up_dialog_pop_up_dialog_component__["a" /* PopUpDialogComponent */], __WEBPACK_IMPORTED_MODULE_26__component_error_dialog_error_dialog_component__["a" /* ErrorDialogComponent */]
+                __WEBPACK_IMPORTED_MODULE_20__component_dialog_dialog_component__["a" /* DialogComponent */], __WEBPACK_IMPORTED_MODULE_23__component_success_dialog_success_dialog_component__["a" /* SuccessDialogComponent */], __WEBPACK_IMPORTED_MODULE_24__component_pop_up_dialog_pop_up_dialog_component__["a" /* PopUpDialogComponent */], __WEBPACK_IMPORTED_MODULE_26__component_error_dialog_error_dialog_component__["a" /* ErrorDialogComponent */], __WEBPACK_IMPORTED_MODULE_29__component_VM_create_vm_form_create_vm_form_component__["a" /* CreateVMFormComponent */], __WEBPACK_IMPORTED_MODULE_30__component_VM_create_vm_form_edit_vm_form_component__["a" /* EditVMFormComponent */]
             ],
-            providers: [__WEBPACK_IMPORTED_MODULE_15__service_common_service__["a" /* CommonService */], __WEBPACK_IMPORTED_MODULE_25__service_authgaurd_service__["a" /* AuthgaurdService */]],
+            providers: [__WEBPACK_IMPORTED_MODULE_15__service_common_service__["a" /* CommonService */], __WEBPACK_IMPORTED_MODULE_25__service_authgaurd_service__["a" /* AuthgaurdService */], __WEBPACK_IMPORTED_MODULE_32__component_VM_create_vm_form_services__["a" /* FormService */]],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_10__app_component__["a" /* AppComponent */]]
         }), 
         __metadata('design:paramtypes', [])
@@ -1498,20 +1869,20 @@ var AppModule = (function () {
 
 /***/ }),
 
-/***/ 853:
+/***/ 857:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__component_home_home_component__ = __webpack_require__(468);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(90);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__component_about_about_component__ = __webpack_require__(464);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__component_login_login_component__ = __webpack_require__(470);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__component_VM_create_vm_create_vm_component__ = __webpack_require__(463);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__component_dashboard_dashboard_component__ = __webpack_require__(465);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__component_request_request_component__ = __webpack_require__(471);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__component_resources_resources_component__ = __webpack_require__(472);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__component_inventory_inventory_component__ = __webpack_require__(469);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__service_authgaurd_service__ = __webpack_require__(474);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__component_home_home_component__ = __webpack_require__(473);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__component_about_about_component__ = __webpack_require__(469);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__component_login_login_component__ = __webpack_require__(475);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__component_VM_create_vm_create_vm_component__ = __webpack_require__(464);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__component_dashboard_dashboard_component__ = __webpack_require__(470);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__component_request_request_component__ = __webpack_require__(476);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__component_resources_resources_component__ = __webpack_require__(477);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__component_inventory_inventory_component__ = __webpack_require__(474);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__service_authgaurd_service__ = __webpack_require__(478);
 /* unused harmony export ROUTES */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ROUTING; });
 
@@ -1547,7 +1918,119 @@ var ROUTING = __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule 
 
 /***/ }),
 
-/***/ 854:
+/***/ 858:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return VMForms; });
+var VMForms = (function () {
+    function VMForms(component, data) {
+        this.component = component;
+        this.data = data;
+    }
+    return VMForms;
+}());
+//# sourceMappingURL=vm.forms.js.map
+
+/***/ }),
+
+/***/ 859:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__form_directive__ = __webpack_require__(465);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return VMOperationFormComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var VMOperationFormComponent = (function () {
+    function VMOperationFormComponent(_componentFactoryResolver, _fb) {
+        this._componentFactoryResolver = _componentFactoryResolver;
+        this._fb = _fb;
+        this.currentFormIndex = -1;
+        this.operationList = [{ name: 'Create', value: 'CREATE' },
+            { name: 'Edit', value: 'UPDATE' }];
+        this.vmcreationForm = this._fb.group({
+            Name: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["g" /* Validators */].required],
+            description: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["g" /* Validators */].required],
+            type: ['VM', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["g" /* Validators */].required],
+            operation: ['CREATE', [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["g" /* Validators */].required]],
+            vmName: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["g" /* Validators */].required],
+            os: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["g" /* Validators */].required],
+            storage: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["g" /* Validators */].required],
+            cores: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["g" /* Validators */].required],
+            memory: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["g" /* Validators */].required],
+        });
+    }
+    VMOperationFormComponent.prototype.ngAfterContentInit = function () {
+        this.loadComponent(0);
+    };
+    VMOperationFormComponent.prototype.ngAfterViewInit = function () {
+        // For Now Nothing to do here 
+    };
+    VMOperationFormComponent.prototype.ngOnDestroy = function () {
+        // For Now Nothing to do here 
+    };
+    VMOperationFormComponent.prototype.loadComponent = function (_index) {
+        var index = _index;
+        //this.currentAddIndex = (this.currentAddIndex + 1) % this.ads.length;
+        this.currentFormIndex = index;
+        var adItem = this.vmForms[this.currentFormIndex];
+        var componentFactory = this._componentFactoryResolver.resolveComponentFactory(adItem.component);
+        var viewContainerRef = this.formHost.viewContainerRef;
+        viewContainerRef.clear();
+        var componentRef = viewContainerRef.createComponent(componentFactory);
+        componentRef.instance.data = adItem.data;
+    };
+    VMOperationFormComponent.prototype.onOperationChange = function (event) {
+        var selectedOperation = event;
+        switch (selectedOperation) {
+            case "CREATE":
+                this.loadComponent(0);
+                break;
+            case "UPDATE":
+                this.loadComponent(1);
+                break;
+            default:
+                console.log("Throw Error");
+                break;
+        }
+    };
+    __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
+        __metadata('design:type', Array)
+    ], VMOperationFormComponent.prototype, "vmForms", void 0);
+    __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_2__form_directive__["a" /* FormDirective */]), 
+        __metadata('design:type', (typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__form_directive__["a" /* FormDirective */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__form_directive__["a" /* FormDirective */]) === 'function' && _a) || Object)
+    ], VMOperationFormComponent.prototype, "formHost", void 0);
+    VMOperationFormComponent = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'add-forms',
+            template: __webpack_require__(1000),
+            styles: [__webpack_require__(490)]
+        }), 
+        __metadata('design:paramtypes', [(typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ComponentFactoryResolver"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ComponentFactoryResolver"]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__angular_forms__["h" /* FormBuilder */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_forms__["h" /* FormBuilder */]) === 'function' && _c) || Object])
+    ], VMOperationFormComponent);
+    return VMOperationFormComponent;
+    var _a, _b, _c;
+}());
+//# sourceMappingURL=vmoperation-form.component.js.map
+
+/***/ }),
+
+/***/ 860:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1571,8 +2054,8 @@ var ConstructionComponent = (function () {
     ConstructionComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-construction',
-            template: __webpack_require__(994),
-            styles: [__webpack_require__(965)]
+            template: __webpack_require__(1004),
+            styles: [__webpack_require__(973)]
         }), 
         __metadata('design:paramtypes', [])
     ], ConstructionComponent);
@@ -1582,12 +2065,12 @@ var ConstructionComponent = (function () {
 
 /***/ }),
 
-/***/ 855:
+/***/ 861:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__service_common_service__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__service_common_service__ = __webpack_require__(43);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NavComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1637,8 +2120,8 @@ var NavComponent = (function () {
     NavComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-nav',
-            template: __webpack_require__(1001),
-            styles: [__webpack_require__(972)]
+            template: __webpack_require__(1011),
+            styles: [__webpack_require__(980)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__service_common_service__["a" /* CommonService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__service_common_service__["a" /* CommonService */]) === 'function' && _a) || Object])
     ], NavComponent);
@@ -1656,7 +2139,3109 @@ var NavComponent = (function () {
 
 /***/ }),
 
-/***/ 856:
+/***/ 862:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return requestData; });
+var requestData = {
+    "status": true,
+    "data": [
+        {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        }, {
+            "_id": "58dcaa5f6e764d0ac43bdd4c",
+            "resourceId": "58dcaa5f6e764d0ac43bdd52",
+            "jobId": "58dcaa5f6e764d0ac43bdd5c",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd51"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd50"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4f"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa5f6e764d0ac43bdd4e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa5f6e764d0ac43bdd4d"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:03.842Z"
+        },
+        {
+            "_id": "58dcaa7a6e764d0ac43bdd77",
+            "resourceId": "58dcaa7a6e764d0ac43bdd7d",
+            "jobId": "58dcaa7a6e764d0ac43bdd87",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM001",
+                    "type": "STRING",
+                    "_id": "58dcaa7a6e764d0ac43bdd7c"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dcaa7a6e764d0ac43bdd7b"
+                },
+                {
+                    "name": "memory",
+                    "value": "1024",
+                    "type": "NUMBER",
+                    "_id": "58dcaa7a6e764d0ac43bdd7a"
+                },
+                {
+                    "name": "storage",
+                    "value": "30",
+                    "type": "NUMBER",
+                    "_id": "58dcaa7a6e764d0ac43bdd79"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dcaa7a6e764d0ac43bdd78"
+                }
+            ],
+            "createdOn": "2017-03-30T06:49:30.242Z"
+        },
+        {
+            "_id": "58dce31cf8b2a8201803172a",
+            "resourceId": "58dce31cf8b2a82018031730",
+            "jobId": "58dce31cf8b2a8201803173a",
+            "name": "NeeleshVM001",
+            "type": "VM",
+            "operation": "UPDATE",
+            "description": "Edit Operation",
+            "requestedBy": "admin1",
+            "status": "SAVED",
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vm_Id",
+                    "value": "111",
+                    "type": "NUMBER",
+                    "_id": "58dce31cf8b2a8201803172f"
+                },
+                {
+                    "name": "vm_node",
+                    "value": "pve",
+                    "type": "STRING",
+                    "_id": "58dce31cf8b2a8201803172e"
+                },
+                {
+                    "name": "cores",
+                    "value": "2",
+                    "type": "NUMBER",
+                    "_id": "58dce31cf8b2a8201803172d"
+                },
+                {
+                    "name": "memory",
+                    "value": "512",
+                    "type": "NUMBER",
+                    "_id": "58dce31cf8b2a8201803172c"
+                },
+                {
+                    "name": "storage",
+                    "value": "10",
+                    "type": "NUMBER",
+                    "_id": "58dce31cf8b2a8201803172b"
+                }
+            ],
+            "createdOn": "2017-03-30T10:51:08.321Z"
+        },
+        {
+            "_id": "58dd05a455112423308fa978",
+            "resourceId": "58dd05a455112423308fa97e",
+            "jobId": "58dd05a455112423308fa988",
+            "name": "Neelesh",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "vm 0003",
+            "requestedBy": "admin",
+            "status": "SAVED",
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "vm0003",
+                    "type": "STRING",
+                    "_id": "58dd05a455112423308fa97d"
+                },
+                {
+                    "name": "cores",
+                    "value": "1",
+                    "type": "NUMBER",
+                    "_id": "58dd05a455112423308fa97c"
+                },
+                {
+                    "name": "memory",
+                    "value": "10",
+                    "type": "NUMBER",
+                    "_id": "58dd05a455112423308fa97b"
+                },
+                {
+                    "name": "storage",
+                    "value": "10",
+                    "type": "NUMBER",
+                    "_id": "58dd05a455112423308fa97a"
+                },
+                {
+                    "name": "os",
+                    "value": "8250.0WIN8_X64_SERVER.ISO",
+                    "type": "STRING",
+                    "_id": "58dd05a455112423308fa979"
+                }
+            ],
+            "createdOn": "2017-03-30T13:18:28.542Z"
+        },
+        {
+            "_id": "58dd06b255112423308fa9a4",
+            "resourceId": "58dd06b255112423308fa9aa",
+            "jobId": "58dd06b255112423308fa9b4",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SAVED",
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM333",
+                    "type": "STRING",
+                    "_id": "58dd06b255112423308fa9a9"
+                },
+                {
+                    "name": "cores",
+                    "value": "1",
+                    "type": "NUMBER",
+                    "_id": "58dd06b255112423308fa9a8"
+                },
+                {
+                    "name": "memory",
+                    "value": "1",
+                    "type": "NUMBER",
+                    "_id": "58dd06b255112423308fa9a7"
+                },
+                {
+                    "name": "storage",
+                    "value": "1",
+                    "type": "NUMBER",
+                    "_id": "58dd06b255112423308fa9a6"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58dd06b255112423308fa9a5"
+                }
+            ],
+            "createdOn": "2017-03-30T13:22:58.928Z"
+        },
+        {
+            "_id": "58ddec5849cab51a14a2c451",
+            "resourceId": "58ddec5849cab51a14a2c457",
+            "jobId": "58ddec5849cab51a14a2c461",
+            "name": "Neelesh1",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "Neelesh 1 Desc",
+            "requestedBy": "admin",
+            "status": "FAILED",
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "Neelesh1",
+                    "type": "STRING",
+                    "_id": "58ddec5849cab51a14a2c456"
+                },
+                {
+                    "name": "cores",
+                    "value": "1",
+                    "type": "NUMBER",
+                    "_id": "58ddec5849cab51a14a2c455"
+                },
+                {
+                    "name": "memory",
+                    "value": "10",
+                    "type": "NUMBER",
+                    "_id": "58ddec5849cab51a14a2c454"
+                },
+                {
+                    "name": "storage",
+                    "value": "10",
+                    "type": "NUMBER",
+                    "_id": "58ddec5849cab51a14a2c453"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58ddec5849cab51a14a2c452"
+                }
+            ],
+            "createdOn": "2017-03-31T05:42:48.104Z"
+        },
+        {
+            "_id": "58ddf8e549cab51a14a2c47c",
+            "resourceId": "58ddf8e549cab51a14a2c482",
+            "jobId": "58ddf8e649cab51a14a2c48c",
+            "name": "Neelesh2",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "Neelesh 2 VM ",
+            "requestedBy": "admin",
+            "status": "SAVED",
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "Neelesh2",
+                    "type": "STRING",
+                    "_id": "58ddf8e549cab51a14a2c481"
+                },
+                {
+                    "name": "cores",
+                    "value": "1",
+                    "type": "NUMBER",
+                    "_id": "58ddf8e549cab51a14a2c480"
+                },
+                {
+                    "name": "memory",
+                    "value": "10",
+                    "type": "NUMBER",
+                    "_id": "58ddf8e549cab51a14a2c47f"
+                },
+                {
+                    "name": "storage",
+                    "value": "10",
+                    "type": "NUMBER",
+                    "_id": "58ddf8e549cab51a14a2c47e"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58ddf8e549cab51a14a2c47d"
+                }
+            ],
+            "createdOn": "2017-03-31T06:36:21.975Z"
+        },
+        {
+            "_id": "58ddfa6a1266f413580faad5",
+            "resourceId": "58ddfa6a1266f413580faadb",
+            "jobId": "58ddfa6b1266f413580faae5",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SAVED",
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM123",
+                    "type": "STRING",
+                    "_id": "58ddfa6a1266f413580faada"
+                },
+                {
+                    "name": "cores",
+                    "value": "1",
+                    "type": "NUMBER",
+                    "_id": "58ddfa6a1266f413580faad9"
+                },
+                {
+                    "name": "memory",
+                    "value": "1",
+                    "type": "NUMBER",
+                    "_id": "58ddfa6a1266f413580faad8"
+                },
+                {
+                    "name": "storage",
+                    "value": "1",
+                    "type": "NUMBER",
+                    "_id": "58ddfa6a1266f413580faad7"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58ddfa6a1266f413580faad6"
+                }
+            ],
+            "createdOn": "2017-03-31T06:42:50.920Z"
+        },
+        {
+            "_id": "58ddfb2e1266f413580fab00",
+            "resourceId": "58ddfb2e1266f413580fab06",
+            "jobId": "58ddfb2e1266f413580fab10",
+            "name": "New VM Request for DCMF",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "This VM will be created throught Datacenter Management Wrokflow",
+            "requestedBy": "admin1",
+            "status": "SAVED",
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "VM123",
+                    "type": "STRING",
+                    "_id": "58ddfb2e1266f413580fab05"
+                },
+                {
+                    "name": "cores",
+                    "value": "1",
+                    "type": "NUMBER",
+                    "_id": "58ddfb2e1266f413580fab04"
+                },
+                {
+                    "name": "memory",
+                    "value": "1",
+                    "type": "NUMBER",
+                    "_id": "58ddfb2e1266f413580fab03"
+                },
+                {
+                    "name": "storage",
+                    "value": "1",
+                    "type": "NUMBER",
+                    "_id": "58ddfb2e1266f413580fab02"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58ddfb2e1266f413580fab01"
+                }
+            ],
+            "createdOn": "2017-03-31T06:46:06.266Z"
+        },
+        {
+            "_id": "58ddfb9a1266f413580fab2b",
+            "resourceId": "58ddfb9a1266f413580fab31",
+            "jobId": "58ddfb9a1266f413580fab3b",
+            "name": "neelesh 3",
+            "type": "VM",
+            "operation": "CREATE",
+            "description": "neelesh 3",
+            "requestedBy": "admin",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vmName",
+                    "value": "neelesh3",
+                    "type": "STRING",
+                    "_id": "58ddfb9a1266f413580fab30"
+                },
+                {
+                    "name": "cores",
+                    "value": "1",
+                    "type": "NUMBER",
+                    "_id": "58ddfb9a1266f413580fab2f"
+                },
+                {
+                    "name": "memory",
+                    "value": "16",
+                    "type": "NUMBER",
+                    "_id": "58ddfb9a1266f413580fab2e"
+                },
+                {
+                    "name": "storage",
+                    "value": "10",
+                    "type": "NUMBER",
+                    "_id": "58ddfb9a1266f413580fab2d"
+                },
+                {
+                    "name": "os",
+                    "value": "ubuntu-14.04.1-server-amd64.iso",
+                    "type": "STRING",
+                    "_id": "58ddfb9a1266f413580fab2c"
+                }
+            ],
+            "createdOn": "2017-03-31T06:47:54.063Z"
+        },
+        {
+            "_id": "58de0d35376b75290cbaee86",
+            "resourceId": "58de0d35376b75290cbaee8c",
+            "jobId": "58de0d35376b75290cbaee96",
+            "name": "neelesh 3",
+            "type": "VM",
+            "operation": "UPDATE",
+            "description": "neelesh 3",
+            "requestedBy": "admin",
+            "status": "SUCCEEDED", "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vm_Id",
+                    "value": "113",
+                    "type": "NUMBER",
+                    "_id": "58de0d35376b75290cbaee8b"
+                },
+                {
+                    "name": "cores",
+                    "value": "1",
+                    "type": "NUMBER",
+                    "_id": "58de0d35376b75290cbaee8a"
+                },
+                {
+                    "name": "memory",
+                    "value": "32",
+                    "type": "NUMBER",
+                    "_id": "58de0d35376b75290cbaee89"
+                },
+                {
+                    "name": "storage",
+                    "value": "10",
+                    "type": "NUMBER",
+                    "_id": "58de0d35376b75290cbaee88"
+                },
+                {
+                    "name": "vm_node",
+                    "value": "pve",
+                    "type": "STRING",
+                    "_id": "58de0d35376b75290cbaee87"
+                }
+            ],
+            "createdOn": "2017-03-31T08:03:01.675Z"
+        },
+        {
+            "_id": "58de0e60573be60384b1a047",
+            "resourceId": "58de0e60573be60384b1a04d",
+            "jobId": "58de0e60573be60384b1a057",
+            "name": "neelesh 3",
+            "type": "VM",
+            "operation": "UPDATE",
+            "description": "neelesh 3",
+            "requestedBy": "admin",
+            "status": "SUCCEEDED",
+            "info": '<i (click)="onUserRowSelect(row) class="material-icons pointer"  >info</i>',
+            "__v": 0,
+            "parameters": [
+                {
+                    "name": "vm_Id",
+                    "value": "113",
+                    "type": "NUMBER",
+                    "_id": "58de0e60573be60384b1a04c"
+                },
+                {
+                    "name": "cores",
+                    "value": "1",
+                    "type": "NUMBER",
+                    "_id": "58de0e60573be60384b1a04b"
+                },
+                {
+                    "name": "memory",
+                    "value": "32",
+                    "type": "NUMBER",
+                    "_id": "58de0e60573be60384b1a04a"
+                },
+                {
+                    "name": "storage",
+                    "value": "10",
+                    "type": "NUMBER",
+                    "_id": "58de0e60573be60384b1a049"
+                },
+                {
+                    "name": "vm_node",
+                    "value": "pve",
+                    "type": "STRING",
+                    "_id": "58de0e60573be60384b1a048"
+                }
+            ],
+            "createdOn": "2017-03-31T08:08:00.644Z"
+        }
+    ]
+};
+//# sourceMappingURL=request-data.js.map
+
+/***/ }),
+
+/***/ 863:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return InfoDirective; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var InfoDirective = (function () {
+    function InfoDirective(el, render) {
+        this.el = el;
+        this.render = render;
+        render.listen(el.nativeElement, 'click', function (event) {
+            // Do something with 'event'
+            console.log(event);
+            return window.confirm('Are you sure you want to do this?');
+        });
+    }
+    InfoDirective = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Directive"])({
+            selector: '[appInfo]'
+        }), 
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["Renderer"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_0__angular_core__["Renderer"]) === 'function' && _b) || Object])
+    ], InfoDirective);
+    return InfoDirective;
+    var _a, _b;
+}());
+//# sourceMappingURL=info.directive.js.map
+
+/***/ }),
+
+/***/ 864:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1672,168 +5257,6 @@ var environment = {
 
 /***/ }),
 
-/***/ 963:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(12)();
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ 964:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(12)();
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ 965:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(12)();
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ 966:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(12)();
-// imports
-
-
-// module
-exports.push([module.i, "md-card {\n  float: left; }\n", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ 967:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(12)();
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ 968:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(12)();
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ 969:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(12)();
-// imports
-
-
-// module
-exports.push([module.i, "md-sidenav-container {\n  padding: 10px 0px 30px;\n  height: 100%;\n  width: 100%; }\n\nmd-card {\n  margin: 5px; }\n\n.header {\n  height: 64px; }\n\n.rest-content {\n  height: calc(100% - 64px); }\n\n.example-fill-remaining-space {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto; }\n\n.spacing {\n  margin: 0px 10px 0px 0px; }\n\n.after-bar:after {\n  content: \"|\";\n  display: inline-block;\n  padding: 0 10px; }\n\nrouter-outlet {\n  width: 100%; }\n\n@media (max-width: 767px) {\n  .header-title {\n    font-size: 17px; } }\n", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ 970:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(12)();
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ 971:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(12)();
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
 /***/ 972:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1842,7 +5265,7 @@ exports = module.exports = __webpack_require__(12)();
 
 
 // module
-exports.push([module.i, ".mat-sidenav-focus-trap {\n  height: 100%; }\n\n.mat-sidenav-focus-trap > .cdk-focus-trap-content {\n  box-sizing: border-box;\n  height: 100%;\n  overflow-y: auto;\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0); }\n\ndiv {\n  display: block; }\n\nnav ul {\n  margin: 0px;\n  padding: 0px;\n  list-style: none; }\n\nli {\n  display: list-item;\n  text-align: -webkit-match-parent;\n  border-bottom-width: 1px;\n  border-bottom-style: solid;\n  margin: 0;\n  padding: 0;\n  border-color: rgba(0, 0, 0, 0.06);\n  color: rgba(0, 0, 0, 0.54); }\n\nh6 {\n  display: block;\n  font-size: 1.17em;\n  -webkit-margin-before: 1em;\n  -webkit-margin-after: 1em;\n  -webkit-margin-start: 0px;\n  -webkit-margin-end: 0px;\n  font-weight: bold; }\n\nnav h6, material-icons {\n  border: none;\n  font-size: 1.17em;\n  letter-spacing: 1px;\n  line-height: 24px;\n  text-transform: uppercase;\n  font-weight: 400;\n  margin: 0;\n  padding: 0 16px;\n  background: rgba(0, 0, 0, 0.32);\n  color: #fff; }\n\nnav ul li > a, span {\n  box-sizing: border-box;\n  display: block;\n  font-size: 14px;\n  font-weight: 400;\n  line-height: 47px;\n  text-decoration: none;\n  -webkit-transition: all .3s;\n  transition: all .3s;\n  padding: 0 16px;\n  position: relative; }\n\nnav ul li > a:hover {\n  background: #fafafa;\n  color: #673ab7; }\n\na {\n  text-decoration: none;\n  color: #000; }\n\n.active {\n  border-left: 5px solid #f00; }\n\n.for-mobile {\n  display: none; }\n\n.list-icons {\n  vertical-align: middle;\n  padding: 0 5px 5px 0; }\n\n@media (max-width: 767px) {\n  .for-mobile {\n    display: block; } }\n", ""]);
+exports.push([module.i, "", ""]);
 
 // exports
 
@@ -1860,7 +5283,7 @@ exports = module.exports = __webpack_require__(12)();
 
 
 // module
-exports.push([module.i, "ng2-smart-table {\n  min-width: 350px; }\n", ""]);
+exports.push([module.i, "", ""]);
 
 // exports
 
@@ -1878,7 +5301,7 @@ exports = module.exports = __webpack_require__(12)();
 
 
 // module
-exports.push([module.i, ".example-margin {\n  margin: 0 10px; }\n", ""]);
+exports.push([module.i, "md-card {\n  float: left;\n  margin: 5px auto; }\n", ""]);
 
 // exports
 
@@ -1932,7 +5355,61 @@ exports = module.exports = __webpack_require__(12)();
 
 
 // module
-exports.push([module.i, "router-outlet{\r\n    width: 100%;\r\n}", ""]);
+exports.push([module.i, "md-sidenav-container {\n  padding: 10px 0px 30px;\n  height: 100%;\n  width: 100%; }\n\nmd-sidenav {\n  padding: 0px; }\n\nmd-card {\n  margin: 5px; }\n\n.header {\n  height: 64px; }\n\n.rest-content {\n  height: calc(100% - 64px); }\n\n.example-fill-remaining-space {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto; }\n\n.spacing {\n  margin: 0px 10px 0px 0px; }\n\n.after-bar:after {\n  content: \"|\";\n  display: inline-block;\n  padding: 0 10px; }\n\nrouter-outlet {\n  width: 100%; }\n\n@media (max-width: 767px) {\n  .header-title {\n    font-size: 17px; } }\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 978:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(12)();
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 979:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(12)();
+// imports
+
+
+// module
+exports.push([module.i, "md-card {\n  margin-top: 1.5rem; }\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 980:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(12)();
+// imports
+
+
+// module
+exports.push([module.i, ".mat-sidenav-focus-trap {\n  height: 100%; }\n\n.mat-sidenav-focus-trap > .cdk-focus-trap-content {\n  box-sizing: border-box;\n  height: 100%;\n  overflow-y: auto;\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0); }\n\ndiv {\n  display: block; }\n\nnav ul {\n  margin: 0px;\n  padding: 0px;\n  list-style: none; }\n\nli {\n  display: list-item;\n  text-align: -webkit-match-parent;\n  border-bottom-width: 1px;\n  border-bottom-style: solid;\n  margin: 0;\n  padding: 0;\n  border-color: rgba(0, 0, 0, 0.06);\n  color: rgba(0, 0, 0, 0.54); }\n\nh6 {\n  display: block;\n  font-size: 1.17em;\n  -webkit-margin-before: 1em;\n  -webkit-margin-after: 1em;\n  -webkit-margin-start: 0px;\n  -webkit-margin-end: 0px;\n  font-weight: bold; }\n\nnav h6, material-icons {\n  border: none;\n  font-size: 1.17em;\n  letter-spacing: 1px;\n  line-height: 24px;\n  text-transform: uppercase;\n  font-weight: 400;\n  margin: 0;\n  padding: 0 16px;\n  background: rgba(0, 0, 0, 0.32);\n  color: #fff; }\n\nnav ul li > a, span {\n  box-sizing: border-box;\n  display: block;\n  font-size: 14px;\n  font-weight: 400;\n  line-height: 47px;\n  text-decoration: none;\n  -webkit-transition: all .3s;\n  transition: all .3s;\n  padding: 0 16px;\n  position: relative; }\n\nnav ul li > a:hover {\n  background: #fafafa;\n  color: primary; }\n\na {\n  text-decoration: none;\n  color: #000; }\n\n.active {\n  border-left: 5px solid #f00; }\n\n.for-mobile {\n  display: none; }\n\n.list-icons {\n  vertical-align: middle;\n  padding: 0 5px 5px 0; }\n\n@media (max-width: 767px) {\n  .for-mobile {\n    display: block; } }\n", ""]);
 
 // exports
 
@@ -1945,237 +5422,327 @@ module.exports = module.exports.toString();
 /***/ 981:
 /***/ (function(module, exports, __webpack_require__) {
 
+exports = module.exports = __webpack_require__(12)();
+// imports
+
+
+// module
+exports.push([module.i, "ng2-smart-table {\n  min-width: 350px; }\n\ntable {\n  border: none; }\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 982:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(12)();
+// imports
+
+
+// module
+exports.push([module.i, ".example-margin {\n  margin: 0 10px; }\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 983:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(12)();
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 984:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(12)();
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 985:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(12)();
+// imports
+
+
+// module
+exports.push([module.i, "router-outlet{\r\n    width: 100%;\r\n}", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 989:
+/***/ (function(module, exports, __webpack_require__) {
+
 var map = {
-	"./af": 488,
-	"./af.js": 488,
-	"./ar": 495,
-	"./ar-dz": 489,
-	"./ar-dz.js": 489,
-	"./ar-kw": 490,
-	"./ar-kw.js": 490,
-	"./ar-ly": 491,
-	"./ar-ly.js": 491,
-	"./ar-ma": 492,
-	"./ar-ma.js": 492,
-	"./ar-sa": 493,
-	"./ar-sa.js": 493,
-	"./ar-tn": 494,
-	"./ar-tn.js": 494,
-	"./ar.js": 495,
-	"./az": 496,
-	"./az.js": 496,
-	"./be": 497,
-	"./be.js": 497,
-	"./bg": 498,
-	"./bg.js": 498,
-	"./bn": 499,
-	"./bn.js": 499,
-	"./bo": 500,
-	"./bo.js": 500,
-	"./br": 501,
-	"./br.js": 501,
-	"./bs": 502,
-	"./bs.js": 502,
-	"./ca": 503,
-	"./ca.js": 503,
-	"./cs": 504,
-	"./cs.js": 504,
-	"./cv": 505,
-	"./cv.js": 505,
-	"./cy": 506,
-	"./cy.js": 506,
-	"./da": 507,
-	"./da.js": 507,
-	"./de": 510,
-	"./de-at": 508,
-	"./de-at.js": 508,
-	"./de-ch": 509,
-	"./de-ch.js": 509,
-	"./de.js": 510,
-	"./dv": 511,
-	"./dv.js": 511,
-	"./el": 512,
-	"./el.js": 512,
-	"./en-au": 513,
-	"./en-au.js": 513,
-	"./en-ca": 514,
-	"./en-ca.js": 514,
-	"./en-gb": 515,
-	"./en-gb.js": 515,
-	"./en-ie": 516,
-	"./en-ie.js": 516,
-	"./en-nz": 517,
-	"./en-nz.js": 517,
-	"./eo": 518,
-	"./eo.js": 518,
-	"./es": 520,
-	"./es-do": 519,
-	"./es-do.js": 519,
-	"./es.js": 520,
-	"./et": 521,
-	"./et.js": 521,
-	"./eu": 522,
-	"./eu.js": 522,
-	"./fa": 523,
-	"./fa.js": 523,
-	"./fi": 524,
-	"./fi.js": 524,
-	"./fo": 525,
-	"./fo.js": 525,
-	"./fr": 528,
-	"./fr-ca": 526,
-	"./fr-ca.js": 526,
-	"./fr-ch": 527,
-	"./fr-ch.js": 527,
-	"./fr.js": 528,
-	"./fy": 529,
-	"./fy.js": 529,
-	"./gd": 530,
-	"./gd.js": 530,
-	"./gl": 531,
-	"./gl.js": 531,
-	"./gom-latn": 532,
-	"./gom-latn.js": 532,
-	"./he": 533,
-	"./he.js": 533,
-	"./hi": 534,
-	"./hi.js": 534,
-	"./hr": 535,
-	"./hr.js": 535,
-	"./hu": 536,
-	"./hu.js": 536,
-	"./hy-am": 537,
-	"./hy-am.js": 537,
-	"./id": 538,
-	"./id.js": 538,
-	"./is": 539,
-	"./is.js": 539,
-	"./it": 540,
-	"./it.js": 540,
-	"./ja": 541,
-	"./ja.js": 541,
-	"./jv": 542,
-	"./jv.js": 542,
-	"./ka": 543,
-	"./ka.js": 543,
-	"./kk": 544,
-	"./kk.js": 544,
-	"./km": 545,
-	"./km.js": 545,
-	"./kn": 546,
-	"./kn.js": 546,
-	"./ko": 547,
-	"./ko.js": 547,
-	"./ky": 548,
-	"./ky.js": 548,
-	"./lb": 549,
-	"./lb.js": 549,
-	"./lo": 550,
-	"./lo.js": 550,
-	"./lt": 551,
-	"./lt.js": 551,
-	"./lv": 552,
-	"./lv.js": 552,
-	"./me": 553,
-	"./me.js": 553,
-	"./mi": 554,
-	"./mi.js": 554,
-	"./mk": 555,
-	"./mk.js": 555,
-	"./ml": 556,
-	"./ml.js": 556,
-	"./mr": 557,
-	"./mr.js": 557,
-	"./ms": 559,
-	"./ms-my": 558,
-	"./ms-my.js": 558,
-	"./ms.js": 559,
-	"./my": 560,
-	"./my.js": 560,
-	"./nb": 561,
-	"./nb.js": 561,
-	"./ne": 562,
-	"./ne.js": 562,
-	"./nl": 564,
-	"./nl-be": 563,
-	"./nl-be.js": 563,
-	"./nl.js": 564,
-	"./nn": 565,
-	"./nn.js": 565,
-	"./pa-in": 566,
-	"./pa-in.js": 566,
-	"./pl": 567,
-	"./pl.js": 567,
-	"./pt": 569,
-	"./pt-br": 568,
-	"./pt-br.js": 568,
-	"./pt.js": 569,
-	"./ro": 570,
-	"./ro.js": 570,
-	"./ru": 571,
-	"./ru.js": 571,
-	"./sd": 572,
-	"./sd.js": 572,
-	"./se": 573,
-	"./se.js": 573,
-	"./si": 574,
-	"./si.js": 574,
-	"./sk": 575,
-	"./sk.js": 575,
-	"./sl": 576,
-	"./sl.js": 576,
-	"./sq": 577,
-	"./sq.js": 577,
-	"./sr": 579,
-	"./sr-cyrl": 578,
-	"./sr-cyrl.js": 578,
-	"./sr.js": 579,
-	"./ss": 580,
-	"./ss.js": 580,
-	"./sv": 581,
-	"./sv.js": 581,
-	"./sw": 582,
-	"./sw.js": 582,
-	"./ta": 583,
-	"./ta.js": 583,
-	"./te": 584,
-	"./te.js": 584,
-	"./tet": 585,
-	"./tet.js": 585,
-	"./th": 586,
-	"./th.js": 586,
-	"./tl-ph": 587,
-	"./tl-ph.js": 587,
-	"./tlh": 588,
-	"./tlh.js": 588,
-	"./tr": 589,
-	"./tr.js": 589,
-	"./tzl": 590,
-	"./tzl.js": 590,
-	"./tzm": 592,
-	"./tzm-latn": 591,
-	"./tzm-latn.js": 591,
-	"./tzm.js": 592,
-	"./uk": 593,
-	"./uk.js": 593,
-	"./ur": 594,
-	"./ur.js": 594,
-	"./uz": 596,
-	"./uz-latn": 595,
-	"./uz-latn.js": 595,
-	"./uz.js": 596,
-	"./vi": 597,
-	"./vi.js": 597,
-	"./x-pseudo": 598,
-	"./x-pseudo.js": 598,
-	"./yo": 599,
-	"./yo.js": 599,
-	"./zh-cn": 600,
-	"./zh-cn.js": 600,
-	"./zh-hk": 601,
-	"./zh-hk.js": 601,
-	"./zh-tw": 602,
-	"./zh-tw.js": 602
+	"./af": 491,
+	"./af.js": 491,
+	"./ar": 498,
+	"./ar-dz": 492,
+	"./ar-dz.js": 492,
+	"./ar-kw": 493,
+	"./ar-kw.js": 493,
+	"./ar-ly": 494,
+	"./ar-ly.js": 494,
+	"./ar-ma": 495,
+	"./ar-ma.js": 495,
+	"./ar-sa": 496,
+	"./ar-sa.js": 496,
+	"./ar-tn": 497,
+	"./ar-tn.js": 497,
+	"./ar.js": 498,
+	"./az": 499,
+	"./az.js": 499,
+	"./be": 500,
+	"./be.js": 500,
+	"./bg": 501,
+	"./bg.js": 501,
+	"./bn": 502,
+	"./bn.js": 502,
+	"./bo": 503,
+	"./bo.js": 503,
+	"./br": 504,
+	"./br.js": 504,
+	"./bs": 505,
+	"./bs.js": 505,
+	"./ca": 506,
+	"./ca.js": 506,
+	"./cs": 507,
+	"./cs.js": 507,
+	"./cv": 508,
+	"./cv.js": 508,
+	"./cy": 509,
+	"./cy.js": 509,
+	"./da": 510,
+	"./da.js": 510,
+	"./de": 513,
+	"./de-at": 511,
+	"./de-at.js": 511,
+	"./de-ch": 512,
+	"./de-ch.js": 512,
+	"./de.js": 513,
+	"./dv": 514,
+	"./dv.js": 514,
+	"./el": 515,
+	"./el.js": 515,
+	"./en-au": 516,
+	"./en-au.js": 516,
+	"./en-ca": 517,
+	"./en-ca.js": 517,
+	"./en-gb": 518,
+	"./en-gb.js": 518,
+	"./en-ie": 519,
+	"./en-ie.js": 519,
+	"./en-nz": 520,
+	"./en-nz.js": 520,
+	"./eo": 521,
+	"./eo.js": 521,
+	"./es": 523,
+	"./es-do": 522,
+	"./es-do.js": 522,
+	"./es.js": 523,
+	"./et": 524,
+	"./et.js": 524,
+	"./eu": 525,
+	"./eu.js": 525,
+	"./fa": 526,
+	"./fa.js": 526,
+	"./fi": 527,
+	"./fi.js": 527,
+	"./fo": 528,
+	"./fo.js": 528,
+	"./fr": 531,
+	"./fr-ca": 529,
+	"./fr-ca.js": 529,
+	"./fr-ch": 530,
+	"./fr-ch.js": 530,
+	"./fr.js": 531,
+	"./fy": 532,
+	"./fy.js": 532,
+	"./gd": 533,
+	"./gd.js": 533,
+	"./gl": 534,
+	"./gl.js": 534,
+	"./gom-latn": 535,
+	"./gom-latn.js": 535,
+	"./he": 536,
+	"./he.js": 536,
+	"./hi": 537,
+	"./hi.js": 537,
+	"./hr": 538,
+	"./hr.js": 538,
+	"./hu": 539,
+	"./hu.js": 539,
+	"./hy-am": 540,
+	"./hy-am.js": 540,
+	"./id": 541,
+	"./id.js": 541,
+	"./is": 542,
+	"./is.js": 542,
+	"./it": 543,
+	"./it.js": 543,
+	"./ja": 544,
+	"./ja.js": 544,
+	"./jv": 545,
+	"./jv.js": 545,
+	"./ka": 546,
+	"./ka.js": 546,
+	"./kk": 547,
+	"./kk.js": 547,
+	"./km": 548,
+	"./km.js": 548,
+	"./kn": 549,
+	"./kn.js": 549,
+	"./ko": 550,
+	"./ko.js": 550,
+	"./ky": 551,
+	"./ky.js": 551,
+	"./lb": 552,
+	"./lb.js": 552,
+	"./lo": 553,
+	"./lo.js": 553,
+	"./lt": 554,
+	"./lt.js": 554,
+	"./lv": 555,
+	"./lv.js": 555,
+	"./me": 556,
+	"./me.js": 556,
+	"./mi": 557,
+	"./mi.js": 557,
+	"./mk": 558,
+	"./mk.js": 558,
+	"./ml": 559,
+	"./ml.js": 559,
+	"./mr": 560,
+	"./mr.js": 560,
+	"./ms": 562,
+	"./ms-my": 561,
+	"./ms-my.js": 561,
+	"./ms.js": 562,
+	"./my": 563,
+	"./my.js": 563,
+	"./nb": 564,
+	"./nb.js": 564,
+	"./ne": 565,
+	"./ne.js": 565,
+	"./nl": 567,
+	"./nl-be": 566,
+	"./nl-be.js": 566,
+	"./nl.js": 567,
+	"./nn": 568,
+	"./nn.js": 568,
+	"./pa-in": 569,
+	"./pa-in.js": 569,
+	"./pl": 570,
+	"./pl.js": 570,
+	"./pt": 572,
+	"./pt-br": 571,
+	"./pt-br.js": 571,
+	"./pt.js": 572,
+	"./ro": 573,
+	"./ro.js": 573,
+	"./ru": 574,
+	"./ru.js": 574,
+	"./sd": 575,
+	"./sd.js": 575,
+	"./se": 576,
+	"./se.js": 576,
+	"./si": 577,
+	"./si.js": 577,
+	"./sk": 578,
+	"./sk.js": 578,
+	"./sl": 579,
+	"./sl.js": 579,
+	"./sq": 580,
+	"./sq.js": 580,
+	"./sr": 582,
+	"./sr-cyrl": 581,
+	"./sr-cyrl.js": 581,
+	"./sr.js": 582,
+	"./ss": 583,
+	"./ss.js": 583,
+	"./sv": 584,
+	"./sv.js": 584,
+	"./sw": 585,
+	"./sw.js": 585,
+	"./ta": 586,
+	"./ta.js": 586,
+	"./te": 587,
+	"./te.js": 587,
+	"./tet": 588,
+	"./tet.js": 588,
+	"./th": 589,
+	"./th.js": 589,
+	"./tl-ph": 590,
+	"./tl-ph.js": 590,
+	"./tlh": 591,
+	"./tlh.js": 591,
+	"./tr": 592,
+	"./tr.js": 592,
+	"./tzl": 593,
+	"./tzl.js": 593,
+	"./tzm": 595,
+	"./tzm-latn": 594,
+	"./tzm-latn.js": 594,
+	"./tzm.js": 595,
+	"./uk": 596,
+	"./uk.js": 596,
+	"./ur": 597,
+	"./ur.js": 597,
+	"./uz": 599,
+	"./uz-latn": 598,
+	"./uz-latn.js": 598,
+	"./uz.js": 599,
+	"./vi": 600,
+	"./vi.js": 600,
+	"./x-pseudo": 601,
+	"./x-pseudo.js": 601,
+	"./yo": 602,
+	"./yo.js": 602,
+	"./zh-cn": 603,
+	"./zh-cn.js": 603,
+	"./zh-hk": 604,
+	"./zh-hk.js": 604,
+	"./zh-tw": 605,
+	"./zh-tw.js": 605
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -2191,73 +5758,17 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 981;
+webpackContext.id = 989;
 
-
-/***/ }),
-
-/***/ 991:
-/***/ (function(module, exports) {
-
-module.exports = "<router-outlet ></router-outlet>\n"
-
-/***/ }),
-
-/***/ 992:
-/***/ (function(module, exports) {
-
-module.exports = "<md-card class=\"col-sm-10 col-md-6 col-lg-4 offset-sm-1 offset-md-3 offset-lg-4\">\n  <md-card-title>\n    <h4>VM Creation Form</h4>\n  </md-card-title>\n  <md-card-content>\n    <form class=\"create-vm-form\" [formGroup]=\"vmcreationForm\" (ngSubmit)=\"onSubmit(vmcreationForm.value)\" [hidden]=\"submitted\">\n      <div class=\"form-group\">\n        <md-input-container class=\"col-12\">\n          <input mdInput placeholder=\"Name\" formControlName=\"Name\" id=\"Name\" required>\n        </md-input-container>\n      </div>\n      <div class=\"form-group\">\n        <md-input-container class=\"col-12\">\n          <textarea cols=\"40\" rows=\"5\" mdInput placeholder=\"Description\" formControlName=\"description\" id=\"description\" required></textarea>\n        </md-input-container>\n      </div>\n      <div class=\"form-group\">\n        <md-input-container class=\"col-12\">\n          <input mdInput placeholder=\"Type\" formControlName=\"type\" id=\"type\" readonly>\n        </md-input-container>\n      </div>\n      <div class=\"form-group\">\n        <md-input-container class=\"col-12\">\n          <input mdInput placeholder=\"Operation\" formControlName=\"operation\" id=\"operation\" readonly>\n        </md-input-container>\n      </div>\n      <div class=\"form-group\">\n        <md-input-container class=\"col-12\">\n          <input mdInput placeholder=\"VM Name\" formControlName=\"vmName\" id=\"vmName\" required (keypress)=\"notAllowSpaces($event)\">\n        </md-input-container>\n      </div>\n      <div class=\"form-group\">\n        <md-select placeholder=\"Operating System\" formControlName=\"os\" required class=\"col-12\">\n          <md-option *ngFor=\"let os of osList\" value=\"{{os.version}}\">\n            {{ os.name }}\n          </md-option>\n        </md-select>\n      </div>\n      <div class=\"form-group\">\n        <md-input-container class=\"col-12\">\n          <input mdInput placeholder=\"Disk Size (GB)\" formControlName=\"storage\" id=\"diskSize\" (keypress)=\"onlyNumberKey($event)\" required>\n        </md-input-container>\n      </div>\n      <div class=\"form-group\">\n        <md-select placeholder=\"CPU Core\" formControlName=\"cores\" id=\"cpuCore\" required class=\"col-12\">\n          <md-option value=\"1\">1</md-option>\n          <md-option value=\"2\">2</md-option>\n        </md-select>\n      </div>\n      <div class=\"form-group\">\n        <md-input-container class=\"col-12\">\n          <input mdInput placeholder=\"Memory (MB)\" formControlName=\"memory\" id=\"Memory\" (keypress)=\"onlyNumberKey($event)\" required>\n        </md-input-container>\n      </div>\n      <div class=\"form-group\">\n        <md-card-actions class=\"col-12\">\n          <button type=\"submit\" md-raised-button class=\"my-success-btn\" color=\"primary\">Create</button>\n          <button type=\"button\" md-raised-button class=\"my-cancel-btn\" (click)=\"backToHome()\">Cancel</button>\n        </md-card-actions>\n      </div>\n    </form>\n  </md-card-content>\n</md-card>"
-
-/***/ }),
-
-/***/ 993:
-/***/ (function(module, exports) {
-
-module.exports = "<p>\n  about works!\n</p>\n"
-
-/***/ }),
-
-/***/ 994:
-/***/ (function(module, exports) {
-
-module.exports = "<p>\n  construction works!\n</p>\n"
-
-/***/ }),
-
-/***/ 995:
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row\">\n  <div class=\"col-10 offset-1\" >\n    <md-card class=\"col-sx-5 col-sm-5 col-md-4 col-lg-4\" *ngFor=\"let i of chartData\">\n      <md-card-title ><h3>{{i.name |uppercase}}</h3></md-card-title>\n      <md-card-content>\n        <div style=\"display: block\">\n          <canvas baseChart [datasets]=\"i.datasets\" [labels]=\"i.label\" [chartType]=\"i.chart\" [colors]=\"colorsOverride\" (chartHover)=\"chartHovered($event)\" (chartClick)=\"chartClicked($event)\"></canvas>\n        </div>\n      </md-card-content>\n    </md-card>\n  </div>\n</div>"
-
-/***/ }),
-
-/***/ 996:
-/***/ (function(module, exports) {
-
-module.exports = "<p>\n   {{data.message}}\n</p>\n<button type=\"button\" md-raised-button class=\"my-cancel-btn\" style=\"float:right\" (click)=\"dialogRef.close()\" color=\"primary\">OK</button>"
-
-/***/ }),
-
-/***/ 997:
-/***/ (function(module, exports) {
-
-module.exports = "<p>\n   {{data.message}}\n</p>\n<button type=\"button\" md-raised-button class=\"my-cancel-btn\" style=\"float:right\" (click)=\"dialogRef.close()\" color=\"primary\">OK</button>"
-
-/***/ }),
-
-/***/ 998:
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"row header\">\n  <md-toolbar color=\"primary\" class=\"col-12\" >\n    <md-icon (click)=\"sidenav.toggle()\" class=\"spacing pointer\">menu</md-icon>\n    <span class=\"header-title\">Datacenter Management Framework</span>\n     <span class=\"example-fill-remaining-space\"></span>\n     <span class=\"for-desktop after-bar\">Welcome {{User}}</span>\n     <span class=\"for-desktop pointer\" (click)=\"logout()\">Logout</span>\n  </md-toolbar>\n</div>\n<div class=\"row rest-content\">\n  <md-sidenav-container mode=\"side\" class=\"col-12\">\n    <md-sidenav #sidenav class=\"col-sx-3 col-sm-3 col-md-3 col-lg-2 border-left-0\">\n      <!-- sidenav content -->\n      <app-nav [sidenav]=\"sidenav\"></app-nav>\n    </md-sidenav>\n    \n    <!-- primary content -->\n    <router-outlet></router-outlet>\n  </md-sidenav-container>\n</div>"
 
 /***/ }),
 
 /***/ 999:
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  inventory works!\n</p>\n"
+module.exports = "<router-outlet ></router-outlet>\n"
 
 /***/ })
 
-},[1259]);
+},[1268]);
 //# sourceMappingURL=main.bundle.js.map
