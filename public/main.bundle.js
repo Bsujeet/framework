@@ -3,49 +3,49 @@ webpackJsonp([1,4],{
 /***/ 1000:
 /***/ (function(module, exports) {
 
-module.exports = "<md-card class=\"col-sm-10 col-md-6 col-lg-4 offset-sm-1 offset-md-3 offset-lg-4\">\r\n  <md-card-title>\r\n    <h4>VM Creation Form</h4>\r\n  </md-card-title>\r\n  <md-card-content>\r\n    <form class=\"create-vm-form\" [formGroup]=\"vmcreationForm\" (ngSubmit)=\"onSubmit(vmcreationForm.value)\" [hidden]=\"submitted\">\r\n      <div class=\"form-group\">\r\n        <md-input-container class=\"col-12\">\r\n          <input mdInput placeholder=\"Type\" formControlName=\"type\" id=\"type\" readonly>\r\n        </md-input-container>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <md-select placeholder=\"Operation\" formControlName=\"operation\" (ngModelChange)=\"onOperationChange($event)\" required class=\"col-12\">\r\n          <md-option *ngFor=\"let operat of operationList\" value=\"{{operat.value}}\">\r\n            {{ operat.name }}\r\n          </md-option>\r\n        </md-select>\r\n      </div>\r\n    </form>\r\n  </md-card-content>\r\n  <template form-host></template>\r\n</md-card>\r\n"
+module.exports = "<router-outlet ></router-outlet>\n"
 
 /***/ }),
 
 /***/ 1001:
 /***/ (function(module, exports) {
 
-module.exports = "<md-card-content>\r\n    <form class=\"create-vm-form\" [formGroup]=\"vmcreationForm\" (ngSubmit)=\"onSubmit(vmcreationForm.value)\" [hidden]=\"submitted\">\r\n      <div class=\"form-group\">\r\n        <md-input-container class=\"col-12\">\r\n          <input mdInput placeholder=\"Name\" formControlName=\"Name\" id=\"Name\" required>\r\n        </md-input-container>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <md-input-container class=\"col-12\">\r\n          <textarea cols=\"40\" rows=\"5\" mdInput placeholder=\"Description\" formControlName=\"description\" id=\"description\" required></textarea>\r\n        </md-input-container>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <md-input-container class=\"col-12\">\r\n          <input mdInput placeholder=\"VM Name\" formControlName=\"vmName\" id=\"vmName\" required>\r\n        </md-input-container>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <md-select placeholder=\"Operating System\" formControlName=\"os\" required class=\"col-12\">\r\n          <md-option *ngFor=\"let os of osList\" value=\"{{os.version}}\">\r\n            {{ os.name }}\r\n          </md-option>\r\n        </md-select>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <md-input-container class=\"col-12\">\r\n          <input mdInput placeholder=\"Disk Size (GB)\" formControlName=\"storage\" id=\"diskSize\" (keypress)=\"onlyNumberKey($event)\" required>\r\n        </md-input-container>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <md-select placeholder=\"CPU Core\" formControlName=\"cores\" id=\"cpuCore\" required class=\"col-12\">\r\n          <md-option value=\"1\">1</md-option>\r\n          <md-option value=\"2\">2</md-option>\r\n        </md-select>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <md-input-container class=\"col-12\">\r\n          <input mdInput placeholder=\"Memory (MB)\" formControlName=\"memory\" id=\"Memory\" (keypress)=\"onlyNumberKey($event)\" required>\r\n        </md-input-container>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <md-card-actions class=\"col-12\">\r\n          <button type=\"submit\" md-raised-button class=\"my-success-btn\" color=\"primary\">Create</button>\r\n          <button type=\"button\" md-raised-button class=\"my-cancel-btn\" (click)=\"backToHome()\">Cancel</button>\r\n        </md-card-actions>\r\n      </div>\r\n    </form>\r\n  </md-card-content>\r\n"
+module.exports = "<md-card class=\"col-sm-10 col-md-6 col-lg-4 offset-sm-1 offset-md-3 offset-lg-4\">\r\n  <md-card-title>\r\n    <h4>VM Creation Form</h4>\r\n  </md-card-title>\r\n  <md-card-content>\r\n    <form class=\"create-vm-form\" [formGroup]=\"vmcreationForm\" (ngSubmit)=\"onSubmit(vmcreationForm.value)\" [hidden]=\"submitted\">\r\n      <div class=\"form-group\">\r\n        <md-input-container class=\"col-12\">\r\n          <input mdInput placeholder=\"Type\" formControlName=\"type\" id=\"type\" readonly>\r\n        </md-input-container>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <md-select placeholder=\"Operation\" formControlName=\"operation\" (ngModelChange)=\"onOperationChange($event)\" required class=\"col-12\">\r\n          <md-option *ngFor=\"let operat of operationList\" value=\"{{operat.value}}\">\r\n            {{ operat.name }}\r\n          </md-option>\r\n        </md-select>\r\n      </div>\r\n    </form>\r\n  </md-card-content>\r\n  <template form-host></template>\r\n</md-card>\r\n"
 
 /***/ }),
 
 /***/ 1002:
 /***/ (function(module, exports) {
 
-module.exports = "<md-card-content>\r\n    <form class=\"create-vm-form\" [formGroup]=\"vmeditForm\" (ngSubmit)=\"onSubmit(vmeditForm.value)\" [hidden]=\"submitted\" >\r\n      \r\n      <div class=\"form-group\">\r\n        <md-select placeholder=\"VM Name\" formControlName=\"vmName\" (change)=\"onVMChange($event)\" required class=\"col-12\" [(ngModel)]=\"vm\">\r\n          <md-option *ngFor=\"let vm of vmList\" value=\"{{vm.requestId}}\">\r\n            {{ vm.vmName + ' VM ID: ' + vm.vmId}}\r\n          </md-option>\r\n        </md-select>\r\n      </div>\r\n      \r\n      <div class=\"form-group\">\r\n        <md-input-container class=\"col-12\">\r\n          <input mdInput placeholder=\"Name\" formControlName=\"Name\" id=\"Name\" required>\r\n        </md-input-container>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <md-input-container class=\"col-12\">\r\n          <textarea cols=\"40\" rows=\"5\" mdInput placeholder=\"Description\" formControlName=\"description\" id=\"description\" required></textarea>\r\n        </md-input-container>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <md-input-container class=\"col-12\">\r\n          <input mdInput placeholder=\"Disk Size (GB)\" formControlName=\"storage\" id=\"diskSize\"  required>          \r\n        </md-input-container>\r\n      </div>\r\n      <!--<div class=\"form-group\">\r\n        <md-input-container class=\"col-12\">\r\n          <input mdInput placeholder=\"Increase Disk Size (GB)\" formControlName=\"storage_inc\" id=\"diskSizeInc\" (keypress)=\"onlyNumberKey($event)\" required>\r\n        </md-input-container>\r\n      </div>-->\r\n      <div class=\"form-group\">\r\n        <md-select placeholder=\"CPU Core\" formControlName=\"cores\" id=\"cpuCore\" required class=\"col-12\">\r\n          <md-option value=\"1\">1</md-option>\r\n          <md-option value=\"2\">2</md-option>\r\n        </md-select>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <md-input-container class=\"col-12\">\r\n          <input mdInput placeholder=\"Memory (MB)\" formControlName=\"memory\" id=\"Memory\" (keypress)=\"onlyNumberKey($event)\" required>\r\n        </md-input-container>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <md-card-actions class=\"col-12\">\r\n          <button type=\"submit\" md-raised-button class=\"my-success-btn\"  color=\"primary\">Create</button>\r\n          <button type=\"button\" md-raised-button class=\"my-cancel-btn\" (click)=\"backToHome()\">Cancel</button>\r\n        </md-card-actions>\r\n      </div>\r\n    </form>\r\n  </md-card-content>\r\n"
+module.exports = "<md-card-content>\r\n    <form class=\"create-vm-form\" [formGroup]=\"vmcreationForm\" (ngSubmit)=\"onSubmit(vmcreationForm.value)\" [hidden]=\"submitted\">\r\n      <div class=\"form-group\">\r\n        <md-input-container class=\"col-12\">\r\n          <input mdInput placeholder=\"Name\" formControlName=\"Name\" id=\"Name\" required>\r\n        </md-input-container>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <md-input-container class=\"col-12\">\r\n          <textarea cols=\"40\" rows=\"5\" mdInput placeholder=\"Description\" formControlName=\"description\" id=\"description\" required></textarea>\r\n        </md-input-container>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <md-input-container class=\"col-12\">\r\n          <input mdInput placeholder=\"VM Name\" formControlName=\"vmName\" id=\"vmName\" required>\r\n        </md-input-container>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <md-select placeholder=\"Operating System\" formControlName=\"os\" required class=\"col-12\">\r\n          <md-option *ngFor=\"let os of osList\" value=\"{{os.version}}\">\r\n            {{ os.name }}\r\n          </md-option>\r\n        </md-select>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <md-input-container class=\"col-12\">\r\n          <input mdInput placeholder=\"Disk Size (GB)\" formControlName=\"storage\" id=\"diskSize\" (keypress)=\"onlyNumberKey($event)\" required>\r\n        </md-input-container>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <md-select placeholder=\"CPU Core\" formControlName=\"cores\" id=\"cpuCore\" required class=\"col-12\">\r\n          <md-option value=\"1\">1</md-option>\r\n          <md-option value=\"2\">2</md-option>\r\n        </md-select>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <md-input-container class=\"col-12\">\r\n          <input mdInput placeholder=\"Memory (MB)\" formControlName=\"memory\" id=\"Memory\" (keypress)=\"onlyNumberKey($event)\" required>\r\n        </md-input-container>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <md-card-actions class=\"col-12\">\r\n          <button type=\"submit\" md-raised-button class=\"my-success-btn\" color=\"primary\">Create</button>\r\n          <button type=\"button\" md-raised-button class=\"my-cancel-btn\" (click)=\"backToHome()\">Cancel</button>\r\n        </md-card-actions>\r\n      </div>\r\n    </form>\r\n  </md-card-content>\r\n"
 
 /***/ }),
 
 /***/ 1003:
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  about works!\n</p>\n"
+module.exports = "<md-card-content>\r\n    <form class=\"create-vm-form\" [formGroup]=\"vmeditForm\" (ngSubmit)=\"onSubmit(vmeditForm.value)\" [hidden]=\"submitted\" >\r\n      \r\n      <div class=\"form-group\">\r\n        <md-select placeholder=\"VM Name\" formControlName=\"vmName\" (change)=\"onVMChange($event)\" required class=\"col-12\" [(ngModel)]=\"vm\">\r\n          <md-option *ngFor=\"let vm of vmList\" value=\"{{vm.requestId}}\">\r\n            {{ vm.vmName + ' VM ID: ' + vm.vmId}}\r\n          </md-option>\r\n        </md-select>\r\n      </div>\r\n      \r\n      <div class=\"form-group\">\r\n        <md-input-container class=\"col-12\">\r\n          <input mdInput placeholder=\"Name\" formControlName=\"Name\" id=\"Name\" required>\r\n        </md-input-container>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <md-input-container class=\"col-12\">\r\n          <textarea cols=\"40\" rows=\"5\" mdInput placeholder=\"Description\" formControlName=\"description\" id=\"description\" required></textarea>\r\n        </md-input-container>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <md-input-container class=\"col-12\">\r\n          <input mdInput placeholder=\"Disk Size (GB)\" formControlName=\"storage\" id=\"diskSize\"  required>          \r\n        </md-input-container>\r\n      </div>\r\n      <!--<div class=\"form-group\">\r\n        <md-input-container class=\"col-12\">\r\n          <input mdInput placeholder=\"Increase Disk Size (GB)\" formControlName=\"storage_inc\" id=\"diskSizeInc\" (keypress)=\"onlyNumberKey($event)\" required>\r\n        </md-input-container>\r\n      </div>-->\r\n      <div class=\"form-group\">\r\n        <md-select placeholder=\"CPU Core\" formControlName=\"cores\" id=\"cpuCore\" required class=\"col-12\">\r\n          <md-option value=\"1\">1</md-option>\r\n          <md-option value=\"2\">2</md-option>\r\n        </md-select>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <md-input-container class=\"col-12\">\r\n          <input mdInput placeholder=\"Memory (MB)\" formControlName=\"memory\" id=\"Memory\" (keypress)=\"onlyNumberKey($event)\" required>\r\n        </md-input-container>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <md-card-actions class=\"col-12\">\r\n          <button type=\"submit\" md-raised-button class=\"my-success-btn\"  color=\"primary\">Create</button>\r\n          <button type=\"button\" md-raised-button class=\"my-cancel-btn\" (click)=\"backToHome()\">Cancel</button>\r\n        </md-card-actions>\r\n      </div>\r\n    </form>\r\n  </md-card-content>\r\n"
 
 /***/ }),
 
 /***/ 1004:
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  construction works!\n</p>\n"
+module.exports = "<p>\n  about works!\n</p>\n"
 
 /***/ }),
 
 /***/ 1005:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"col-12\">\n    <div class=\"col-10 offset-1 justify-content-xs-center\">\n      <md-card class=\"col-sx-12 col-sm-12 col-md-6 col-lg-4 \" *ngFor=\"let i of chartData\"> <!--class=\"col-sx-5 col-sm-5 col-md-4 col-lg-4 \"-->\n        <md-card-title>\n          <h3>{{i.name |uppercase}}</h3>\n        </md-card-title>\n        <md-card-content>\n          <div style=\"display: block\">\n            <canvas baseChart [datasets]=\"i.datasets\" [labels]=\"i.label\" [chartType]=\"i.chart\" [colors]=\"colorsOverride\" (chartHover)=\"chartHovered($event)\"\n              (chartClick)=\"chartClicked($event)\"></canvas>\n          </div>\n        </md-card-content>\n      </md-card>\n    </div>\n  </div>\n</div>"
+module.exports = "<p>\n  construction works!\n</p>\n"
 
 /***/ }),
 
 /***/ 1006:
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n   {{data.message}}\n</p>\n<button type=\"button\" md-button class=\"my-cancel-btn\" style=\"float:right\" (click)=\"dialogRef.close()\" color=\"primary\">OK</button>"
+module.exports = "<div class=\"row\">\n  <div class=\"col-12\">\n    <div class=\"col-10 offset-1 justify-content-xs-center\">\n      <md-card class=\"col-sx-12 col-sm-12 col-md-6 col-lg-4 \" *ngFor=\"let i of chartData\"> <!--class=\"col-sx-5 col-sm-5 col-md-4 col-lg-4 \"-->\n        <md-card-title>\n          <h3>{{i.name |uppercase}}</h3>\n        </md-card-title>\n        <md-card-content>\n          <div style=\"display: block\">\n            <canvas baseChart [datasets]=\"i.datasets\" [labels]=\"i.label\" [chartType]=\"i.chart\" [colors]=\"colorsOverride\" (chartHover)=\"chartHovered($event)\"\n              (chartClick)=\"chartClicked($event)\"></canvas>\n          </div>\n        </md-card-content>\n      </md-card>\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -59,68 +59,119 @@ module.exports = "<p>\n   {{data.message}}\n</p>\n<button type=\"button\" md-but
 /***/ 1008:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row header\">\r\n    <md-toolbar color=\"primary\" class=\"col-12\">\r\n        <md-icon (click)=\"sidenav.toggle()\" class=\"spacing pointer\">menu</md-icon>\r\n        <span class=\"header-title\">Datacenter Management Framework</span>\r\n        <span class=\"example-fill-remaining-space\"></span>\r\n        <span class=\"for-desktop after-bar\">Welcome {{User}}</span>\r\n        <span class=\"for-desktop pointer\" (click)=\"logout()\">Logout</span>\r\n    </md-toolbar>\r\n</div>\r\n<div class=\"row rest-content\">\r\n    <md-sidenav-container>\r\n        <md-sidenav #sidenav mode=\"side\" opened=\"showHideMenu()\" class=\"col-sx-3 col-sm-3 col-md-auto col-lg-auto border-left-0\"> <!--class=\"col-sx-3 col-sm-3 col-md-3 col-lg-2 border-left-0\"-->\r\n            <!-- sidenav content -->\r\n            <app-nav [sidenav]=\"sidenav\"></app-nav>\r\n        </md-sidenav>\r\n        <!-- primary content -->\r\n        <div class=\"col-12\">\r\n            <router-outlet></router-outlet>\r\n        </div>\r\n    </md-sidenav-container>\r\n</div>"
+module.exports = "<p>\n   {{data.message}}\n</p>\n<button type=\"button\" md-button class=\"my-cancel-btn\" style=\"float:right\" (click)=\"dialogRef.close()\" color=\"primary\">OK</button>"
 
 /***/ }),
 
 /***/ 1009:
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  inventory works!\n</p>\n"
+module.exports = "<div class=\"row header\">\r\n    <md-toolbar color=\"primary\" class=\"col-12\">\r\n        <md-icon (click)=\"sidenav.toggle()\" class=\"spacing pointer\">menu</md-icon>\r\n        <span class=\"header-title\">Datacenter Management Framework</span>\r\n        <span class=\"example-fill-remaining-space\"></span>\r\n        <span class=\"for-desktop after-bar\">Welcome {{User}}</span>\r\n        <span class=\"for-desktop pointer\" (click)=\"logout()\">Logout</span>\r\n    </md-toolbar>\r\n</div>\r\n<div class=\"row rest-content\">\r\n    <md-sidenav-container>\r\n        <md-sidenav #sidenav mode=\"side\" opened=\"showHideMenu()\" class=\"col-sx-3 col-sm-3 col-md-auto col-lg-auto border-left-0\"> <!--class=\"col-sx-3 col-sm-3 col-md-3 col-lg-2 border-left-0\"-->\r\n            <!-- sidenav content -->\r\n            <app-nav [sidenav]=\"sidenav\"></app-nav>\r\n        </md-sidenav>\r\n        <!-- primary content -->\r\n        <div class=\"col-12\">\r\n            <router-outlet></router-outlet>\r\n        </div>\r\n    </md-sidenav-container>\r\n</div>"
 
 /***/ }),
 
 /***/ 1010:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <md-toolbar color=\"primary\" class=\"col-12\">\n    <h5>Datacenter Management Framework</h5>\n  </md-toolbar>\n</div>\n<div class=\"row\">\n  <div class=\"col-sm-10 col-md-6 col-lg-4 offset-sm-1 offset-md-3 offset-lg-4\">\n    <md-card class=\"login-wrapper\">\n      <md-card-header>        \n        <md-card-title ><h5 style=\"text-align: center\"> Datacenter Management Framework </h5></md-card-title>\n      </md-card-header>\n      <hr>\n      <md-card-content>\n        <form class=\"login\" [formGroup]=\"loginForm\" (ngSubmit)=\"onlogin()\">\n          <div class=\"form-group\">\n            <md-input-container class=\"col-12\">\n              <input mdInput placeholder=\"UserName\" type=\"text\" formControlName=\"userId\" required />\n            </md-input-container>\n          </div>\n\n          <div class=\"form-group\">\n            <md-input-container class=\"col-12\">\n              <input mdInput placeholder=\"Password\" type=\"password\" formControlName=\"password\" required />\n            </md-input-container>\n          </div>\n          <div class=\"form-group\">\n            <span [ngClass]=\"{'error':!InVisible,'active':!InVisible}\">\n          {{result}}\n        </span>\n          </div>\n          <div class=\"form-group\">\n            <md-card-actions class=\"col-12\">\n              <button md-raised-button type=\"submit\" class=\"my-success-btn\" color=\"primary\">LOG IN</button>\n            </md-card-actions>\n          </div>\n        </form>\n      </md-card-content>\n    </md-card>\n  </div>\n</div>"
+module.exports = "<p>\n  inventory works!\n</p>\n"
 
 /***/ }),
 
 /***/ 1011:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"mat-sidenav-focus-trap\">\n  <div class=\"cdk-focus-trap-content\">\n    <nav class=\"main\">\n      <ul>\n        <li class=\"for-mobile\"><span>Welcome {{User}}</span></li>\n        <li *ngFor=\"let list of links\">\n          <a *ngIf=\"list.submenu==undefined \" [routerLink]=\"[list.path]\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" (click)=\"sidenav.close()\"><i class=\"material-icons list-icons\">{{list.icon}}</i>{{list.name}}</a>\n          <nav class=\"sub\" *ngIf=\"list.submenu!=undefined\">\n            <h6 *ngIf=\"list.submenu!=undefined\" (click)=\"submenu($event)\">{{list.name}}<i class=\"material-icons\" [hidden]=\"shown\">&#xE315;</i><i class=\"material-icons\" [hidden]=\"!shown\">&#xE313;</i></h6>\n            <ul [hidden]=\"shown\">\n              <li *ngFor=\"let menu of list.submenu\"><a [routerLink]=\"[menu.path]\" (click)=\"sidenav.close();submenu($event)\"><i class=\"material-icons list-icons\">{{menu.icon}}</i>{{menu.name}}</a></li>\n            </ul>\n          </nav>\n        </li>\n        <li class=\"for-mobile\"><a href=\"javascript:void(0)\" (click)=\"logout()\"><i class=\"material-icons list-icons\">power_settings_new</i>Logout</a></li>\n      </ul>\n    </nav>\n  </div>\n</div>\n<!--(click)=\"sidenav.close()\"-->"
+module.exports = "<div class=\"row\">\n  <md-toolbar color=\"primary\" class=\"col-12\">\n    <h5>Datacenter Management Framework</h5>\n  </md-toolbar>\n</div>\n<div class=\"row\">\n  <div class=\"col-sm-10 col-md-6 col-lg-4 offset-sm-1 offset-md-3 offset-lg-4\">\n    <md-card class=\"login-wrapper\">\n      <md-card-header>        \n        <md-card-title ><h5 style=\"text-align: center\"> Datacenter Management Framework </h5></md-card-title>\n      </md-card-header>\n      <hr>\n      <md-card-content>\n        <form class=\"login\" [formGroup]=\"loginForm\" (ngSubmit)=\"onlogin()\" novalidate>\n          <div class=\"form-group\">\n            <md-input-container class=\"col-12\">\n              <input mdInput placeholder=\"UserName\" type=\"text\" formControlName=\"userId\" required />\n            </md-input-container>\n          </div>\n\n          <div class=\"form-group\">\n            <md-input-container class=\"col-12\">\n              <input mdInput placeholder=\"Password\" type=\"password\" formControlName=\"password\" required />\n            </md-input-container>\n          </div>\n          <div class=\"form-group\">\n            <span [ngClass]=\"{'error':!InVisible,'active':!InVisible}\">\n          {{result}}\n        </span>\n          </div>\n          <div class=\"form-group\">\n            <md-card-actions class=\"col-12\">\n              <button md-raised-button type=\"submit\" class=\"my-success-btn\" color=\"primary\">LOG IN</button>\n            </md-card-actions>\n          </div>\n        </form>\n      </md-card-content>\n    </md-card>\n  </div>\n</div>"
 
 /***/ }),
 
 /***/ 1012:
 /***/ (function(module, exports) {
 
-module.exports = "<ng2-smart-table  [settings]=\"settings\" [source]=\"parameters\" ></ng2-smart-table>\n<button type=\"button\" md-button class=\"my-cancel-btn\" style=\"float: right\" (click)=\"dialogRef.close()\" color=\"primary\">OK</button>\n"
+module.exports = "<div class=\"mat-sidenav-focus-trap\">\n  <div class=\"cdk-focus-trap-content\">\n    <nav class=\"main\">\n      <ul>\n        <li class=\"for-mobile\"><span>Welcome {{User}}</span></li>\n        <li *ngFor=\"let list of links\">\n          <a *ngIf=\"list.submenu==undefined \" [routerLink]=\"[list.path]\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" (click)=\"sidenav.close()\"><i class=\"material-icons list-icons\">{{list.icon}}</i>{{list.name}}</a>\n          <nav class=\"sub\" *ngIf=\"list.submenu!=undefined\">\n            <h6 *ngIf=\"list.submenu!=undefined\" (click)=\"submenu($event)\">{{list.name}}<i class=\"material-icons\" [hidden]=\"shown\">&#xE315;</i><i class=\"material-icons\" [hidden]=\"!shown\">&#xE313;</i></h6>\n            <ul [hidden]=\"shown\">\n              <li *ngFor=\"let menu of list.submenu\"><a [routerLink]=\"[menu.path]\" (click)=\"sidenav.close();submenu($event)\"><i class=\"material-icons list-icons\">{{menu.icon}}</i>{{menu.name}}</a></li>\n            </ul>\n          </nav>\n        </li>\n        <li class=\"for-mobile\"><a href=\"javascript:void(0)\" (click)=\"logout()\"><i class=\"material-icons list-icons\">power_settings_new</i>Logout</a></li>\n      </ul>\n    </nav>\n  </div>\n</div>\n<!--(click)=\"sidenav.close()\"-->"
 
 /***/ }),
 
 /***/ 1013:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\"> \r\n  <md-card class=\"col-10 offset-1\">\r\n    <md-card-title>\r\n      <h2>Requests</h2>\r\n    </md-card-title>\r\n    <md-card-content>\r\n      <button type=\"button\" md-raised-button class=\"my-success-btn\" (click)=\"addNewRequest()\"  color=\"primary\">New / Edit</button>\r\n      <hr>\r\n      <ng2-smart-table class=\"table table-striped table-responsive\" [settings]=\"settings\" [source]=\"data\" (infoColumn)=\"onUserRowSelect($event)\" (edit)=\"onEdit($event)\" ></ng2-smart-table>\r\n    </md-card-content>\r\n  </md-card>\r\n</div>"
+module.exports = "<ng2-smart-table  [settings]=\"settings\" [source]=\"parameters\" ></ng2-smart-table>\n<button type=\"button\" md-button class=\"my-cancel-btn\" style=\"float: right\" (click)=\"dialogRef.close()\" color=\"primary\">OK</button>\n"
 
 /***/ }),
 
 /***/ 1014:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n<md-card class=\"col-10 offset-1\">\n  <md-card-title>\n    <h2>Resouces</h2>\n  </md-card-title>\n  <md-card-content>\n        <ng2-smart-table class=\"table table-responsive\" [settings]=\"settings\" [source]=\"data\" (infoColumn)=\"onUserRowSelect($event)\"></ng2-smart-table>\n  </md-card-content>\n</md-card>\n</div>"
+module.exports = "<div class=\"row\"> \r\n  <md-card class=\"col-10 offset-1\">\r\n    <md-card-title>\r\n      <h2>Requests</h2>\r\n    </md-card-title>\r\n    <md-card-content>\r\n      <button type=\"button\" md-raised-button class=\"my-success-btn\" (click)=\"addNewRequest()\"  color=\"primary\">New / Edit</button>\r\n      <hr>\r\n      <ng2-smart-table class=\"table table-striped table-responsive\" [settings]=\"settings\" [source]=\"data\" (infoColumn)=\"onUserRowSelect($event)\" (edit)=\"onEdit($event)\" ></ng2-smart-table>\r\n    </md-card-content>\r\n  </md-card>\r\n</div>"
 
 /***/ }),
 
 /***/ 1015:
 /***/ (function(module, exports) {
 
+module.exports = "<div class=\"row\">\n<md-card class=\"col-10 offset-1\">\n  <md-card-title>\n    <h2>Resouces</h2>\n  </md-card-title>\n  <md-card-content>\n        <ng2-smart-table class=\"table table-responsive\" [settings]=\"settings\" [source]=\"data\" (infoColumn)=\"onUserRowSelect($event)\"></ng2-smart-table>\n  </md-card-content>\n</md-card>\n</div>"
+
+/***/ }),
+
+/***/ 1016:
+/***/ (function(module, exports) {
+
 module.exports = "<p>\n  {{data.message}}\n</p>\n<button type=\"button\" md-button class=\"my-cancel-btn\" style=\"float: right\" (click)=\"dialogRef.close()\">Ok</button>"
 
 /***/ }),
 
-/***/ 1268:
+/***/ 1269:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(652);
+module.exports = __webpack_require__(654);
 
 
 /***/ }),
 
-/***/ 276:
+/***/ 182:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__(33);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ErrorDialogComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+
+
+var ErrorDialogComponent = (function () {
+    function ErrorDialogComponent(dialogRef, data) {
+        this.dialogRef = dialogRef;
+        this.data = data;
+    }
+    ErrorDialogComponent.prototype.ngOnInit = function () {
+    };
+    ErrorDialogComponent = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'app-error-dialog',
+            template: __webpack_require__(1008),
+            styles: [__webpack_require__(977)]
+        }),
+        __param(1, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_1__angular_material__["c" /* MD_DIALOG_DATA */])), 
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["d" /* MdDialogRef */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_material__["d" /* MdDialogRef */]) === 'function' && _a) || Object, Object])
+    ], ErrorDialogComponent);
+    return ErrorDialogComponent;
+    var _a;
+}());
+//# sourceMappingURL=error-dialog.component.js.map
+
+/***/ }),
+
+/***/ 277:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -194,8 +245,8 @@ var PopUpDialogComponent = (function () {
     PopUpDialogComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-pop-up-dialog',
-            template: __webpack_require__(1012),
-            styles: [__webpack_require__(981)]
+            template: __webpack_require__(1013),
+            styles: [__webpack_require__(982)]
         }),
         __param(1, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_1__angular_material__["c" /* MD_DIALOG_DATA */])), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["d" /* MdDialogRef */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_material__["d" /* MdDialogRef */]) === 'function' && _a) || Object, Object])
@@ -207,7 +258,7 @@ var PopUpDialogComponent = (function () {
 
 /***/ }),
 
-/***/ 277:
+/***/ 278:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -239,8 +290,8 @@ var SuccessDialogComponent = (function () {
     SuccessDialogComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-success-dialog',
-            template: __webpack_require__(1015),
-            styles: [__webpack_require__(984)]
+            template: __webpack_require__(1016),
+            styles: [__webpack_require__(985)]
         }),
         __param(1, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_1__angular_material__["c" /* MD_DIALOG_DATA */])), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["d" /* MdDialogRef */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_material__["d" /* MdDialogRef */]) === 'function' && _a) || Object, Object])
@@ -262,9 +313,9 @@ var SuccessDialogComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Subject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Subject__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__(77);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_material__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__component_dialog_dialog_component__ = __webpack_require__(471);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__component_error_dialog_error_dialog_component__ = __webpack_require__(472);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rxjs_Rx__ = __webpack_require__(188);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__component_dialog_dialog_component__ = __webpack_require__(472);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__component_error_dialog_error_dialog_component__ = __webpack_require__(182);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rxjs_Rx__ = __webpack_require__(189);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_rxjs_Rx__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CommonService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -530,12 +581,12 @@ var CommonService = (function () {
 
 /***/ }),
 
-/***/ 464:
+/***/ 465:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__form_services__ = __webpack_require__(466);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__form_services__ = __webpack_require__(467);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CreateVmComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -559,7 +610,7 @@ var CreateVmComponent = (function () {
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-create-vm',
             template: "<div>\n                  <add-forms [vmForms]=\"vmForms\"></add-forms>\n               </div>",
-            styles: [__webpack_require__(490)]
+            styles: [__webpack_require__(492)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__form_services__["a" /* FormService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__form_services__["a" /* FormService */]) === 'function' && _a) || Object])
     ], CreateVmComponent);
@@ -570,7 +621,7 @@ var CreateVmComponent = (function () {
 
 /***/ }),
 
-/***/ 465:
+/***/ 466:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -603,14 +654,14 @@ var FormDirective = (function () {
 
 /***/ }),
 
-/***/ 466:
+/***/ 467:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__form_create_vm_form_component__ = __webpack_require__(467);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__form_edit_vm_form_component__ = __webpack_require__(468);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__vm_forms__ = __webpack_require__(858);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__form_create_vm_form_component__ = __webpack_require__(468);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__form_edit_vm_form_component__ = __webpack_require__(469);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__vm_forms__ = __webpack_require__(860);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FormService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -644,7 +695,7 @@ var FormService = (function () {
 
 /***/ }),
 
-/***/ 467:
+/***/ 468:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -653,7 +704,8 @@ var FormService = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_material__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__(77);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__service_common_service__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__success_dialog_success_dialog_component__ = __webpack_require__(277);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__success_dialog_success_dialog_component__ = __webpack_require__(278);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__error_dialog_error_dialog_component__ = __webpack_require__(182);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CreateVMFormComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -664,6 +716,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -699,11 +752,18 @@ var CreateVMFormComponent = (function () {
         var _this = this;
         var dialogRef = this.dialog.open(__WEBPACK_IMPORTED_MODULE_5__success_dialog_success_dialog_component__["a" /* SuccessDialogComponent */], {
             data: {
-                message: "Request " + msg
+                message: msg
             }
         });
         dialogRef.afterClosed().subscribe(function (result) {
             _this.CS.router.navigateByUrl('home/requests');
+        });
+    };
+    CreateVMFormComponent.prototype.showErrorDialog = function (msg) {
+        var dialogRef = this.dialog.open(__WEBPACK_IMPORTED_MODULE_6__error_dialog_error_dialog_component__["a" /* ErrorDialogComponent */], {
+            data: {
+                message: msg
+            }
         });
     };
     CreateVMFormComponent.prototype.onSubmit = function () {
@@ -722,7 +782,7 @@ var CreateVMFormComponent = (function () {
             var res = JSON.parse(err._body);
             if (!res.status) {
                 console.log(err);
-                _this.showDialog("" + err.status + " " + res.message + " ");
+                _this.showErrorDialog(" " + res.message + " ");
             }
         }, function () { });
     };
@@ -743,7 +803,7 @@ var CreateVMFormComponent = (function () {
     ], CreateVMFormComponent.prototype, "data", void 0);
     CreateVMFormComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            template: __webpack_require__(1001)
+            template: __webpack_require__(1002)
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_forms__["h" /* FormBuilder */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_forms__["h" /* FormBuilder */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* Router */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* Router */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__service_common_service__["a" /* CommonService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_4__service_common_service__["a" /* CommonService */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__angular_material__["b" /* MdDialog */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_material__["b" /* MdDialog */]) === 'function' && _d) || Object])
     ], CreateVMFormComponent);
@@ -754,7 +814,7 @@ var CreateVMFormComponent = (function () {
 
 /***/ }),
 
-/***/ 468:
+/***/ 469:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -763,7 +823,8 @@ var CreateVMFormComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_material__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__(77);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__service_common_service__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__success_dialog_success_dialog_component__ = __webpack_require__(277);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__success_dialog_success_dialog_component__ = __webpack_require__(278);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__error_dialog_error_dialog_component__ = __webpack_require__(182);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EditVMFormComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -774,6 +835,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -905,7 +967,7 @@ var EditVMFormComponent = (function () {
             var res = JSON.parse(err._body);
             if (!res.status) {
                 console.log(err);
-                _this.showDialog("" + err.status + " " + res.message + " ");
+                _this.showErrorDialog(" " + res.message + " ");
             }
         });
     };
@@ -917,11 +979,18 @@ var EditVMFormComponent = (function () {
         var _this = this;
         var dialogRef = this.dialog.open(__WEBPACK_IMPORTED_MODULE_5__success_dialog_success_dialog_component__["a" /* SuccessDialogComponent */], {
             data: {
-                message: "Request " + msg
+                message: " " + msg
             }
         });
         dialogRef.afterClosed().subscribe(function (result) {
             _this.CS.router.navigateByUrl('home/requests');
+        });
+    };
+    EditVMFormComponent.prototype.showErrorDialog = function (msg) {
+        var dialogRef = this.dialog.open(__WEBPACK_IMPORTED_MODULE_6__error_dialog_error_dialog_component__["a" /* ErrorDialogComponent */], {
+            data: {
+                message: msg
+            }
         });
     };
     EditVMFormComponent.prototype.onlyNumberKey = function (event) {
@@ -937,7 +1006,7 @@ var EditVMFormComponent = (function () {
     ], EditVMFormComponent.prototype, "data", void 0);
     EditVMFormComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            template: __webpack_require__(1002)
+            template: __webpack_require__(1003)
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_forms__["h" /* FormBuilder */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_forms__["h" /* FormBuilder */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* Router */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* Router */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__service_common_service__["a" /* CommonService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_4__service_common_service__["a" /* CommonService */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__angular_material__["b" /* MdDialog */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_material__["b" /* MdDialog */]) === 'function' && _d) || Object])
     ], EditVMFormComponent);
@@ -948,7 +1017,7 @@ var EditVMFormComponent = (function () {
 
 /***/ }),
 
-/***/ 469:
+/***/ 470:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -972,8 +1041,8 @@ var AboutComponent = (function () {
     AboutComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-about',
-            template: __webpack_require__(1003),
-            styles: [__webpack_require__(972)]
+            template: __webpack_require__(1004),
+            styles: [__webpack_require__(973)]
         }), 
         __metadata('design:paramtypes', [])
     ], AboutComponent);
@@ -983,7 +1052,7 @@ var AboutComponent = (function () {
 
 /***/ }),
 
-/***/ 470:
+/***/ 471:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1004,9 +1073,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var DashboardComponent = (function () {
     function DashboardComponent(CS) {
         this.CS = CS;
-        /*
-                   "#68B6DD",
-                  "#FED403"*/
+        /* "#68B6DD","#FED403"*/
         this.colorsOverride = [{
                 backgroundColor: [
                     "#ECEAEB",
@@ -1082,8 +1149,8 @@ var DashboardComponent = (function () {
     DashboardComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-dashboard',
-            template: __webpack_require__(1005),
-            styles: [__webpack_require__(974)]
+            template: __webpack_require__(1006),
+            styles: [__webpack_require__(975)],
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__service_common_service__["a" /* CommonService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__service_common_service__["a" /* CommonService */]) === 'function' && _a) || Object])
     ], DashboardComponent);
@@ -1094,7 +1161,7 @@ var DashboardComponent = (function () {
 
 /***/ }),
 
-/***/ 471:
+/***/ 472:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1126,8 +1193,8 @@ var DialogComponent = (function () {
     DialogComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-dialog',
-            template: __webpack_require__(1006),
-            styles: [__webpack_require__(975)]
+            template: __webpack_require__(1007),
+            styles: [__webpack_require__(976)]
         }),
         __param(1, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_1__angular_material__["c" /* MD_DIALOG_DATA */])), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["d" /* MdDialogRef */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_material__["d" /* MdDialogRef */]) === 'function' && _a) || Object, Object])
@@ -1136,50 +1203,6 @@ var DialogComponent = (function () {
     var _a;
 }());
 //# sourceMappingURL=dialog.component.js.map
-
-/***/ }),
-
-/***/ 472:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__(33);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ErrorDialogComponent; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
-
-
-var ErrorDialogComponent = (function () {
-    function ErrorDialogComponent(dialogRef, data) {
-        this.dialogRef = dialogRef;
-        this.data = data;
-    }
-    ErrorDialogComponent.prototype.ngOnInit = function () {
-    };
-    ErrorDialogComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'app-error-dialog',
-            template: __webpack_require__(1007),
-            styles: [__webpack_require__(976)]
-        }),
-        __param(1, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_1__angular_material__["c" /* MD_DIALOG_DATA */])), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["d" /* MdDialogRef */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_material__["d" /* MdDialogRef */]) === 'function' && _a) || Object, Object])
-    ], ErrorDialogComponent);
-    return ErrorDialogComponent;
-    var _a;
-}());
-//# sourceMappingURL=error-dialog.component.js.map
 
 /***/ }),
 
@@ -1226,8 +1249,8 @@ var HomeComponent = (function () {
     };
     HomeComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            template: __webpack_require__(1008),
-            styles: [__webpack_require__(977)],
+            template: __webpack_require__(1009),
+            styles: [__webpack_require__(978)],
             host: {
                 '(window:resize)': 'onResize($event)'
             }
@@ -1265,8 +1288,8 @@ var InventoryComponent = (function () {
     InventoryComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-inventory',
-            template: __webpack_require__(1009),
-            styles: [__webpack_require__(978)]
+            template: __webpack_require__(1010),
+            styles: [__webpack_require__(979)]
         }), 
         __metadata('design:paramtypes', [])
     ], InventoryComponent);
@@ -1284,7 +1307,7 @@ var InventoryComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__service_common_service__ = __webpack_require__(43);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__(77);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Rx__ = __webpack_require__(188);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Rx__ = __webpack_require__(189);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_Rx__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1341,8 +1364,8 @@ var LoginComponent = (function () {
     LoginComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-login',
-            template: __webpack_require__(1010),
-            styles: [__webpack_require__(979)]
+            template: __webpack_require__(1011),
+            styles: [__webpack_require__(980)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__angular_forms__["h" /* FormBuilder */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_forms__["h" /* FormBuilder */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__service_common_service__["a" /* CommonService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__service_common_service__["a" /* CommonService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* Router */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* Router */]) === 'function' && _c) || Object])
     ], LoginComponent);
@@ -1359,12 +1382,12 @@ var LoginComponent = (function () {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__service_common_service__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_smart_table__ = __webpack_require__(301);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_smart_table__ = __webpack_require__(302);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_smart_table___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_ng2_smart_table__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_material__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pop_up_dialog_pop_up_dialog_component__ = __webpack_require__(276);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pop_up_dialog_pop_up_dialog_component__ = __webpack_require__(277);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_platform_browser__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__request_data__ = __webpack_require__(862);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__request_data__ = __webpack_require__(864);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RequestComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1475,8 +1498,8 @@ var RequestComponent = (function () {
     RequestComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-request',
-            template: __webpack_require__(1013),
-            styles: [__webpack_require__(982)]
+            template: __webpack_require__(1014),
+            styles: [__webpack_require__(983)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__service_common_service__["a" /* CommonService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__service_common_service__["a" /* CommonService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_material__["b" /* MdDialog */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__angular_material__["b" /* MdDialog */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_5__angular_platform_browser__["e" /* DomSanitizer */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_5__angular_platform_browser__["e" /* DomSanitizer */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === 'function' && _d) || Object])
     ], RequestComponent);
@@ -1493,11 +1516,11 @@ var RequestComponent = (function () {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__service_common_service__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_smart_table__ = __webpack_require__(301);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_smart_table__ = __webpack_require__(302);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_smart_table___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_ng2_smart_table__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_material__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pop_up_dialog_pop_up_dialog_component__ = __webpack_require__(276);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pop_up_dialog_pop_up_dialog_component__ = __webpack_require__(277);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ResourcesComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1597,8 +1620,8 @@ var ResourcesComponent = (function () {
     ResourcesComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-resources',
-            template: __webpack_require__(1014),
-            styles: [__webpack_require__(983)]
+            template: __webpack_require__(1015),
+            styles: [__webpack_require__(984)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__service_common_service__["a" /* CommonService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__service_common_service__["a" /* CommonService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__angular_material__["b" /* MdDialog */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_4__angular_material__["b" /* MdDialog */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser__["e" /* DomSanitizer */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser__["e" /* DomSanitizer */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === 'function' && _d) || Object])
     ], ResourcesComponent);
@@ -1648,7 +1671,7 @@ var AuthgaurdService = (function () {
 
 /***/ }),
 
-/***/ 490:
+/***/ 492:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(12)();
@@ -1666,7 +1689,7 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 651:
+/***/ 653:
 /***/ (function(module, exports) {
 
 function webpackEmptyContext(req) {
@@ -1675,20 +1698,20 @@ function webpackEmptyContext(req) {
 webpackEmptyContext.keys = function() { return []; };
 webpackEmptyContext.resolve = webpackEmptyContext;
 module.exports = webpackEmptyContext;
-webpackEmptyContext.id = 651;
+webpackEmptyContext.id = 653;
 
 
 /***/ }),
 
-/***/ 652:
+/***/ 654:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__(777);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_app_module__ = __webpack_require__(856);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(864);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__(779);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_app_module__ = __webpack_require__(858);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(866);
 
 
 
@@ -1701,7 +1724,7 @@ __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dyna
 
 /***/ }),
 
-/***/ 855:
+/***/ 857:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1724,8 +1747,8 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-root',
-            template: __webpack_require__(999),
-            styles: [__webpack_require__(985)]
+            template: __webpack_require__(1000),
+            styles: [__webpack_require__(986)]
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
@@ -1735,7 +1758,7 @@ var AppComponent = (function () {
 
 /***/ }),
 
-/***/ 856:
+/***/ 858:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1744,38 +1767,38 @@ var AppComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(73);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_material__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ng2_charts_ng2_charts__ = __webpack_require__(992);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ng2_charts_ng2_charts__ = __webpack_require__(993);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ng2_charts_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_ng2_charts_ng2_charts__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ng2_smart_table__ = __webpack_require__(301);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ng2_smart_table__ = __webpack_require__(302);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ng2_smart_table___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_ng2_smart_table__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_hammerjs__ = __webpack_require__(986);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_hammerjs__ = __webpack_require__(987);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_hammerjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_hammerjs__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_chart_js__ = __webpack_require__(867);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_chart_js__ = __webpack_require__(869);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_chart_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_chart_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__app_route__ = __webpack_require__(857);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__app_component__ = __webpack_require__(855);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__app_route__ = __webpack_require__(859);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__app_component__ = __webpack_require__(857);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__component_login_login_component__ = __webpack_require__(475);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__component_home_home_component__ = __webpack_require__(473);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__component_VM_create_vm_create_vm_component__ = __webpack_require__(464);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__component_about_about_component__ = __webpack_require__(469);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__component_VM_create_vm_create_vm_component__ = __webpack_require__(465);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__component_about_about_component__ = __webpack_require__(470);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__service_common_service__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__component_nav_nav_component__ = __webpack_require__(861);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__component_dashboard_dashboard_component__ = __webpack_require__(470);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__component_nav_nav_component__ = __webpack_require__(863);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__component_dashboard_dashboard_component__ = __webpack_require__(471);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__component_request_request_component__ = __webpack_require__(476);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__component_resources_resources_component__ = __webpack_require__(477);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__component_dialog_dialog_component__ = __webpack_require__(471);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__component_dialog_dialog_component__ = __webpack_require__(472);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__component_inventory_inventory_component__ = __webpack_require__(474);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__component_construction_construction_component__ = __webpack_require__(860);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__component_success_dialog_success_dialog_component__ = __webpack_require__(277);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__component_pop_up_dialog_pop_up_dialog_component__ = __webpack_require__(276);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__component_construction_construction_component__ = __webpack_require__(862);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__component_success_dialog_success_dialog_component__ = __webpack_require__(278);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__component_pop_up_dialog_pop_up_dialog_component__ = __webpack_require__(277);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__service_authgaurd_service__ = __webpack_require__(478);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__component_error_dialog_error_dialog_component__ = __webpack_require__(472);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__shared_info_directive__ = __webpack_require__(863);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__component_VM_create_vm_vmoperation_form_component__ = __webpack_require__(859);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__component_VM_create_vm_form_create_vm_form_component__ = __webpack_require__(467);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__component_VM_create_vm_form_edit_vm_form_component__ = __webpack_require__(468);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__component_VM_create_vm_form_directive__ = __webpack_require__(465);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__component_VM_create_vm_form_services__ = __webpack_require__(466);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__component_error_dialog_error_dialog_component__ = __webpack_require__(182);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__shared_info_directive__ = __webpack_require__(865);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__component_VM_create_vm_vmoperation_form_component__ = __webpack_require__(861);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__component_VM_create_vm_form_create_vm_form_component__ = __webpack_require__(468);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__component_VM_create_vm_form_edit_vm_form_component__ = __webpack_require__(469);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__component_VM_create_vm_form_directive__ = __webpack_require__(466);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__component_VM_create_vm_form_services__ = __webpack_require__(467);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1869,16 +1892,16 @@ var AppModule = (function () {
 
 /***/ }),
 
-/***/ 857:
+/***/ 859:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__component_home_home_component__ = __webpack_require__(473);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(77);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__component_about_about_component__ = __webpack_require__(469);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__component_about_about_component__ = __webpack_require__(470);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__component_login_login_component__ = __webpack_require__(475);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__component_VM_create_vm_create_vm_component__ = __webpack_require__(464);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__component_dashboard_dashboard_component__ = __webpack_require__(470);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__component_VM_create_vm_create_vm_component__ = __webpack_require__(465);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__component_dashboard_dashboard_component__ = __webpack_require__(471);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__component_request_request_component__ = __webpack_require__(476);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__component_resources_resources_component__ = __webpack_require__(477);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__component_inventory_inventory_component__ = __webpack_require__(474);
@@ -1918,7 +1941,7 @@ var ROUTING = __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule 
 
 /***/ }),
 
-/***/ 858:
+/***/ 860:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1934,13 +1957,13 @@ var VMForms = (function () {
 
 /***/ }),
 
-/***/ 859:
+/***/ 861:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__form_directive__ = __webpack_require__(465);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__form_directive__ = __webpack_require__(466);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return VMOperationFormComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2018,8 +2041,8 @@ var VMOperationFormComponent = (function () {
     VMOperationFormComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'add-forms',
-            template: __webpack_require__(1000),
-            styles: [__webpack_require__(490)]
+            template: __webpack_require__(1001),
+            styles: [__webpack_require__(492)]
         }), 
         __metadata('design:paramtypes', [(typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ComponentFactoryResolver"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ComponentFactoryResolver"]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__angular_forms__["h" /* FormBuilder */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_forms__["h" /* FormBuilder */]) === 'function' && _c) || Object])
     ], VMOperationFormComponent);
@@ -2030,7 +2053,7 @@ var VMOperationFormComponent = (function () {
 
 /***/ }),
 
-/***/ 860:
+/***/ 862:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2054,8 +2077,8 @@ var ConstructionComponent = (function () {
     ConstructionComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-construction',
-            template: __webpack_require__(1004),
-            styles: [__webpack_require__(973)]
+            template: __webpack_require__(1005),
+            styles: [__webpack_require__(974)]
         }), 
         __metadata('design:paramtypes', [])
     ], ConstructionComponent);
@@ -2065,7 +2088,7 @@ var ConstructionComponent = (function () {
 
 /***/ }),
 
-/***/ 861:
+/***/ 863:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2120,8 +2143,8 @@ var NavComponent = (function () {
     NavComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-nav',
-            template: __webpack_require__(1011),
-            styles: [__webpack_require__(980)]
+            template: __webpack_require__(1012),
+            styles: [__webpack_require__(981)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__service_common_service__["a" /* CommonService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__service_common_service__["a" /* CommonService */]) === 'function' && _a) || Object])
     ], NavComponent);
@@ -2139,7 +2162,7 @@ var NavComponent = (function () {
 
 /***/ }),
 
-/***/ 862:
+/***/ 864:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5202,7 +5225,7 @@ var requestData = {
 
 /***/ }),
 
-/***/ 863:
+/***/ 865:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5241,7 +5264,7 @@ var InfoDirective = (function () {
 
 /***/ }),
 
-/***/ 864:
+/***/ 866:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5254,24 +5277,6 @@ var environment = {
     production: false
 };
 //# sourceMappingURL=environment.js.map
-
-/***/ }),
-
-/***/ 972:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(12)();
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
 
 /***/ }),
 
@@ -5301,7 +5306,7 @@ exports = module.exports = __webpack_require__(12)();
 
 
 // module
-exports.push([module.i, "md-card {\n  float: left;\n  margin: 5px auto; }\n", ""]);
+exports.push([module.i, "", ""]);
 
 // exports
 
@@ -5319,7 +5324,7 @@ exports = module.exports = __webpack_require__(12)();
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "md-card {\n  float: left;\n  margin: 5px auto; }\n", ""]);
 
 // exports
 
@@ -5355,7 +5360,7 @@ exports = module.exports = __webpack_require__(12)();
 
 
 // module
-exports.push([module.i, "md-sidenav-container {\n  padding: 10px 0px 30px;\n  height: 100%;\n  width: 100%; }\n\nmd-sidenav {\n  padding: 0px; }\n\nmd-card {\n  margin: 5px; }\n\n.header {\n  height: 64px; }\n\n.rest-content {\n  height: calc(100% - 64px); }\n\n.example-fill-remaining-space {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto; }\n\n.spacing {\n  margin: 0px 10px 0px 0px; }\n\n.after-bar:after {\n  content: \"|\";\n  display: inline-block;\n  padding: 0 10px; }\n\nrouter-outlet {\n  width: 100%; }\n\n@media (max-width: 767px) {\n  .header-title {\n    font-size: 17px; } }\n", ""]);
+exports.push([module.i, "", ""]);
 
 // exports
 
@@ -5373,7 +5378,7 @@ exports = module.exports = __webpack_require__(12)();
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "md-sidenav-container {\n  padding: 10px 0px 30px;\n  height: 100%;\n  width: 100%; }\n\nmd-sidenav {\n  padding: 0px; }\n\nmd-card {\n  margin: 5px; }\n\n.header {\n  height: 64px; }\n\n.rest-content {\n  height: calc(100% - 64px); }\n\n.example-fill-remaining-space {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto; }\n\n.spacing {\n  margin: 0px 10px 0px 0px; }\n\n.after-bar:after {\n  content: \"|\";\n  display: inline-block;\n  padding: 0 10px; }\n\nrouter-outlet {\n  width: 100%; }\n\n@media (max-width: 767px) {\n  .header-title {\n    font-size: 17px; } }\n", ""]);
 
 // exports
 
@@ -5391,7 +5396,7 @@ exports = module.exports = __webpack_require__(12)();
 
 
 // module
-exports.push([module.i, "md-card {\n  margin-top: 1.5rem; }\n", ""]);
+exports.push([module.i, "", ""]);
 
 // exports
 
@@ -5409,7 +5414,7 @@ exports = module.exports = __webpack_require__(12)();
 
 
 // module
-exports.push([module.i, ".mat-sidenav-focus-trap {\n  height: 100%; }\n\n.mat-sidenav-focus-trap > .cdk-focus-trap-content {\n  box-sizing: border-box;\n  height: 100%;\n  overflow-y: auto;\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0); }\n\ndiv {\n  display: block; }\n\nnav ul {\n  margin: 0px;\n  padding: 0px;\n  list-style: none; }\n\nli {\n  display: list-item;\n  text-align: -webkit-match-parent;\n  border-bottom-width: 1px;\n  border-bottom-style: solid;\n  margin: 0;\n  padding: 0;\n  border-color: rgba(0, 0, 0, 0.06);\n  color: rgba(0, 0, 0, 0.54); }\n\nh6 {\n  display: block;\n  font-size: 1.17em;\n  -webkit-margin-before: 1em;\n  -webkit-margin-after: 1em;\n  -webkit-margin-start: 0px;\n  -webkit-margin-end: 0px;\n  font-weight: bold; }\n\nnav h6, material-icons {\n  border: none;\n  font-size: 1.17em;\n  letter-spacing: 1px;\n  line-height: 24px;\n  text-transform: uppercase;\n  font-weight: 400;\n  margin: 0;\n  padding: 0 16px;\n  background: rgba(0, 0, 0, 0.32);\n  color: #fff; }\n\nnav ul li > a, span {\n  box-sizing: border-box;\n  display: block;\n  font-size: 14px;\n  font-weight: 400;\n  line-height: 47px;\n  text-decoration: none;\n  -webkit-transition: all .3s;\n  transition: all .3s;\n  padding: 0 16px;\n  position: relative; }\n\nnav ul li > a:hover {\n  background: #fafafa;\n  color: primary; }\n\na {\n  text-decoration: none;\n  color: #000; }\n\n.active {\n  border-left: 5px solid #f00; }\n\n.for-mobile {\n  display: none; }\n\n.list-icons {\n  vertical-align: middle;\n  padding: 0 5px 5px 0; }\n\n@media (max-width: 767px) {\n  .for-mobile {\n    display: block; } }\n", ""]);
+exports.push([module.i, "md-card {\n  margin-top: 1.5rem; }\n", ""]);
 
 // exports
 
@@ -5427,7 +5432,7 @@ exports = module.exports = __webpack_require__(12)();
 
 
 // module
-exports.push([module.i, "ng2-smart-table {\n  min-width: 350px; }\n\ntable {\n  border: none; }\n", ""]);
+exports.push([module.i, ".mat-sidenav-focus-trap {\n  height: 100%; }\n\n.mat-sidenav-focus-trap > .cdk-focus-trap-content {\n  box-sizing: border-box;\n  height: 100%;\n  overflow-y: auto;\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0); }\n\ndiv {\n  display: block; }\n\nnav ul {\n  margin: 0px;\n  padding: 0px;\n  list-style: none; }\n\nli {\n  display: list-item;\n  text-align: -webkit-match-parent;\n  border-bottom-width: 1px;\n  border-bottom-style: solid;\n  margin: 0;\n  padding: 0;\n  border-color: rgba(0, 0, 0, 0.06);\n  color: rgba(0, 0, 0, 0.54); }\n\nh6 {\n  display: block;\n  font-size: 1.17em;\n  -webkit-margin-before: 1em;\n  -webkit-margin-after: 1em;\n  -webkit-margin-start: 0px;\n  -webkit-margin-end: 0px;\n  font-weight: bold; }\n\nnav h6, material-icons {\n  border: none;\n  font-size: 1.17em;\n  letter-spacing: 1px;\n  line-height: 24px;\n  text-transform: uppercase;\n  font-weight: 400;\n  margin: 0;\n  padding: 0 16px;\n  background: rgba(0, 0, 0, 0.32);\n  color: #fff; }\n\nnav ul li > a, span {\n  box-sizing: border-box;\n  display: block;\n  font-size: 14px;\n  font-weight: 400;\n  line-height: 47px;\n  text-decoration: none;\n  -webkit-transition: all .3s;\n  transition: all .3s;\n  padding: 0 16px;\n  position: relative; }\n\nnav ul li > a:hover {\n  background: #fafafa;\n  color: primary; }\n\na {\n  text-decoration: none;\n  color: #000; }\n\n.active {\n  border-left: 5px solid #f00; }\n\n.for-mobile {\n  display: none; }\n\n.list-icons {\n  vertical-align: middle;\n  padding: 0 5px 5px 0; }\n\n@media (max-width: 767px) {\n  .for-mobile {\n    display: block; } }\n", ""]);
 
 // exports
 
@@ -5445,7 +5450,7 @@ exports = module.exports = __webpack_require__(12)();
 
 
 // module
-exports.push([module.i, ".example-margin {\n  margin: 0 10px; }\n", ""]);
+exports.push([module.i, "ng2-smart-table {\n  min-width: 350px; }\n\ntable {\n  border: none; }\n", ""]);
 
 // exports
 
@@ -5463,7 +5468,7 @@ exports = module.exports = __webpack_require__(12)();
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".example-margin {\n  margin: 0 10px; }\n", ""]);
 
 // exports
 
@@ -5499,6 +5504,24 @@ exports = module.exports = __webpack_require__(12)();
 
 
 // module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 986:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(12)();
+// imports
+
+
+// module
 exports.push([module.i, "router-outlet{\r\n    width: 100%;\r\n}", ""]);
 
 // exports
@@ -5509,240 +5532,240 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 989:
+/***/ 990:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./af": 491,
-	"./af.js": 491,
-	"./ar": 498,
-	"./ar-dz": 492,
-	"./ar-dz.js": 492,
-	"./ar-kw": 493,
-	"./ar-kw.js": 493,
-	"./ar-ly": 494,
-	"./ar-ly.js": 494,
-	"./ar-ma": 495,
-	"./ar-ma.js": 495,
-	"./ar-sa": 496,
-	"./ar-sa.js": 496,
-	"./ar-tn": 497,
-	"./ar-tn.js": 497,
-	"./ar.js": 498,
-	"./az": 499,
-	"./az.js": 499,
-	"./be": 500,
-	"./be.js": 500,
-	"./bg": 501,
-	"./bg.js": 501,
-	"./bn": 502,
-	"./bn.js": 502,
-	"./bo": 503,
-	"./bo.js": 503,
-	"./br": 504,
-	"./br.js": 504,
-	"./bs": 505,
-	"./bs.js": 505,
-	"./ca": 506,
-	"./ca.js": 506,
-	"./cs": 507,
-	"./cs.js": 507,
-	"./cv": 508,
-	"./cv.js": 508,
-	"./cy": 509,
-	"./cy.js": 509,
-	"./da": 510,
-	"./da.js": 510,
-	"./de": 513,
-	"./de-at": 511,
-	"./de-at.js": 511,
-	"./de-ch": 512,
-	"./de-ch.js": 512,
-	"./de.js": 513,
-	"./dv": 514,
-	"./dv.js": 514,
-	"./el": 515,
-	"./el.js": 515,
-	"./en-au": 516,
-	"./en-au.js": 516,
-	"./en-ca": 517,
-	"./en-ca.js": 517,
-	"./en-gb": 518,
-	"./en-gb.js": 518,
-	"./en-ie": 519,
-	"./en-ie.js": 519,
-	"./en-nz": 520,
-	"./en-nz.js": 520,
-	"./eo": 521,
-	"./eo.js": 521,
-	"./es": 523,
-	"./es-do": 522,
-	"./es-do.js": 522,
-	"./es.js": 523,
-	"./et": 524,
-	"./et.js": 524,
-	"./eu": 525,
-	"./eu.js": 525,
-	"./fa": 526,
-	"./fa.js": 526,
-	"./fi": 527,
-	"./fi.js": 527,
-	"./fo": 528,
-	"./fo.js": 528,
-	"./fr": 531,
-	"./fr-ca": 529,
-	"./fr-ca.js": 529,
-	"./fr-ch": 530,
-	"./fr-ch.js": 530,
-	"./fr.js": 531,
-	"./fy": 532,
-	"./fy.js": 532,
-	"./gd": 533,
-	"./gd.js": 533,
-	"./gl": 534,
-	"./gl.js": 534,
-	"./gom-latn": 535,
-	"./gom-latn.js": 535,
-	"./he": 536,
-	"./he.js": 536,
-	"./hi": 537,
-	"./hi.js": 537,
-	"./hr": 538,
-	"./hr.js": 538,
-	"./hu": 539,
-	"./hu.js": 539,
-	"./hy-am": 540,
-	"./hy-am.js": 540,
-	"./id": 541,
-	"./id.js": 541,
-	"./is": 542,
-	"./is.js": 542,
-	"./it": 543,
-	"./it.js": 543,
-	"./ja": 544,
-	"./ja.js": 544,
-	"./jv": 545,
-	"./jv.js": 545,
-	"./ka": 546,
-	"./ka.js": 546,
-	"./kk": 547,
-	"./kk.js": 547,
-	"./km": 548,
-	"./km.js": 548,
-	"./kn": 549,
-	"./kn.js": 549,
-	"./ko": 550,
-	"./ko.js": 550,
-	"./ky": 551,
-	"./ky.js": 551,
-	"./lb": 552,
-	"./lb.js": 552,
-	"./lo": 553,
-	"./lo.js": 553,
-	"./lt": 554,
-	"./lt.js": 554,
-	"./lv": 555,
-	"./lv.js": 555,
-	"./me": 556,
-	"./me.js": 556,
-	"./mi": 557,
-	"./mi.js": 557,
-	"./mk": 558,
-	"./mk.js": 558,
-	"./ml": 559,
-	"./ml.js": 559,
-	"./mr": 560,
-	"./mr.js": 560,
-	"./ms": 562,
-	"./ms-my": 561,
-	"./ms-my.js": 561,
-	"./ms.js": 562,
-	"./my": 563,
-	"./my.js": 563,
-	"./nb": 564,
-	"./nb.js": 564,
-	"./ne": 565,
-	"./ne.js": 565,
-	"./nl": 567,
-	"./nl-be": 566,
-	"./nl-be.js": 566,
-	"./nl.js": 567,
-	"./nn": 568,
-	"./nn.js": 568,
-	"./pa-in": 569,
-	"./pa-in.js": 569,
-	"./pl": 570,
-	"./pl.js": 570,
-	"./pt": 572,
-	"./pt-br": 571,
-	"./pt-br.js": 571,
-	"./pt.js": 572,
-	"./ro": 573,
-	"./ro.js": 573,
-	"./ru": 574,
-	"./ru.js": 574,
-	"./sd": 575,
-	"./sd.js": 575,
-	"./se": 576,
-	"./se.js": 576,
-	"./si": 577,
-	"./si.js": 577,
-	"./sk": 578,
-	"./sk.js": 578,
-	"./sl": 579,
-	"./sl.js": 579,
-	"./sq": 580,
-	"./sq.js": 580,
-	"./sr": 582,
-	"./sr-cyrl": 581,
-	"./sr-cyrl.js": 581,
-	"./sr.js": 582,
-	"./ss": 583,
-	"./ss.js": 583,
-	"./sv": 584,
-	"./sv.js": 584,
-	"./sw": 585,
-	"./sw.js": 585,
-	"./ta": 586,
-	"./ta.js": 586,
-	"./te": 587,
-	"./te.js": 587,
-	"./tet": 588,
-	"./tet.js": 588,
-	"./th": 589,
-	"./th.js": 589,
-	"./tl-ph": 590,
-	"./tl-ph.js": 590,
-	"./tlh": 591,
-	"./tlh.js": 591,
-	"./tr": 592,
-	"./tr.js": 592,
-	"./tzl": 593,
-	"./tzl.js": 593,
-	"./tzm": 595,
-	"./tzm-latn": 594,
-	"./tzm-latn.js": 594,
-	"./tzm.js": 595,
-	"./uk": 596,
-	"./uk.js": 596,
-	"./ur": 597,
-	"./ur.js": 597,
-	"./uz": 599,
-	"./uz-latn": 598,
-	"./uz-latn.js": 598,
-	"./uz.js": 599,
-	"./vi": 600,
-	"./vi.js": 600,
-	"./x-pseudo": 601,
-	"./x-pseudo.js": 601,
-	"./yo": 602,
-	"./yo.js": 602,
-	"./zh-cn": 603,
-	"./zh-cn.js": 603,
-	"./zh-hk": 604,
-	"./zh-hk.js": 604,
-	"./zh-tw": 605,
-	"./zh-tw.js": 605
+	"./af": 493,
+	"./af.js": 493,
+	"./ar": 500,
+	"./ar-dz": 494,
+	"./ar-dz.js": 494,
+	"./ar-kw": 495,
+	"./ar-kw.js": 495,
+	"./ar-ly": 496,
+	"./ar-ly.js": 496,
+	"./ar-ma": 497,
+	"./ar-ma.js": 497,
+	"./ar-sa": 498,
+	"./ar-sa.js": 498,
+	"./ar-tn": 499,
+	"./ar-tn.js": 499,
+	"./ar.js": 500,
+	"./az": 501,
+	"./az.js": 501,
+	"./be": 502,
+	"./be.js": 502,
+	"./bg": 503,
+	"./bg.js": 503,
+	"./bn": 504,
+	"./bn.js": 504,
+	"./bo": 505,
+	"./bo.js": 505,
+	"./br": 506,
+	"./br.js": 506,
+	"./bs": 507,
+	"./bs.js": 507,
+	"./ca": 508,
+	"./ca.js": 508,
+	"./cs": 509,
+	"./cs.js": 509,
+	"./cv": 510,
+	"./cv.js": 510,
+	"./cy": 511,
+	"./cy.js": 511,
+	"./da": 512,
+	"./da.js": 512,
+	"./de": 515,
+	"./de-at": 513,
+	"./de-at.js": 513,
+	"./de-ch": 514,
+	"./de-ch.js": 514,
+	"./de.js": 515,
+	"./dv": 516,
+	"./dv.js": 516,
+	"./el": 517,
+	"./el.js": 517,
+	"./en-au": 518,
+	"./en-au.js": 518,
+	"./en-ca": 519,
+	"./en-ca.js": 519,
+	"./en-gb": 520,
+	"./en-gb.js": 520,
+	"./en-ie": 521,
+	"./en-ie.js": 521,
+	"./en-nz": 522,
+	"./en-nz.js": 522,
+	"./eo": 523,
+	"./eo.js": 523,
+	"./es": 525,
+	"./es-do": 524,
+	"./es-do.js": 524,
+	"./es.js": 525,
+	"./et": 526,
+	"./et.js": 526,
+	"./eu": 527,
+	"./eu.js": 527,
+	"./fa": 528,
+	"./fa.js": 528,
+	"./fi": 529,
+	"./fi.js": 529,
+	"./fo": 530,
+	"./fo.js": 530,
+	"./fr": 533,
+	"./fr-ca": 531,
+	"./fr-ca.js": 531,
+	"./fr-ch": 532,
+	"./fr-ch.js": 532,
+	"./fr.js": 533,
+	"./fy": 534,
+	"./fy.js": 534,
+	"./gd": 535,
+	"./gd.js": 535,
+	"./gl": 536,
+	"./gl.js": 536,
+	"./gom-latn": 537,
+	"./gom-latn.js": 537,
+	"./he": 538,
+	"./he.js": 538,
+	"./hi": 539,
+	"./hi.js": 539,
+	"./hr": 540,
+	"./hr.js": 540,
+	"./hu": 541,
+	"./hu.js": 541,
+	"./hy-am": 542,
+	"./hy-am.js": 542,
+	"./id": 543,
+	"./id.js": 543,
+	"./is": 544,
+	"./is.js": 544,
+	"./it": 545,
+	"./it.js": 545,
+	"./ja": 546,
+	"./ja.js": 546,
+	"./jv": 547,
+	"./jv.js": 547,
+	"./ka": 548,
+	"./ka.js": 548,
+	"./kk": 549,
+	"./kk.js": 549,
+	"./km": 550,
+	"./km.js": 550,
+	"./kn": 551,
+	"./kn.js": 551,
+	"./ko": 552,
+	"./ko.js": 552,
+	"./ky": 553,
+	"./ky.js": 553,
+	"./lb": 554,
+	"./lb.js": 554,
+	"./lo": 555,
+	"./lo.js": 555,
+	"./lt": 556,
+	"./lt.js": 556,
+	"./lv": 557,
+	"./lv.js": 557,
+	"./me": 558,
+	"./me.js": 558,
+	"./mi": 559,
+	"./mi.js": 559,
+	"./mk": 560,
+	"./mk.js": 560,
+	"./ml": 561,
+	"./ml.js": 561,
+	"./mr": 562,
+	"./mr.js": 562,
+	"./ms": 564,
+	"./ms-my": 563,
+	"./ms-my.js": 563,
+	"./ms.js": 564,
+	"./my": 565,
+	"./my.js": 565,
+	"./nb": 566,
+	"./nb.js": 566,
+	"./ne": 567,
+	"./ne.js": 567,
+	"./nl": 569,
+	"./nl-be": 568,
+	"./nl-be.js": 568,
+	"./nl.js": 569,
+	"./nn": 570,
+	"./nn.js": 570,
+	"./pa-in": 571,
+	"./pa-in.js": 571,
+	"./pl": 572,
+	"./pl.js": 572,
+	"./pt": 574,
+	"./pt-br": 573,
+	"./pt-br.js": 573,
+	"./pt.js": 574,
+	"./ro": 575,
+	"./ro.js": 575,
+	"./ru": 576,
+	"./ru.js": 576,
+	"./sd": 577,
+	"./sd.js": 577,
+	"./se": 578,
+	"./se.js": 578,
+	"./si": 579,
+	"./si.js": 579,
+	"./sk": 580,
+	"./sk.js": 580,
+	"./sl": 581,
+	"./sl.js": 581,
+	"./sq": 582,
+	"./sq.js": 582,
+	"./sr": 584,
+	"./sr-cyrl": 583,
+	"./sr-cyrl.js": 583,
+	"./sr.js": 584,
+	"./ss": 585,
+	"./ss.js": 585,
+	"./sv": 586,
+	"./sv.js": 586,
+	"./sw": 587,
+	"./sw.js": 587,
+	"./ta": 588,
+	"./ta.js": 588,
+	"./te": 589,
+	"./te.js": 589,
+	"./tet": 590,
+	"./tet.js": 590,
+	"./th": 591,
+	"./th.js": 591,
+	"./tl-ph": 592,
+	"./tl-ph.js": 592,
+	"./tlh": 593,
+	"./tlh.js": 593,
+	"./tr": 594,
+	"./tr.js": 594,
+	"./tzl": 595,
+	"./tzl.js": 595,
+	"./tzm": 597,
+	"./tzm-latn": 596,
+	"./tzm-latn.js": 596,
+	"./tzm.js": 597,
+	"./uk": 598,
+	"./uk.js": 598,
+	"./ur": 599,
+	"./ur.js": 599,
+	"./uz": 601,
+	"./uz-latn": 600,
+	"./uz-latn.js": 600,
+	"./uz.js": 601,
+	"./vi": 602,
+	"./vi.js": 602,
+	"./x-pseudo": 603,
+	"./x-pseudo.js": 603,
+	"./yo": 604,
+	"./yo.js": 604,
+	"./zh-cn": 605,
+	"./zh-cn.js": 605,
+	"./zh-hk": 606,
+	"./zh-hk.js": 606,
+	"./zh-tw": 607,
+	"./zh-tw.js": 607
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -5758,17 +5781,10 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 989;
+webpackContext.id = 990;
 
-
-/***/ }),
-
-/***/ 999:
-/***/ (function(module, exports) {
-
-module.exports = "<router-outlet ></router-outlet>\n"
 
 /***/ })
 
-},[1268]);
+},[1269]);
 //# sourceMappingURL=main.bundle.js.map

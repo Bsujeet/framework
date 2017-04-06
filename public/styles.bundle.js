@@ -57,7 +57,7 @@ module.exports = function() {
 
 /***/ }),
 
-/***/ 1265:
+/***/ 1266:
 /***/ (function(module, exports) {
 
 /*
@@ -310,24 +310,24 @@ function updateLink(linkElement, obj) {
 
 /***/ }),
 
-/***/ 1270:
+/***/ 1271:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(654);
+module.exports = __webpack_require__(656);
 
 
 /***/ }),
 
-/***/ 654:
+/***/ 656:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(967);
+var content = __webpack_require__(968);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(1265)(content, {});
+var update = __webpack_require__(1266)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -345,7 +345,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 966:
+/***/ 967:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(12)();
@@ -360,12 +360,12 @@ exports.push([module.i, ".mat-elevation-z0{box-shadow:0 0 0 0 rgba(0,0,0,.2),0 0
 
 /***/ }),
 
-/***/ 967:
+/***/ 968:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(12)();
 // imports
-exports.i(__webpack_require__(966), "");
+exports.i(__webpack_require__(967), "");
 
 // module
 exports.push([module.i, "/* You can add global styles to this file, and also import other style files */\n html, body,.container-fluid{\n    height: 100%;\n    font-size: 1rem;\n}\n.container-fluid > .row{\n    height: inherit;\n}\n .for-desktop{\n    display: block;\n}\n.pointer{\n    cursor: pointer;\n}\n.mat-card-title h2{\n    font-size: 27px;\n}\n/* For Data Table */\ninput-filter input{\n    border-radius:0 !important;\n}\n.table td{\n    vertical-align: middle;\n}\n.ng2-smart-pagination\n{\n    display: -webkit-inline-box !important;\n    display: -ms-inline-flexbox !important;\n    display: inline-flex !important;\n}\n/*End of data table*/\n@media (max-width: 767px){\n    .for-desktop{\n        display: none;\n    }\n    .mat-sidenav{\n        padding: 0;\n    }\n}\n@media (max-width: 600px){\n    .mat-card{\n        padding: 24px !important;\n    }\n}", ""]);
@@ -375,5 +375,5 @@ exports.push([module.i, "/* You can add global styles to this file, and also imp
 
 /***/ })
 
-},[1270]);
+},[1271]);
 //# sourceMappingURL=styles.bundle.js.map
