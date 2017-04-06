@@ -266,21 +266,14 @@ function createRequest(reqBody, callback) {
                         for (let index = 0; index < resourceInventory.inventory_items.length; index++) {
                             const resourceInventryItemName = resourceInventory.inventory_items[index].name;
                             for (let i = 0; i < resourceItems.length; i++) {
-                                /*if (resourceInventryItemName === resourceItems[i].name && resourceInventryItemName !== 'storage') {
-                                    const diff = resourceItems[i].qty - resourceInventory.inventory_items[index].qty;
-                                    resourceItems[i].qty = diff < 0 ? diff * -1 : diff;
-                                    break;
-                                }*/
                                 if (resourceInventryItemName === resourceItems[i].name && resourceInventryItemName !== 'storage') {
                                     let diff;
-                                    if(resourceInventory.inventory_items[index].qty > resourceItems[i].qty){
-                                        diff = resourceInventory.inventory_items[index].qty - resourceItems[i].qty;
-                                    }else {
+                                    if (resourceInventory.inventory_items[index].qty > resourceItems[i].qty){
+                                        diff = resourceItems[i].qty - resourceInventory.inventory_items[index].qty;
+                                    } else {
                                         diff = resourceItems[i].qty - resourceInventory.inventory_items[index].qty;
                                     }
                                     resourceItems[i].qty = diff;
-                                    /*const diff = resourceItems[i].qty - resourceInventory.inventory_items[index].qty;
-                                    resourceItems[i].qty = diff < 0 ? diff * -1 : diff;*/
                                     break;
                                 } else if (resourceInventryItemName === resourceItems[i].name && resourceInventryItemName === 'storage') {
                                     if (resourceItems[i].qty < resourceInventory.inventory_items[index].qty) {
@@ -370,10 +363,7 @@ function onRequestComplete(request) {
             let additionalInfo = {};
             const outputParam = job.steps[1].output_params;
             additionalInfo = { vmId: outputParam[0].value, vmNode: outputParam[1].value };
-            /* if (job.name === 'CREATE_VM') {
-                const outputParam = job.steps[1].output_params;
-                additionalInfo = { vmId: outputParam[0].value, vmNode: outputParam[1].value };
-            } else*/ if (job.name === 'EDIT_VM') {
+            if (job.name === 'EDIT_VM') {
                 for (const key in request.parameters) {
                     // Get resouce ID which is given by User
                     if (request.parameters[key].name === 'resourceId') {
@@ -393,7 +383,7 @@ function onRequestComplete(request) {
                                         // Update Core, Storage, Memory and Resource ID in Resource DB
                                         for (let index = 0; index < orignalResourceInventory.inventory_items.length; index++) {
                                             let dbInventryItemName = orignalResourceInventory.inventory_items[index].name;
-                                            
+
                                             for (let i = 0; i < objectToCompare.inventory_items.length; i++) {
                                                 if (dbInventryItemName === objectToCompare.inventory_items[i].name) {
                                                     // request iteration need to remove (solution: put add/remove property in resource DB)
@@ -401,16 +391,10 @@ function onRequestComplete(request) {
                                                         // Hard code property check need to remove
                                                         dbInventryItemName = dbInventryItemName === 'cpu' ? 'cores' : dbInventryItemName;
                                                         if (request.parameters[j].name === dbInventryItemName) {
-                                                            if (request.parameters[j].value > orignalResourceInventory.inventory_items[index].qty){
-                                                                orignalResourceInventory.inventory_items[index].qty =
+                                                            orignalResourceInventory.inventory_items[index].qty =
                                                                 objectToCompare.inventory_items[i].qty + orignalResourceInventory.inventory_items[index].qty;
-                                                            } else {
-                                                                orignalResourceInventory.inventory_items[index].qty = orignalResourceInventory.inventory_items[index].qty - objectToCompare.inventory_items[i].qty;
-                                                            }
                                                         }
                                                     }
-                                                   /* orignalResourceInventory.inventory_items[index].qty = objectToCompare.inventory_items[i].qty
-                                                        + orignalResourceInventory.inventory_items[index].qty;*/
                                                     break;
                                                 }
                                             }
