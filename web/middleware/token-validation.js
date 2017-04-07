@@ -25,12 +25,13 @@ function tokenValidationFactory(options) {
                     return next();
                 });
             } else {
-                return res.status(401)
-                    .send({
-                        status: false,
-                        message: 'No token provided.'
-                    })
-                    .end();
+                // return res.status(401)
+                //     .send({
+                //         status: false,
+                //         message: 'No token provided.'
+                //     })
+                //     .end();
+                return res.render('index.html');
             }
         }
     };
