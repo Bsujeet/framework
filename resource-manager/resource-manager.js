@@ -11,7 +11,8 @@ function removeResearvation(resourceid, callback) {
             return callback(err);
         }
         undoReservationAsync(resource.inventory_items, (err) => {
-            if (err) {
+            // if (err) { Need To Test
+            if (!err) {
                 logger.error('Error occured in removing reservation. Error', err);
                 return callback(err);
             }
