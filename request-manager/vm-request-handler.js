@@ -6,6 +6,7 @@ const Job = require('../models/job');
 const ResourceManager = require('../resource-manager');
 const workflow = require('../models/workflow/static-vm-workflow'); // TODO get it from DB
 const editVMWorkflow = require('../models/workflow/static-vm-edit-workflow'); // TODO get it from DB
+const cloneVMWorkflow = require('../models/workflow/static-clone-vm'); // TODO get it from DB
 const EventBus = require('../event-bus');
 const Resource = require('../models/resource');
 
@@ -111,6 +112,127 @@ function createRequest(reqBody, callback) {
                         return callback(err, null);
                     }
                     const job = new Job(workflow);
+                    request.jobId = job.get('id');
+                    request.resourceId = resource.get('id');
+                    job.requestId = request.get('id');
+                    request.save((err) => {
+                        if (err) {
+                            logger.error('Error occured while saving request to DB. Error:', err);
+                            return callback(err, null);
+                        }
+
+                        job.save((err) => {
+                            if (err) {
+                                logger.error('Error occured while saving job to DB. Error:', err);
+                                logger.info('Start rollback of Request Saved.');
+                                // Rollback request save operation
+                                // TODO: Test below code
+                                ResourceManager.removeResearvation(resource.resourceId, (err) => {
+                                    if (err) {
+                                        return logger.error('Error occured while removing reservation. Error:', err);
+                                    }
+                                });
+                                request.remove((err) => {
+                                    if (err) {
+                                        return logger.error('Error occured while deleting request from DB. Error:', err);
+                                    }
+                                });
+                                return callback(err, null);
+                            }
+                            callback(null, request);
+                        });
+                    });
+                });
+                break;
+            }
+        case 'CLONE':
+            {
+                const resourceItems = [];
+                let vmname = '';
+                let templateID = '';
+                // Populate workflow parameters
+                // vm_name
+                const paramVmName = reqBody.parameters.filter((param) => {
+                    return param.name === 'vm_name';
+                });
+                if (paramVmName.length === 1) { // TODO: Add more validations as required
+                    vmname = paramVmName[0].value;
+                    cloneVMWorkflow.parameters.filter((param) => {
+                        return param.name === 'vm_name';
+                    })[0].value = paramVmName[0].value;
+                } else {
+                    return callback(new Error('Missing reqired Parameter: vmName'), null);
+                }
+
+                const paramVmTemplateID = reqBody.parameters.filter((param) => {
+                    return param.name === 'os';
+                });
+                if (paramVmTemplateID.length === 1) { // TODO: Add more validations as required
+                    templateID = paramVmTemplateID[0].value;
+                    cloneVMWorkflow.parameters.filter((param) => {
+                        return param.name === 'os';
+                    })[0].value = paramVmTemplateID[0].value;
+                } else {
+                    return callback(new Error('Missing reqired Parameter: TemplateID'), null);
+                }
+
+                // number_of_cores
+                const paramNumberOfCores = reqBody.parameters.filter((param) => {
+                    return param.name === 'cores';
+                });
+                if (paramNumberOfCores.length === 1) {
+                    resourceItems.push({
+                        name: 'cpu',
+                        qty: parseInt(paramNumberOfCores[0].value, 10),
+                        measure: 'CORE'
+                    });
+                    cloneVMWorkflow.parameters.filter((param) => {
+                        return param.name === 'number_of_cores';
+                    })[0].value = paramNumberOfCores[0].value;
+                } else {
+                    return callback(new Error('Missing reqired Parameter: cores'), null);
+                }
+
+                // memory
+                const paramMemory = reqBody.parameters.filter((param) => {
+                    return param.name === 'memory';
+                });
+                if (paramMemory.length === 1) {
+                    resourceItems.push({
+                        name: 'memory',
+                        qty: parseInt(paramMemory[0].value, 10),
+                        measure: 'MB'
+                    });
+                    cloneVMWorkflow.parameters.filter((param) => {
+                        return param.name === 'memory';
+                    })[0].value = paramMemory[0].value;
+                } else {
+                    return callback(new Error('Missing reqired Parameter: memory'), null);
+                }
+
+                // storage
+                const paramStorage = reqBody.parameters.filter((param) => {
+                    return param.name === 'storage';
+                });
+                if (paramStorage.length === 1) {
+                    resourceItems.push({
+                        name: 'storage',
+                        qty: parseInt(paramStorage[0].value, 10),
+                        measure: 'GB'
+                    });
+                    cloneVMWorkflow.parameters.filter((param) => {
+                        return param.name === 'storage';
+                    })[0].value = paramStorage[0].value;
+                } else {
+                    return callback(new Error('Missing reqired Parameter: storage'), null);
+                }
+
+                ResourceManager.reserveResource(vmname, 'VM', resourceItems, 'admin', (err, resource) => {
+                    if (err) {
+                        logger.error('Error Occured in resource reservation. Error:', err);
+                        return callback(err, null);
+                    }
+                    const job = new Job(cloneVMWorkflow);
                     request.jobId = job.get('id');
                     request.resourceId = resource.get('id');
                     job.requestId = request.get('id');
@@ -268,7 +390,7 @@ function createRequest(reqBody, callback) {
                             for (let i = 0; i < resourceItems.length; i++) {
                                 if (resourceInventryItemName === resourceItems[i].name && resourceInventryItemName !== 'storage') {
                                     let diff;
-                                    if (resourceInventory.inventory_items[index].qty > resourceItems[i].qty){
+                                    if (resourceInventory.inventory_items[index].qty > resourceItems[i].qty) {
                                         diff = resourceItems[i].qty - resourceInventory.inventory_items[index].qty;
                                     } else {
                                         diff = resourceItems[i].qty - resourceInventory.inventory_items[index].qty;
@@ -287,20 +409,6 @@ function createRequest(reqBody, callback) {
                                     break;
                                 }
                             }
-                        }
-                        // Update Requset data incase of storage is increase
-                        try {
-                            for (let i = 0; i < resourceItems.length; i++) {
-                                if (resourceItems[i].name === 'storage') {
-                                    for (let index = 0; index < editVMWorkflow.parameters.length; index++) {
-                                        if (editVMWorkflow.parameters[index].name === 'storage') {
-                                            editVMWorkflow.parameters[index].value = resourceItems[i].qty;
-                                        }
-                                    }
-                                }
-                            }
-                        } catch (error) {
-                            logger.error('Error Occured during update Requset data incase of storage is increase. Error:', error);
                         }
 
                         ResourceManager.modifyReserveResource(vmname, vmId, resourceId, 'VM', resourceItems, 'admin', (err, resource) => {
@@ -361,8 +469,11 @@ function onRequestComplete(request) {
         if (job.status === 'SUCCEEDED') {
             // additionalInfo (vmId and vmNode) added for Create VM Workflow
             let additionalInfo = {};
-            const outputParam = job.steps[1].output_params;
-            additionalInfo = { vmId: outputParam[0].value, vmNode: outputParam[1].value };
+            if (job.name !== 'CloneTest') {
+                const outputParam = job.steps[1].output_params;
+                additionalInfo = { vmId: outputParam[0].value, vmNode: outputParam[1].value };
+            }
+
             if (job.name === 'EDIT_VM') {
                 for (const key in request.parameters) {
                     // Get resouce ID which is given by User
@@ -387,12 +498,13 @@ function onRequestComplete(request) {
                                             for (let i = 0; i < objectToCompare.inventory_items.length; i++) {
                                                 if (dbInventryItemName === objectToCompare.inventory_items[i].name) {
                                                     // request iteration need to remove (solution: put add/remove property in resource DB)
-                                                    for (let j = 0; j < request.parameters.length-1; j++) {
+                                                    for (let j = 0; j <= request.parameters.length - 1; j++) {
                                                         // Hard code property check need to remove
                                                         dbInventryItemName = dbInventryItemName === 'cpu' ? 'cores' : dbInventryItemName;
                                                         if (request.parameters[j].name === dbInventryItemName) {
                                                             orignalResourceInventory.inventory_items[index].qty =
                                                                 objectToCompare.inventory_items[i].qty + orignalResourceInventory.inventory_items[index].qty;
+                                                            break;
                                                         }
                                                     }
                                                     break;
@@ -409,13 +521,6 @@ function onRequestComplete(request) {
                                                         return logger.error('Error occured while removing temp resource from Resource DB. Error:', err);
                                                     } else {
                                                         logger.info('Resource DB is updated successfully.');
-                                                        request.save((err, resource) => {
-                                                            if (err) {
-                                                                return logger.error('Error occured during update resource Id in Request DB. Error:', err);
-                                                            } else {
-                                                                logger.info('Request DB is updated successfully.');
-                                                            }
-                                                        });
                                                     }
                                                 });
                                             }
@@ -427,6 +532,17 @@ function onRequestComplete(request) {
                         break;
                     }
                 }
+            }
+
+            if (job.name === 'CLONE_VM') {
+                const outputParam = job.steps[4].output_params;
+                additionalInfo = {
+                    vmId: outputParam[0].value,
+                    vmNode: outputParam[1].value,
+                    vmIP: outputParam[2].value,
+                    loginUserName: outputParam[3].value,
+                    loginPassword: outputParam[4].value
+                };
             }
 
             ResourceManager.assignResource(request.resourceId, additionalInfo, (err) => {

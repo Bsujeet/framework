@@ -25,7 +25,7 @@ const RequestSchema = new Schema({
     },
     operation: {
         type: String,
-        enum: ['CREATE', 'START', 'STOP', 'DELETE', 'UPDATE']
+        enum: ['CREATE', 'START', 'STOP', 'DELETE', 'UPDATE', 'CLONE']
     },
     requestedBy: {
         type: String,

@@ -23,7 +23,9 @@ router.post('/api/v1/user', api.user.post);
 // Request
 router.get('/api/v1/request/:requestId', api.request.get);
 router.get('/api/v1/request', api.request.get);
+// router.get('/api/v1/request/template', api.request.get);
 router.post('/api/v1/request', api.request.post);
+router.post('/api/v1/request/clonevm', api.request.post);
 // router.put('/api/v1/requests', api.requests.put);
 // router.delete('/api/v1/requests/:requestId', api.requests.delete);
 
