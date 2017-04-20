@@ -28,11 +28,11 @@ function authenticate(req, resp) {
         return;
     }
 
-    User.authenticate(reqBody.userId, reqBody.password, (err, token) => {
+    User.LdapAuthenticate(reqBody.userId, reqBody.password, (err, token) => {
         if (err) {
             resp.status(200).send({
                 status: false,
-                msg: 'Invalid UserID/Password'
+                msg: err.message
             });
             resp.end();
             return;

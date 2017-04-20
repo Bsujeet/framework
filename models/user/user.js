@@ -4,6 +4,9 @@ const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const config = require('../../config');
+const ldap = require('ldapjs');
+
+const logger = require.main.require('./logger');
 
 const Schema = mongoose.Schema;
 
@@ -27,7 +30,7 @@ const UserSchema = new Schema({
     },
     password: {
         type: String,
-        validate: [required, 'Password is required']
+        // validate: [required, 'Password is required']
     },
     firstName: {
         type: String,
@@ -54,6 +57,102 @@ const UserSchema = new Schema({
     }]
 });
 
+UserSchema.statics.LdapAuthenticate = function (userId, password, callback) {
+    const _self = this;
+    const LDAP_IP = '192.168.207.44';
+    const LDAP_PORT = '3268';
+    const LDAP_BINDDN = 'cn=Ldap Access,ou=it-tech,dc=calsofthq,dc=com';
+    const LDAP_PASSWORD = 'Qwerty!23';
+    const LDAP_FILTER = 'sAMAccountName';
+    const LDAP_BASEDN = 'dc=calsofthq,dc=com';
+    // Make connection to LDAP Server
+    let client = ldap.createClient({
+        url: 'ldap://' + LDAP_IP + ':' + LDAP_PORT
+    });
+    //Search Parameter to search in LDAP Directory
+    let opts = {
+        filter: '(' + LDAP_FILTER + '=' + userId + ')',
+        scope: 'sub'
+    };
+    client.bind(LDAP_BINDDN, LDAP_PASSWORD, function (err) {
+        if (err) {
+            logger.debug(err);
+            return callback(new Error('cannot connect to LDAP;'));
+        } else {
+            client.search(LDAP_BASEDN, opts, function (err, resp) {
+                var LDAP_USERDN = null;
+                var LDAP_DISPLAYNAME = null;
+
+                resp.on('searchEntry', function (entry) {
+                    LDAP_USERDN = entry.object.dn;
+                    LDAP_DISPLAYNAME = entry.object.displayName;
+                });
+
+                resp.on('end', function (result) {
+                    if (!LDAP_USERDN) {
+                        return callback(new Error('invalid userid '));
+                    } else {
+                        client.bind(LDAP_USERDN, password, function (err) {
+                            if (err) {
+                                return callback(new Error('invalid  password'));
+                            } else {
+                                _self.findOne({
+                                    userId
+                                }, (err, user) => {
+                                    if (!user) {
+                                        let data = LDAP_DISPLAYNAME.split(" ");
+                                        let firstName = data[0];
+                                        let lastName = data[1];
+                                        _self.newUser(userId, firstName, lastName, (err, newUserInstance) => {
+                                            if (err) {
+                                                return callback(err);
+                                            } else {
+                                                addSessionData(_self, newUserInstance, callback);
+                                            }
+                                        })
+                                    } else {
+                                        addSessionData(_self, user, callback);
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+        }
+    });
+}
+
+function addSessionData(selfObj, userData, callback) {
+    const expiry = Math.floor(Date.now() / 1000) + (60 * 60 * 24 * 7); // Expires in 1 week
+    const token = jwt.sign({
+        exp: expiry,
+        data: {
+            userId: userData.userId,
+            firstName: userData.firstName,
+            lastName: userData.lastName
+        }
+    }, config.Common.secret);
+    const session = {
+        token,
+        expiry
+    };
+    selfObj.update({
+        _id: userData._id
+    }, {
+        $push: {
+            sessions: session
+        }
+    }, {
+        multi: false,
+        safe: true
+    }, (err) => {
+        if (err) {
+            return callback(new Error('Unable to create new session'));
+        }
+        return callback(null, session);
+    });
+}
 
 // Define Additional Methods for User Object
 UserSchema.statics.authenticate = function (userId, password, callback) {
@@ -185,10 +284,10 @@ UserSchema.statics.deleteSession = function (userId, token, callback) {
         });
 };
 
-UserSchema.statics.newUser = function (userId, password, firstName, lastName, callback) {
+UserSchema.statics.newUser = function (userId, firstName, lastName, callback) {
     const instance = new User({
         userId,
-        password: hash(password, config.Common.secret),
+        // password: hash(password, config.Common.secret),
         firstName,
         lastName
     });
