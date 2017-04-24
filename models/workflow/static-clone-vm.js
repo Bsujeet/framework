@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-    name: 'CLONE_VM',
+    name: 'CREATE_VM',
     title: 'Clone VM and Power it On',
     description: 'This process clone VM. It also power on the VM',
     version: '1',

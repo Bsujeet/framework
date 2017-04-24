@@ -25,7 +25,7 @@ function createRequest(reqBody, callback) {
     });
 
     switch (reqBody.operation) {
-        case 'CREATE':
+        /*case 'CREATE':
             {
                 const resourceItems = [];
                 let vmname = '';
@@ -144,8 +144,8 @@ function createRequest(reqBody, callback) {
                     });
                 });
                 break;
-            }
-        case 'CLONE':
+            }*/
+        case 'CREATE':
             {
                 const resourceItems = [];
                 let vmname = '';
@@ -534,7 +534,8 @@ function onRequestComplete(request) {
                 }
             }
 
-            if (job.name === 'CLONE_VM') {
+            // if (job.name === 'CLONE_VM') {
+            if (job.name === 'CREATE_VM') {
                 const outputParam = job.steps[4].output_params;
                 additionalInfo = {
                     vmId: outputParam[0].value,

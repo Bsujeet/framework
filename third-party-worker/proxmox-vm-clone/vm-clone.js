@@ -16,7 +16,7 @@ function runTask(task, callback) {
                 break;
             case 'vmOS': {
                 if (element.value.toLowerCase().indexOf('ununtu' > -1)) {
-                    createVMObj.vmTemplateID = 200;
+                    createVMObj.vmTemplateID = 118;
                 }
                 break;
             }

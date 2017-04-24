@@ -5,9 +5,7 @@ const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const config = require('../../config');
 const ldap = require('ldapjs');
-
-const logger = require.main.require('./logger');
-
+const logger = require('../../logger');
 const Schema = mongoose.Schema;
 
 // Helper functions
