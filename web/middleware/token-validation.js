@@ -21,16 +21,11 @@ function tokenValidationFactory(options) {
                             .end();
                     }
                     global.SocketToken = token;
+                    global.userId = user.userId;
                     req.userId = user.userId;
                     return next();
                 });
             } else {
-                // return res.status(401)
-                //     .send({
-                //         status: false,
-                //         message: 'No token provided.'
-                //     })
-                //     .end();
                 return res.render('index.html');
             }
         }

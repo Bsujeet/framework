@@ -227,7 +227,7 @@ function createRequest(reqBody, callback) {
                     return callback(new Error('Missing reqired Parameter: storage'), null);
                 }
 
-                ResourceManager.reserveResource(vmname, 'VM', resourceItems, 'admin', (err, resource) => {
+                ResourceManager.reserveResource(vmname, 'VM', resourceItems, global.userId, (err, resource) => {
                     if (err) {
                         logger.error('Error Occured in resource reservation. Error:', err);
                         return callback(err, null);
@@ -411,7 +411,7 @@ function createRequest(reqBody, callback) {
                             }
                         }
 
-                        ResourceManager.modifyReserveResource(vmname, vmId, resourceId, 'VM', resourceItems, 'admin', (err, resource) => {
+                        ResourceManager.modifyReserveResource(vmname, vmId, resourceId, 'VM', resourceItems, global.userId, (err, resource) => {
                             if (err) {
                                 logger.error('Error Occured in resource reservation. Error:', err);
                                 return callback(err, null);
@@ -471,7 +471,10 @@ function onRequestComplete(request) {
             let additionalInfo = {};
             if (job.name !== 'CloneTest') {
                 const outputParam = job.steps[1].output_params;
-                additionalInfo = { vmId: outputParam[0].value, vmNode: outputParam[1].value };
+                additionalInfo = {
+                    vmId: outputParam[0].value,
+                    vmNode: outputParam[1].value
+                };
             }
 
             if (job.name === 'EDIT_VM') {
@@ -516,7 +519,9 @@ function onRequestComplete(request) {
                                             if (err) {
                                                 return logger.error('Error occured while updating orignal resource from Resource DB. Error:', err);
                                             } else {
-                                                Resource.remove({ _id: request.resourceId }, (err, res) => {
+                                                Resource.remove({
+                                                    _id: request.resourceId
+                                                }, (err, res) => {
                                                     if (err) {
                                                         return logger.error('Error occured while removing temp resource from Resource DB. Error:', err);
                                                     } else {
