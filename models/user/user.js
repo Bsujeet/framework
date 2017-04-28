@@ -86,7 +86,7 @@ UserSchema.statics.LdapAuthenticate = function (userId, password, callback) {
                 let LDAP_MAIL = null;
 
                 resp.on('searchEntry', (entry) => {
-                    logger.info(entry.object);
+                    // logger.info(entry.object);
                     LDAP_USERDN = entry.object.dn;
                     LDAP_DISPLAYNAME = entry.object.displayName;
                     LDAP_MAIL = entry.object.mail;
