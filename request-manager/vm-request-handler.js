@@ -460,6 +460,7 @@ function createRequest(reqBody, callback) {
 }
 
 function onRequestComplete(request) {
+    const _self = this;
     const jobId = request.jobId;
     Job.findById(jobId, {}, (err, job) => {
         if (err) {
@@ -468,10 +469,10 @@ function onRequestComplete(request) {
         }
         if (job.status === 'SUCCEEDED') {
             // additionalInfo (vmId and vmNode) added for Create VM Workflow
-            let additionalInfo = {};
+            _self.additionalInfo = {};
             if (job.name !== 'CloneTest') {
                 const outputParam = job.steps[1].output_params;
-                additionalInfo = {
+                _self.additionalInfo = {
                     vmId: outputParam[0].value,
                     vmNode: outputParam[1].value
                 };
@@ -542,7 +543,7 @@ function onRequestComplete(request) {
             // if (job.name === 'CLONE_VM') {
             if (job.name === 'CREATE_VM') {
                 const outputParam = job.steps[4].output_params;
-                additionalInfo = {
+                _self.additionalInfo = {
                     vmId: outputParam[0].value,
                     vmNode: outputParam[1].value,
                     vmIP: outputParam[2].value,
@@ -551,7 +552,7 @@ function onRequestComplete(request) {
                 };
             }
 
-            ResourceManager.assignResource(request.resourceId, additionalInfo, (err) => {
+            ResourceManager.assignResource(request.resourceId, _self.additionalInfo, (err) => {
                 if (err) {
                     return logger.error('Error occured while commiting reserved resources. Error:', err);
                 }
@@ -571,7 +572,10 @@ function onRequestComplete(request) {
                 return logger.error('Error occured while saving request to DB. Error:', err);
             } else {
                 EventBus.Emitter.emit(EventBus.Events.BROWSER_PUSH, {
-                    updatedRequestData: request
+                    updatedRequestData: {
+                        req: request,
+                        addInfo: _self.additionalInfo
+                    }
                 });
             }
         });

@@ -37,6 +37,9 @@ const UserSchema = new Schema({
     lastName: {
         type: String
     },
+    mail: {
+        type: String
+    },
     createdAt: {
         type: Date,
         default: Date.now
@@ -64,62 +67,63 @@ UserSchema.statics.LdapAuthenticate = function (userId, password, callback) {
     const LDAP_FILTER = 'sAMAccountName';
     const LDAP_BASEDN = 'dc=calsofthq,dc=com';
     // Make connection to LDAP Server
-    let client = ldap.createClient({
+    const client = ldap.createClient({
         url: 'ldap://' + LDAP_IP + ':' + LDAP_PORT
     });
     //Search Parameter to search in LDAP Directory
-    let opts = {
+    const opts = {
         filter: '(' + LDAP_FILTER + '=' + userId + ')',
         scope: 'sub'
     };
-    client.bind(LDAP_BINDDN, LDAP_PASSWORD, function (err) {
+    client.bind(LDAP_BINDDN, LDAP_PASSWORD, (err) => {
         if (err) {
             logger.debug(err);
             return callback(new Error('cannot connect to LDAP;'));
         } else {
-            client.search(LDAP_BASEDN, opts, function (err, resp) {
-                var LDAP_USERDN = null;
-                var LDAP_DISPLAYNAME = null;
+            client.search(LDAP_BASEDN, opts, (err, resp) => {
+                let LDAP_USERDN = null;
+                let LDAP_DISPLAYNAME = null;
+                let LDAP_MAIL = null;
 
-                resp.on('searchEntry', function (entry) {
+                resp.on('searchEntry', (entry) => {
+                    logger.info(entry.object);
                     LDAP_USERDN = entry.object.dn;
                     LDAP_DISPLAYNAME = entry.object.displayName;
+                    LDAP_MAIL = entry.object.mail;
                 });
 
-                resp.on('end', function (result) {
+                resp.on('end', (result) => {
                     if (!LDAP_USERDN) {
                         return callback(new Error('invalid userid '));
                     } else {
-                        client.bind(LDAP_USERDN, password, function (err) {
+                        client.bind(LDAP_USERDN, password, (err) => {
                             if (err) {
                                 return callback(new Error('invalid  password'));
-                            } else {
-                                _self.findOne({
-                                    userId
-                                }, (err, user) => {
-                                    if (!user) {
-                                        let data = LDAP_DISPLAYNAME.split(" ");
-                                        let firstName = data[0];
-                                        let lastName = data[1];
-                                        _self.newUser(userId, firstName, lastName, (err, newUserInstance) => {
-                                            if (err) {
-                                                return callback(err);
-                                            } else {
-                                                addSessionData(_self, newUserInstance, callback);
-                                            }
-                                        })
-                                    } else {
-                                        addSessionData(_self, user, callback);
-                                    }
-                                });
                             }
+                            _self.findOne({
+                                userId
+                            }, (err, user) => {
+                                if (!user) {
+                                    const data = LDAP_DISPLAYNAME.split(" ");
+                                    const firstName = data[0];
+                                    const lastName = data[1];
+                                    _self.newUser(userId, firstName, lastName, LDAP_MAIL, (err, newUserInstance) => {
+                                        if (err) {
+                                            return callback(err);
+                                        }
+                                        addSessionData(_self, newUserInstance, callback);
+                                    });
+                                } else {
+                                    addSessionData(_self, user, callback);
+                                }
+                            });
                         });
                     }
                 });
             });
         }
     });
-}
+};
 
 function addSessionData(selfObj, userData, callback) {
     const expiry = Math.floor(Date.now() / 1000) + (60 * 60 * 24 * 7); // Expires in 1 week
@@ -282,12 +286,13 @@ UserSchema.statics.deleteSession = function (userId, token, callback) {
         });
 };
 
-UserSchema.statics.newUser = function (userId, firstName, lastName, callback) {
+UserSchema.statics.newUser = function (userId, firstName, lastName, mail, callback) {
     const instance = new User({
         userId,
         // password: hash(password, config.Common.secret),
         firstName,
-        lastName
+        lastName,
+        mail
     });
 
     instance.save((err) => {
