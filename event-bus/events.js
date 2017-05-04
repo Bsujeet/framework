@@ -8,5 +8,6 @@ module.exports = {
     TASK_UPDATE: 'taskupdate',
     JOB_UPDATE: 'jobupdate',
     JOB_COMPLETE: 'jobcomplete',
-    BROWSER_PUSH: 'browserpush'
+    BROWSER_PUSH: 'browserpush',
+    SEND_MAIL: 'sendmail'
 };
