@@ -52,13 +52,18 @@ function runTask(task, callback) {
             createVMObj.vmid = data;
             return createVM(createVMObj);
         })
-        .then(() => {
-            setTimeout(() => {
-                const outputParams = [{ name: 'vmID', value: createVMObj.vmid, type: 'STRING' },
-                { name: 'vmNode', value: createVMObj.nodeName, type: 'STRING' }
-                ];
-                callback(null, 'SUCCEEDED', { myState: 'createVM SUCCEEDED' }, outputParams);
-            }, 10000);
+        .then((data) => {
+            if (!data.data) {
+                const _error = data.errors;
+                callback(new Error(`VMCreation Failed: ${_error.name}`));
+            } else {
+                setTimeout(() => {
+                    const outputParams = [{ name: 'vmID', value: createVMObj.vmid, type: 'STRING' },
+                    { name: 'vmNode', value: createVMObj.nodeName, type: 'STRING' }
+                    ];
+                    callback(null, 'SUCCEEDED', { myState: 'createVM SUCCEEDED' }, outputParams);
+                }, 10000);
+            }
         })
         .catch((err) => {
             callback(new Error(`VMCreation Failed: ${err}`));
@@ -68,9 +73,15 @@ function runTask(task, callback) {
 function makePostRequest(options) {
     return new Promise((resolve, reject) => {
         request(options, (error, response, body) => {
-            if (!error && response.statusCode === 200) {
-                const _response = JSON.parse(body);
-                resolve(_response.data);
+            if (!error) {
+                if (response.statusCode === 200) {
+                    const _response = JSON.parse(body);
+                    resolve(_response.data);
+                } else if (response.statusCode === 400) {
+                    const _response = JSON.parse(body);
+                    resolve(_response);
+                    // callback(new Error(`VMCreation Failed: ${err}`));
+                }
             } else if (error.code === 'EHOSTUNREACH' || error) {
                 reject('Unable to reach at Proxmox server.');
             } else {
