@@ -24,7 +24,9 @@ global.activeSocketUser = [];
 io.on('connection', (socket) => {
     if (socket.handshake.query.token) {
         const socketToken = socket.handshake.query.token;
-        global.activeSocketUser[socketToken] = socket;
+        if (!global.activeSocketUser[socketToken]) {
+            global.activeSocketUser[socketToken] = socket;
+        }
     }
     socket.on('disconnect', () => {
         if (socket.handshake.query.token) {

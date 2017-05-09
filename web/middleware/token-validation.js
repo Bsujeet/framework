@@ -20,9 +20,7 @@ function tokenValidationFactory(options) {
                             })
                             .end();
                     }
-                    if (global.SocketToken === token) {
-                        global.SocketToken = token;
-                    }
+                    global.SocketToken = token;
                     global.userId = user.userId;
                     req.userId = user.userId;
                     return next();

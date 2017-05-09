@@ -20,9 +20,8 @@ EventBus.Emitter.on(EventBus.Events.BROWSER_PUSH, (data) => {
 
 function senduserNotification(dataToSend) {
     const dataToSendNew = loadAsh.merge(dataToSend.req, dataToSend.addInfo);
-
     logger.debug('Send socket notification');
-    global.activeSocketUser.global.SocketToken.emit('notification', {
+    global.activeSocketUser[global.SocketToken].emit('notification', {
         dataToSendNew
     });
 }
