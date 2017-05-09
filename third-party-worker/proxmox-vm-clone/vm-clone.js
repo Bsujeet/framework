@@ -53,7 +53,7 @@ function runTask(task, callback) {
             return createVM(createVMObj);
         })
         .then((data) => {
-            if (!data.data) {
+            if (!data) {
                 const _error = data.errors;
                 callback(new Error(`VMCreation Failed: ${_error.name}`));
             } else {
