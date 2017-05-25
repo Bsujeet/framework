@@ -11,7 +11,7 @@ const EventBus = require('../event-bus');
 EventBus.Emitter.on(EventBus.Events.BROWSER_PUSH, (data) => {
     try {
         if (global.SocketToken && global.activeSocketUser[global.SocketToken]) {
-            senduserNotification(data.updatedRequestData);
+            senduserNotification(data);
         }
     } catch (error) {
         logger.info('error in socketOper.js ' + error);
@@ -19,7 +19,8 @@ EventBus.Emitter.on(EventBus.Events.BROWSER_PUSH, (data) => {
 });
 
 function senduserNotification(dataToSend) {
-    const dataToSendNew = loadAsh.merge(dataToSend.req, dataToSend.addInfo);
+    // const dataToSendNew = loadAsh.merge(dataToSend.req, dataToSend.addInfo);
+    const dataToSendNew = { vm_Id: dataToSend.addInfo.vmId, type: dataToSend.req.type, operation: dataToSend.req.operation, status: dataToSend.req.status };
     logger.debug('Send socket notification');
     global.activeSocketUser[global.SocketToken].emit('notification', {
         dataToSendNew
