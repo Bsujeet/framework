@@ -4,6 +4,61 @@ const logger = require.main.require('./logger');
 const Inventory = require('../models/inventory');
 const Resource = require('../models/resource');
 
+// This function removeInventory will remove Used Quantity from Inventory and remove resource
+function removeInventory(resourceid, callback) {
+    Resource.findById(resourceid, {}, (err, resource) => {
+        if (err) {
+            logger.error('Error occured in getting resource. Error', err);
+            return callback(err);
+        }
+        removeUsedResourceAsync(resource.inventory_items, (err) => {
+            // if (err) { Need To Test
+            if (!err) {
+                logger.error('Error occured in deleting resource. Error', err);
+                return callback(err);
+            }
+            resource.remove((err) => {
+                if (err) {
+                    logger.error('Error occured in deleting resource. Error', err);
+                    return callback(err);
+                } else {
+                    Resource.remove({
+                        _id: resourceid
+                    }, (err, res) => {
+                        if (err) {
+                            return logger.error('Error occured while deleting resource from Resource DB. Error:', err);
+                        } else {
+                            logger.info('Resource deleted successfully.');
+                        }
+                    });
+                }
+                return callback(null, true);
+            });
+        });
+    });
+}
+
+function removeUsedResourceAsync(reservations, callback) {
+    let counter = 0;
+    let status = true;
+    for (let idx = 0; idx < reservations.length; idx++) {
+        counter += 1;
+        const item = reservations[idx];
+        Inventory.removeUsedInventory(item.name, item.qty, item.token, (err) => {
+            counter -= 1;
+            if (err) {
+                status = false;
+                logger.error('Failed to delete used resource for resource DB:', JSON.stringify(item));
+            } else {
+                logger.info('Used Resources removed from resource db: ', JSON.stringify(item));
+            }
+            if (counter === 0) {
+                callback(status);
+            }
+        });
+    }
+}
+
 function removeResearvation(resourceid, callback) {
     Resource.findById(resourceid, {}, (err, resource) => {
         if (err) {
@@ -250,6 +305,7 @@ function assignAsync(reservations, callback) {
 
 module.exports = {
     reserveResource,
+    removeInventory,
     modifyReserveResource,
     removeResearvation,
     assignResource,

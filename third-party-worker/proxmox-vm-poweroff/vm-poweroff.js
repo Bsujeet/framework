@@ -29,10 +29,12 @@ function runTask (task, callback) {
             return powerOffVM(vmObj);
         })
         .then(() => {
-            const outputParams = [{ name: 'vmID', value: vmObj.vmID, type: 'NUMBER' },
+            setTimeout(() => {
+                const outputParams = [{ name: 'vmID', value: vmObj.vmID, type: 'NUMBER' },
                                     { name: 'vmNode', value: vmObj.vmNode, type: 'STRING' }
-            ];
-            callback(null, 'SUCCEEDED', { myState: 'Power Off VM SUCCEEDED' }, outputParams);
+                ];
+                callback(null, 'SUCCEEDED', { myState: 'Power Off VM SUCCEEDED' }, outputParams);
+            }, 20000);
         })
         .catch((err) => {
             callback(new Error(`Power Off VM Failed: ${err}`));

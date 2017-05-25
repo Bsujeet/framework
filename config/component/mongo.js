@@ -4,7 +4,7 @@ const joi = require('joi');
 
 const envVarsSchema = joi.object({
     DBPORT: joi.number()
-        .default(27017),
+        .default(27018),
     DBHOST: joi.string()
         .default('localhost'),
     DB: joi.string()

@@ -86,6 +86,44 @@ function reserveResource (model, name, qty, measure, callback) {
     });
 }
 
+function removeUsedResource (model, name, qty, token, callback) {
+    const _token = token;
+    const _name = name;
+    const _qty = qty;
+    model.findOne({ name: _name }, (err, inventory) => {
+        if (err) {
+            return callback(err);
+        }
+        let tokenIndex = -1;
+        let itemQty = 0;
+        console.log(inventory.used_qty);
+        /* for (let idx = 0; idx < inventory.reservations.length; idx++) {
+            if (inventory.reservations[idx].token.equals(_token)) {
+                tokenIndex = idx;
+                itemQty = inventory.reservations[idx].qty;
+                break;
+            }
+        }*/
+        if (inventory.used_qty >= _qty) {
+            tokenIndex += 1;
+            itemQty = _qty;
+        }
+        if (tokenIndex >= 0) {
+            inventory.available_qty += itemQty;
+            inventory.used_qty -= itemQty;
+            // inventory.reservations.splice(tokenIndex, 1);
+            inventory.save((err, inventory) => {
+                if (err) {
+                    return callback(err);
+                }
+                return callback(null, inventory);
+            });
+        } else {
+            return callback(new Error('No reservation found for given token'));
+        }
+    });
+}
+
 function unReserveResource (model, name, token, callback) {
     const _token = token;
     const _name = name;
@@ -180,6 +218,27 @@ InventorySchema.statics.rollBackResearvation = function (name, token, callback) 
             if (err.name && err.name === 'VersionError') {
                 // In case of version mismatch retry once again.
                 unReserveResource(_self, _name, _token, (err, inventory) => {
+                    return callback(err, inventory);
+                });
+            } else {
+                return callback(err);
+            }
+        } else {
+            return callback(null, inventory);
+        }
+    });
+};
+
+InventorySchema.statics.removeUsedInventory = function (name, qty, token, callback) {
+    const _token = token;
+    const _name = name;
+    const _qty = qty;
+    const _self = this;
+    removeUsedResource(_self, _name, _qty, _token, (err, inventory) => {
+        if (err) {
+            if (err.name && err.name === 'VersionError') {
+                // In case of version mismatch retry once again.
+                removeUsedResource(_self, _name, _token, (err, inventory) => {
                     return callback(err, inventory);
                 });
             } else {
