@@ -16,8 +16,8 @@ EventBus.Emitter.on(EventBus.Events.SEND_MAIL, (data) => {
     const userQuery = {};
     const datatoSend = {};
     try {
-        logger.debug('data');
-        logger.debug(data);
+        // logger.debug('data');
+        // logger.debug(data);
         userQuery.userId = data.requestedBy;
         user.findOne(userQuery, {
             password: 0
@@ -45,7 +45,7 @@ EventBus.Emitter.on(EventBus.Events.SEND_MAIL, (data) => {
 
 
 function sendmail(toSend) {
-    logger.debug(toSend);
+    logger.debug('Send Mail');
     const config = {
         host: '192.168.206.109',
         port: 587,
